@@ -13,8 +13,8 @@
     <header>
         <a href="index.html" class="title">CodePrepSchool</a>
         <nav class="nav-links">
-            <a href="time-complexity.html" class="nav-item">
-                Time Complexity
+            <a href="linear-time-complexity.html" class="nav-item">
+                Linear Time Complexity
             </a>
             <a href="insertion-sort.html" class="nav-item">
                 Insertion Sort
@@ -24,12 +24,10 @@
     <main>
         <div class="content-container">
             <div class="page-title">
-                Time Complexity
+                Linear Time Complexity
             </div>
             <div class="page-body">
-                Time complexity: How many times a piece of code runs.<br>
-                <br>
-                Let&rsquo;s take a look at time complexity. Understanding time complexity is important because optimizing your code to run as quickly as possible is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.<br>
+                Let's take a look at linear time complexity, known as O(n).<br>
                 Look at this code that takes a name and reverses it.<br>
                 <br>
                 name = input(&ldquo;Type in your first name: &quot;);<br>
@@ -38,11 +36,13 @@
                 reversed_name = char + reversed_name<br>
                 print(reversed_name)<br>
                 <br>
-                How many times would this code run? It would depend on the number of characters in name. For the name Jen, the for loop runs 3 times: to add J, then e, then n. For the name Mary-Kate, the for loop runs 9 times, counting the hyphen. We refer to the length of this input as &ldquo;n.&rdquo; Therefore, this code runs O(n) times, also known as a linear time complexity. The specific number doesn&rsquo;t matter because it&rsquo;s a constant and, in codes where users can give their own inputs, subject to change.<br>
+                How many times would this code run? It would depend on the number of characters in name. For the name Jen, the for loop runs 3 times: to add J, then e, then n. For the name Mary-Kate, the for loop runs 9 times, counting the hyphen. <br>
+                <br>
+                We refer to the length of this input as &ldquo;n.&rdquo; Therefore, this code runs O(n) times, also known as a linear time complexity. The specific number doesn&rsquo;t matter because it&rsquo;s a constant and, in codes where users can give their own inputs, subject to change.<br>
                 <br>
                 Let's look at the time complexity if we rewrite this code to do the same thing in less lines.<br>
                 <br>
-                name = input(&ldquo;Type in your first name: )<br>
+                name = input(&ldquo;Type in your first name: &quot;)<br>
                 print(name[::-1])<br>
                 <br>
                 One may believe that this would result in a faster time complexity. After all, it's only one line of code, right?<br>
@@ -72,7 +72,7 @@
                 <br>
                 It seems like since the code to create the new list is only one line long, the time complexity would be O(1), but this is not true.<br>
                 <br>
-                List comprehensions, as we have here, are still for loops. They&rsquo;re just shorthand for writing them. It helps to use them, because less lines of code generally makes your code more readable. (However, don&rsquo;t feel like it&rsquo;s necessary to use as few lines of code as possible. Code should be concise, meaning short, but also not dense. Cramming everything into one line can become dense if you&rsquo;re trying to do too many things at once.) But it doesn&rsquo;t improve our time complexity. The time complexity here is still O(n).<br>
+                List comprehensions, as we have here, are still for loops. They&rsquo;re just shorthand for writing them. It helps to use them, because less lines of code generally makes your code more readable. (However, don&rsquo;t feel like it&rsquo;s necessary to use as few lines of code as possible. Code should be concise, meaning short, but also not dense. Cramming everything into one line can become dense if you&rsquo;re trying to do too many things at once.) But it doesn&rsquo;t lower our time complexity. The time complexity here is still O(n).<br>
                 <br>
                 Let&rsquo;s look at another code with a different time complexity.<br>
                 <br>
@@ -87,7 +87,27 @@
                 <br>
                 This is still considered a linear time complexity, because the exponents of the variables are still one.<br>
                 <br>
-                Come back soon for the next installment, a look at a case in which the time complexity is neither constant nor linear.<br>
+                Let's take a look at a code with a similar time complexity.<br>
+                <br>
+                name = &quot;Walter&quot;<br>
+                last_name = &quot;White&quot;<br>
+                name = name + last_name<br>
+                <br>
+                This is an example of string concatenation. Line 1 initializes name, line 2 initializes last_name, and line 3 concatenates them, assigning the result to name.<br><br>
+                A common misconception may be that string concatenation has a constant time complexity of O(1), because it seems like it's just adding, right?
+                <br><br>
+                However, that's incorrect. In Python, strings are immutable, so you can't really &quot;add&quot; to a string. Concatenation works by copying all letters from both strings into the new one. 
+                <br><br>
+                Therefore, if we refer to the number of characters in name as n, and the number of characters in last_name as m, you would have to add the time complexities. O(n) + O(m) = O(n+m), which is a linear time complexity because it has an exponent of one.<br>
+                <br>
+                Here's one more code that may confuse you at first.<br>
+                <br>
+                names = [&ldquo;Anna&rdquo;, &ldquo;Joe&rdquo;, &ldquo;Will&rdquo;]<br>
+                names.pop(0)<br>
+                <br>
+                If you read the page on constant time complexity, you've already seen this code, but on that page, pop() was not passed an argument. Here, pop() does have an argument. This changes the time complexity significantly, because if you are popping from the beginning or middle of the list, that means the other elements have to shift position after the popped element is removed. This would result in a linear time complexity of O(n).
+                <br><br>
+                Come back soon for the next installment, a look at time complexities that are neither constant nor linear.
         </div>
     </main>
     <footer>
