@@ -66,3 +66,20 @@ a {
     font-size:25px;
     margin-top:20px;
 }
+
+.page-title {
+    font-size:50px;
+}
+
+.content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.page-body {
+    font-size:18px;
+    line-height:30px;
+    margin-top:8px;
+    padding-bottom:10px;
+}
