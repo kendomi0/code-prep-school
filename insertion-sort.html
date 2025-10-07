@@ -26,6 +26,79 @@
             <div class="page-title">
                 Insertion Sort
             </div>
+            <div class="page-body">
+                Let&rsquo;s look at a relatively simple sorting algorithm, called insertion sort.<br>
+                Insertion sort is used to sort elements in ascending (greater) or descending (lower) order.<br>
+                <br>
+                Let&rsquo;s look at this pseudocode for insertion sort.<br>
+                <br>
+                for j=2 to A.length<br>
+                key = A[j]<br>
+                i = j - 1<br>
+                while i > 0 and A[i] > key<br>
+                A[i + 1] = A[i]<br>
+                i = i - 1<br>
+                A[i + 1] = key<br>
+                <br>
+                Since this is pseudocode, j=2 would translate to j=1 in Python, meaning the second element in the list, and A.length would have to be len(A)+1. Adjust the element numbers to account for how Python processes indices.<br>
+                <br>
+                Let&rsquo;s explain this code in Layman&rsquo;s terms.<br>
+                <br>
+                Line 1: Loop goes from the second element in the list A to the final element. The very first element is considered already sorted because there is no previous element to compare it to.<br>
+                Line 2: The key variable stores the value of the element in A at the current index j.<br>
+                Line 3: The i variable stores the previous index of the current one we are on.<br>
+                Line 4: While loop inside the for loop. <br>
+                While the previous index is greater than 0, so the loop does not try to run past the first element in the list since that&rsquo;s as far as it can go, and the value of the element at the previous index is greater than the value of the current element (key).<br>
+                Line 5: Shift the value at A[i] one to the right, to the position of A[i+1].
+                Line 6: Subtract 1 from the previous index to get the new previous index. <br>
+                Line 7: Insert the key at the value at one greater than the new previous index. <br>
+                <br>
+                Let&rsquo;s use an example to demonstrate what&rsquo;s happening in this code. Indices are used how they are in the pseudocode. A[2] refers to A[1] in Python. <br>
+                <br>
+                A: [4, 3, 1]<br>
+                <br>
+                First iteration of outer loop:<br>
+                <br>
+                Line 1: Start loop at the second element, 3, and go to the end.<br>
+                Line 2: Key = A[j]. Since current j is 2, key = A[2], so key = 3.<br>
+                Line 3: i = j - 1. j is 2, so i = 1, referring to the first element, 4.<br>
+                Line 4: While the previous index is greater than 0 and A[i] > key. i=1, so A[i] = 4, and key = 3. Condition is satisfied, while loop runs.<br>
+                Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[2] is now 4. <br>
+                Line 6: i = i - 1, so now i = 0, as 1 - 1 = 0.<br>
+                At this point, the while loop terminates, because i = 0.<br>
+                Line 7: A[i + 1] = key. As i is now 0, this means A[1] now equals 3.<br>
+                <br>
+                Current list: [3, 4, 1]<br>
+                <br>
+                Second iteration of outer loop:<br>
+                Line 1: Continue loop at the third element, 1. <br>
+                Line 2: Key = A[j]. Since current j is 3, key = A[3], so key = 1.<br>
+                Line 3: i = j - 1. j is 3, so i = 2, referring to the second element, 4.<br>
+                Line 4: While the previous index is greater than 0 and A[i] > key. A[i] = 4 and key = 1. Condition is satisfied, while loop runs.<br>
+                Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[3] is now 4.<br>
+                A = [3, 4, 4]<br>
+                Line 6: i = i - 1, so now i = 1, as 2 - 1 = 1.<br>
+                The while loop runs a second time, because i > 0 and 3 > 1.<br>
+                Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[2] is now 3.<br>
+                A = [3, 3, 4]<br>
+                Line 6: i = i - 1, so now i = 0, as 1 - 1 = 0.<br>
+                At this point, the while loop terminates, because i = 0.<br>
+                Line 7: A[i + 1] = key. This means A[1] is now 1.<br>
+                A = [1, 3, 4]<br>
+                The outer loop terminates because we have reached the end of the list.<br>
+                <br>
+                Our sorted list is now [1, 3, 4].<br>
+                <br>
+                The time complexity for this specific list is O(n**2). This is considered worst-case, because our list was originally in descending order, and we sorted it in ascending order, the opposite, so every element had to be sorted. The inner loop had to run the maximum number of times per iteration of the outer loop. The average-case time complexity is also O(n**2). <br>
+                <br>
+                In cases where each element is already sorted, like sorting [2, 4, 6] in ascending order, the time complexity is only O(n). This is because the while loop does not execute at all, as the value at the previous index, A[i], will never be greater than key. O(n) is the best-case time complexity for this algorithm. <br>
+                <br>
+                If you want to count exactly how many times the code runs, add print statements at the end of the inner and outer loops. <br>
+                <br>
+                Think of the inner loop as going backwards while the outer loop goes forwards. i = i - 1 ensures that in the next iteration of the inner loop, the numbers at the lesser indices will be compared, while the outer loop continues through the list. <br>
+                <br>
+                Come back soon for visualizations of how the insertion sort algorithm works.
+            </div>
         </div>
     </main>
     <footer>
