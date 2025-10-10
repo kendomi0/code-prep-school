@@ -21,11 +21,15 @@
                 Let's take a look at linear time complexity, known as O(n).<br>
                 Look at this code that takes a name and reverses it.<br>
                 <br>
+
+                <pre><code>
                 name = input(&ldquo;Type in your first name: &quot;);<br>
                 reversed_name = &ldquo;&rdquo;<br>
                 for char in name:<br>
-                reversed_name = char + reversed_name<br>
+                    reversed_name = char + reversed_name<br>
                 print(reversed_name)<br>
+                </code></pre>
+
                 <br>
                 How many times would this code run? It would depend on the number of characters in name. For the name Jen, the for loop runs 3 times: to add J, then e, then n. For the name Mary-Kate, the for loop runs 9 times, counting the hyphen. <br>
                 <br>
@@ -33,33 +37,50 @@
                 <br>
                 Let's look at the time complexity if we rewrite this code to do the same thing in less lines.<br>
                 <br>
+                
+                <pre><code>
                 name = input(&ldquo;Type in your first name: &quot;)<br>
                 print(name[::-1])<br>
+                </code></pre>
+
                 <br>
                 One may believe that this would result in a faster time complexity. After all, it's only one line of code, right?<br>
                 However, that's incorrect. Using techniques like slicing is great for readability, but they don't make time complexity faster. The time complexity for slicing is still O(n).<br>
                 <br>
                 Let&rsquo;s look at another code.<br>
                 <br>
+
+                <pre><code>
                 nums = [2, 4, 6, 8, 10]<br>
                 sum = 0<br>
                 for num in nums:<br>
-                sum += num<br>
+                    sum += num<br>
                 print(sum)<br>
+                </code></pre>
+
+
                 <br>
                 Right now, our time complexity is O(n), because the for loop runs through the length of the list nums. <br>
                 <br>
                 Now, you may believe it could be optimized like this:<br>
                 <br>
+
+                <pre><code>
                 nums = [2, 4, 6, 8, 10]<br>
                 print(sum(nums))<br>
+                </code></pre>
+
                 <br>
                 One may think that because this code uses a built-in method, the time complexity is quicker.<br>
                 However, the time complexity is still O(n).<br>
                 Don&rsquo;t be fooled into thinking less lines means lower time complexity.<br>
                 <br>
+
+                <pre><code>
                 nums = [2, 4, 6]<br>
                 print([x**2 for x in nums])<br>
+                </code></pre>
+
                 <br>
                 It seems like since the code to create the new list is only one line long, the time complexity would be O(1), but this is not true.<br>
                 <br>
@@ -67,11 +88,15 @@
                 <br>
                 Let&rsquo;s look at another code with a different time complexity.<br>
                 <br>
+
+                <pre><code>
                 even_nums = [2, 4, 6, 8]<br>
                 odd_nums = [1, 3, 5, 7, 9]<br>
                 double_evens = [x*2 for x in even_nums]<br>
                 double_odds = [y*2 for y in odd_nums]<br>
                 print(double_evens, double_odds)<br>
+                </code></pre>
+
                 <br>
                 You can see that in this code, we have 2 for loops in the form of list comprehensions in the variables double_evens and double_odds. We will refer to the length of even_nums as n and the length of odd_nums as m.<br>
                 We simply add these, and our time complexity would be O(n + m). <br>
@@ -80,9 +105,13 @@
                 <br>
                 Let's take a look at a code with a similar time complexity.<br>
                 <br>
+
+                <pre><code>
                 name = &quot;Walter&quot;<br>
                 last_name = &quot;White&quot;<br>
                 name = name + last_name<br>
+                </code></pre>
+
                 <br>
                 This is an example of string concatenation. Line 1 initializes name, line 2 initializes last_name, and line 3 concatenates them, assigning the result to name.<br><br>
                 A common misconception may be that string concatenation has a constant time complexity of O(1), because it seems like it's just adding, right?
@@ -93,8 +122,12 @@
                 <br>
                 Here's one more code that may confuse you at first.<br>
                 <br>
+
+                <pre><code>
                 names = [&ldquo;Anna&rdquo;, &ldquo;Joe&rdquo;, &ldquo;Will&rdquo;]<br>
                 names.pop(0)<br>
+                </code></pre>
+
                 <br>
                 If you read the page on constant time complexity, you've already seen this code, but on that page, pop() was not passed an argument. Here, pop() does have an argument. This changes the time complexity significantly, because if you are popping from the beginning or middle of the list, that means the other elements have to shift position after the popped element is removed. This would result in a linear time complexity of O(n).
                 <br><br>

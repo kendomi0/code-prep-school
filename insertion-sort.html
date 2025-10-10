@@ -23,13 +23,17 @@
                 <br>
                 Let&rsquo;s look at this pseudocode for insertion sort.<br>
                 <br>
+
+                <pre><code>
                 for j=2 to A.length<br>
-                key = A[j]<br>
-                i = j - 1<br>
-                while i > 0 and A[i] > key<br>
-                A[i + 1] = A[i]<br>
-                i = i - 1<br>
-                A[i + 1] = key<br>
+                    key = A[j]<br>
+                    i = j - 1<br>
+                    while i > 0 and A[i] > key<br>
+                        A[i + 1] = A[i]<br>
+                        i = i - 1<br>
+                    A[i + 1] = key<br>
+                </code></pre>
+
                 <br>
                 Since this is pseudocode, j=2 would translate to j=1 in Python, meaning the second element in the list, and A.length would have to be len(A)+1. Adjust the element numbers to account for how Python processes indices.<br>
                 <br>

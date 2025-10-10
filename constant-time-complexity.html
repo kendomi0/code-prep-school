@@ -26,8 +26,10 @@
                 A constant time complexity means each line only runs once. &ldquo;Constant&rdquo; refers to how it always runs the same amount of times, opposed to cases of linear time complexity where O(n) is dependent on the size of n.<br>
                 Let&rsquo;s look at some examples of constant time complexity.<br>
                 <br>
+                <pre><code>
                 food = [&ldquo;fries&rdquo;, &ldquo;pizza&rdquo;, &ldquo;burger&rdquo;]<br>
                 print(food[0])<br>
+                </code></pre>
                 <br>
                 Line 1 initializes the list food. Simply initializing is always constant time.<br>
                 Line 2 accesses the first value (value at 0th index) of food and prints it. <br>
@@ -35,8 +37,10 @@
                 <br>
                 Let&rsquo;s look at another example.<br>
                 <br>
+                <pre><code>
                 flowers = [&ldquo;rose&rdquo;, &ldquo;daisy&rdquo;, &ldquo;sunflower&rdquo;]<br>
                 flowers.append(&ldquo;violet&rdquo;)<br>
+                </code></pre>
                 <br>
                 Line 1 initializes the list flowers.<br>
                 Line 2 adds &ldquo;violet&rdquo; to the end of the list flowers, so that flowers now would consist of [&ldquo;rose&rdquo;, &ldquo;daisy&rdquo;, &ldquo;sunflower&rdquo;, &ldquo;violet&rdquo;].<br>
@@ -44,8 +48,10 @@
                 <br>
                 Let&rsquo;s look at an example that can get complex.<br>
                 <br>
+                <pre><code>
                 names = [&ldquo;Anna&rdquo;, &ldquo;Joe&rdquo;, &ldquo;Will&rdquo;]<br>
                 names.pop()<br>
+                </code></pre>
                 <br>
                 Line 1 initializes the list names, which is constant time. <br>
                 Line 2 removes the item at the last index, which would be &ldquo;Will.&rdquo;<br>
@@ -55,9 +61,11 @@
                 <br>
                 You can access a list of constant operations' time complexities on the official Python website. Additionally, basic arithmetic operations that do not involve exponentials, such as<br>
                 <br>
+                <pre><code>
                 x = 2<br>
                 result = x * 2<br>
                 print(result)<br>
+                </code></pre>
                 <br>
                 also have a time complexity of O(1), assuming the given numbers are not so large that they exceed a machine's word size.
             </div>
