@@ -7,6 +7,9 @@ let appHeader = `
         <a href="linear-time-complexity.html" class="nav-item">
             Linear Time Complexity
         </a>
+        <a href="quadratic-time-complexity.html" class="nav-item">
+            Quadratic Time Complexity
+        </a>
         <a href="insertion-sort.html" class="nav-item">
             Insertion Sort
         </a>

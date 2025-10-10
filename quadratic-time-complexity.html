@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Time Complexity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="app-header"></header>
+    <script src="header.js"></script>
+    <main>
+        <div class="content-container">
+            <div class="page-title">
+                Quadratic Time Complexity
+            </div>
+            <div class="page-body">
+                Quadratic time complexity: O(n^2).<br>
+                Let's take a look at some examples of quadratic time complexity.<br>
+                <br>
+                <pre><code>
+                odd = [1, 3, 5]<br>
+                even = [2, 4, 6]<br>
+                for x in odd:<br>
+                    for y in even:<br>
+                        print(x, y)<br>
+                </code></pre>
+                <br>
+                Here, we have what's called a nested loop, a loop inside a loop. It means the inner loop runs inside the outer loop, and when the inner loop is finished for that iteration, it moves onto the next item in the outer loop. When x in odd is 1, every y in even is iterated through. When x in odd is 2, every y in even is iterated through again, and so on and so forth.<br>
+                <br>
+                So you multiply their input sizes, n*m, to get O(nm), which is conceptually equivalent to O(n^2), or quadratic time complexity, meaning an exponent of 2. In this case, n and m are of the same size, but in cases where they are not, it's more correct to just refer to the time complexity as O(nm), although the concept of quadratic growth is still the same.<br>
+                <br>
+                For this code, the output would be: <br>
+                1 2<br>
+                1 4<br>
+                1 6<br>
+                3 2<br>
+                3 4<br>
+                3 6<br>
+                5 2<br>
+                5 4<br>
+                5 6<br>
+                <br>
+                <br>
+                Now, let's have a look at another code with a quadratic time complexity that shows how nested loops can sometimes lead to misconceptions.<br>
+                <br>
+                <pre><code>
+                first_names = ['Tony ', 'Dexter ', 'Joe ']<br>
+                last_names = ['Soprano', 'Morgan', 'Goldberg']<br>
+                full_names = []<br>
+                for x in first_names:<br>
+                    for y in last_names:<br>
+                        full_names.append(x + y)<br>
+                print(full_names)<br>
+                </code></pre>
+                <br>
+                Now, it seems that the goal of my code would be to match the first name to the last name, so that full_names would contain <br>
+                <br>
+                [&quot;Tony Soprano&quot;, &quot;Dexter Morgan&quot;, &quot;Joe Goldberg&quot;]<br>
+                <br>
+                However, this is not how nested loops work.<br>
+                <br>
+                The code would actually start at the first index of first_names and iterate through every item in last_names until it gets to the end, then move onto the second index of first_names, then so on and so forth.<br>
+                <br>
+                So, after going through the first iteration (First index of first_names iterating through every index in last_names), full_names would consist of:<br>
+                <br>
+                ['Tony Soprano', 'Tony Morgan', 'Tony Goldberg']<br>
+                <br>
+                And at the end, full_names would comprise:<br>
+                <br>
+                ['Tony Soprano', 'Tony Morgan', 'Tony Goldberg', 'Dexter Soprano', 'Dexter Morgan', 'Dexter Goldberg', 'Joe Soprano', 'Joe Morgan', 'Joe Goldberg']<br>
+                <br>
+                Notice how there are 9 items in full_names. For O(n^2), when n = 3, n^2 = 9. <br>
+                <br>
+                Some examples of algorithms with worst- and average-case time complexities of O(n^2) are bubble sort and insertion sort, which you can read about on their respective pages. However, with those algorithms, their best-case time complexities, which is when the given list is already sorted, are O(n), because their inner loops don't run if the condition is not satisfied.
+            </div>
+        </div>
+    </main>
+    <footer>
+        Github site by kendomi0
+    </footer>
+</body>
+</html>
