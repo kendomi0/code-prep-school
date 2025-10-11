@@ -1,6 +1,9 @@
 let appHeader = `
     <a href="index.html" class="title">CodePrepSchool</a>
     <nav class="nav-links">
+        <a href="time-complexity-basics.html" class="nav-item">
+            Time Complexity Basics
+        </a>
         <a href="constant-time-complexity.html" class="nav-item">
             Constant Time Complexity
         </a>
