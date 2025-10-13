@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Complexity Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="app-header"></header>
+    <script src="header.js"></script>
+    <main>
+        <div class="content-container">
+            <div class="page-title">
+                Time Complexity Quiz
+            </div>
+            <!-- Page body -->
+            <div class="page-body">
+                Test your understanding of time complexity with some questions that may puzzle you.<br>
+                <br>
+                1. What is the time complexity of the given code?<br>
+                <br>
+                <pre><code>
+                tongue_twister = &quot;Peter Piper picked a peck of pickled peppers.&quot;<br>
+                print(tongue_twister.count(&quot;p&quot;))
+                </code></pre>
+                <br>
+                <input type="radio" id="O(1)" name="q1" value="a. O(1)">
+                <label for="O(1)">a. O(1)</label><br>
+                <input type="radio" id="O(n)" name="q1" value="b. O(n)">
+                <label for="O(n)">b. O(n)</label><br>
+                <input type="radio" id="O(n^2)" name="q1" value="c. O(n^2)">
+                <label for="O(n^2)">c. O(n^2)</label>
+            </div>
+
+                <div id="message"></div>
+            <!-- End page body-->
+        </div>
+    </main>
+    <footer>
+        Github site by kendomi0
+    </footer>
+    <script src="quiz.js"></script>
+</body>
+</html>
