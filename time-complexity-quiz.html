@@ -65,6 +65,109 @@
                     <input type="radio" name="q3" value="c"><label>c. O(n^2)</label><br>
                     <div class="message"></div>
                 </div>
+                <div class="question" data-qid="q4">
+                    4. What is the time complexity of the given code?
+                    <pre><code>
+                        students = ["Chloe", "Sam", "Sophia", "Marcus"]
+                        students.insert(0, "Taylor")
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q4" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q4" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q4" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q5">
+                    5. What is the time complexity of the given code?
+                    <pre><code>
+                        n = 2
+                        for i in range(n):
+                            for j in range(5):
+                                print(i, j)
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q5" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q5" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q5" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q6">
+                    6. What is the time complexity of the given code?
+                    <pre><code>
+                        name = "Mary "
+                        middle_name = "Jenny"
+                        for char in middle_name:
+                            name += char
+                        print(name)
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q6" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q6" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q6" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q7">
+                    7. What is the best-case time complexity of the given code? Assume target is a random digit from 1-5.
+                    <pre><code>
+                        for i in range(1, 6):
+                            if i == target:
+                                print("Target found")
+                                break
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q7" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q7" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q7" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q8">
+                    8. What is the time complexity of the given code?
+                    <pre><code>
+                        shows = ["Breaking Bad", "The Sopranos", "Friends"]
+                        sitcoms = ["Friends", "Boy Meets World", "Happy Days"]
+                        for sitcom in sitcoms:
+                            if sitcom not in shows:
+                                shows.append(sitcom)
+                        print(shows)
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q8" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q8" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q8" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q9">
+                    9. What is the time complexity of the given code?
+                    <pre><code>
+                        grades = [90, 85, 73, 61, 99, 88, 63]
+                        (max(grades))
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q9" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q9" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q9" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
+                <div class="question" data-qid="q10">
+                    10. What is the time complexity of the given code?
+                    <pre><code>
+                        packing_list = {"clothes", "shoes", "passport"}
+                        if "shoes" in packing_list:
+                            print("Need to pack shoes")
+                    </code>
+                    </pre>
+
+                    <input type="radio" name="q10" value="a"><label>a. O(1)</label><br>
+                    <input type="radio" name="q10" value="b"><label>b. O(n)</label><br>
+                    <input type="radio" name="q10" value="c"><label>c. O(n^2)</label><br>
+                    <div class="message"></div>
+                </div>
                 <!-- End page body-->
             </div>
     </main>
