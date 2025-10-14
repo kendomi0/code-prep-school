@@ -13,6 +13,9 @@ let appHeader = `
         <a href="quadratic-time-complexity.html" class="nav-item">
             Quadratic Time Complexity
         </a>
+        <a href="time-complexity-quiz.html" class="nav-item">
+            Time Complexity Quiz
+        </a>
         <a href="insertion-sort.html" class="nav-item">
             Insertion Sort
         </a>
