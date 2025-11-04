@@ -2,9 +2,10 @@ let appHeader = `
     <a href="index.html" class="title">CodePrepSchool</a>
     <nav class="nav-dropdown">
         <div class="dropdown" id="dropdown-time-complexity">
-            <span class="dropdown-title">
+            <div class="dropdown-title">
                 Time Complexity
-            </span>
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
             <div class="nav-links">
                 <a href="time-complexity-basics.html" class="nav-item">
                     Time Complexity Basics
@@ -24,9 +25,10 @@ let appHeader = `
             </div>
         </div>
         <div class="dropdown" id="dropdown-algorithms">
-            <span class="dropdown-title">
+            <div class="dropdown-title">
                 Algorithms
-            </span>
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
             <div class="nav-links">
                 <a href="insertion-sort.html" class="nav-item">
                     Insertion Sort
