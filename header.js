@@ -30,6 +30,9 @@ let appHeader = `
                 <i class="fa-solid fa-caret-down"></i>
             </div>
             <div class="nav-links">
+                <a href="intro-to-algorithms.html" class="nav-item">
+                    Intro to Algorithms
+                </a>
                 <a href="insertion-sort.html" class="nav-item">
                     Insertion Sort
                 </a>
