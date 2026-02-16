@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/b3ffa80bf4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
 </head>
 <body>
     <header id="app-header"></header>
@@ -18,11 +22,183 @@
                 Intro to Algorithms
             </div>
             <div class="page-body">
+                <p>In computer science, you&rsquo;ll learn about a variation of *algorithms*. If you have no prior technical knowledge, you may associate &ldquo;algorithms&rdquo; with what social media companies use to recommend content to their users. However, this is only one example of an algorithm, an algorithm that is much more complex than the ones you will encounter in elementary computer science.</p>
+
+                <p>Many basic computer science algorithms, such as insertion sort, bubble sort, and merge sort, simply sort items in an array. Think of it as a math formula. We use a formula &ndash; the algorithm &ndash; to achieve our goal of sorting items. We use variables in code, just like in math formulas, and solve the problem by filling in the formula with our variable values.</p>
+
+                <p>The difference between math formulas and algorithms is that formulas are typically one line, while algorithms are multi-line. You have to execute all the lines of the algorithm in order, because they all affect each other. So, in that aspect, think of algorithms as a math problem where you have to use multiple formulas. You solve one formula, and use the answer to that formula in the next.</p>
+
+                <p>In textbooks and other educational material, you&rsquo;ll often see them using *pseudocode* to display algorithms. This is to make the code universal to any programming language. It&rsquo;s meant to focus on what the code does instead of the syntax of the specific programming language.</p>
+
+                <p>The point of pseudocode is to be literal, to make its meaning more apparent upon first glance without being complicated by the conventions of specific programming languages.</p>
+
+                <p>However, it may be confusing to someone not as well-versed in code to read pseudocode if they are used to understanding code in their preferred programming language. If this applies to you, it may help to first translate the pseudocode into your preferred language. Learning the algorithm is more important than intuitively understanding pseudocode. Once you learn the algorithm, it will help you understand it without needing to translate it into real code.</p>
+
+                <p>Pseudocode also tends to use single-letter variables, such as i and j, similar to math formulas. If this makes the algorithm difficult for you to understand, feel free to assign the variables your own preferred names.</p>
+
+                <p>While programming languages like Python use 0-based indexing, many pseudocodes you&rsquo;ll encounter use 1-based indexing &mdash; how humans typically count &mdash; which is what we&rsquo;ll be using here.</p>
+
+                <p>Let&rsquo;s look at pseudocode for a very simple algorithm for finding the maximum value in a list that&rsquo;s called A.</p>
+
+                <pre>
+                <code>
+                max = A[1]
+                for i = 2 to A.length:
+                    if A[i] > max:
+                        max = A[i]
+                return max
+                </code>
+                </pre>
+
+                So you can understand how pseudocode translates into real code, here is the code written in Python. At first, you might be more accustomed to reading code in your preferred language, but you&rsquo;ll find that the pseudocode is more straight-forward about what each line does.
+
+                <pre>
+                <code>
+    arr = [1, 5, 3, 4, 2]
+    max_value = arr[0] # Python uses 0-based index, so arr[0] equals A[1] in the pseudocode
+    for i in range(1, len(arr)): # Despite the 0-based indices, the stop endpoint remains
+                                # the same because Python loops stop one before the endpoint
+        if arr[i] > max_value:
+            max_value = arr[i]
+    print(max_value)
+                </code>
+                </pre>
+
+                <p>We&rsquo;ll be referring to the pseudocode version in this explanation.</p>
+
+                <p>Line 1 initializes the variable *max* and sets its value to the value at A[1], meaning the first value in the array.</p>
+
+                <p>Line 2 initializes a loop from the second item in the array (Because checking the first item is unnecessary when we have already assigned max the value of the first item) to the end of the loop.</p>
+
+                <p>Line 3 checks if the value of the item at the index the loop is currently on is greater than max. The value is accessed by index lookup. The index, i, is a variable that represents the current index in the loop.</p>
+
+                <p>Line 4 changes the value of max to that value, if the condition in line 3 is satisfied.</p>
+
+                <p>Line 5 returns the value of max once the for loop has checked every value from the second to last index in the array. This is okay with pseudocode, since it&rsquo;s just the concept of returning a value, but in Python, *return* doesn&rsquo;t work outside of a defined function.</p>
+
+                <p>Let&rsquo;s say our array, A, has the values of [1, 5, 3, 4, 2]. Let&rsquo;s fill in the values from the pseudocode for the steps in the first iteration.</p>
+
+                <pre>
+                <code>
+        max = A[1] # A[1] = 1, so max = 1
+        for i = 2 to A.length: # A.length = 5
+            if A[2] > max: # A[2] = 5, so this becomes if 5 > 1, which is true
+                max = A[2] # Since the condition is true, max becomes A[2], so max = 5
+        return max
+                </code>
+                </pre>
+
+                <p>Keep in mind that we know that 5 is the maximum value in the array, because we can look at the list all at once and immediately gauge that it is the highest number. However, the code can&rsquo;t. It has to iterate through every number in the list to ensure that there is no number higher than the current max.</p>
+
+                <p>Think of it as that there are 5 apples, but they&rsquo;re only shown to you one at a time. You won&rsquo;t know which apple is the biggest until you&rsquo;ve seen them all.</p>
+
+                <p>So let&rsquo;s go through the second iteration of the algorithm. We can ignore the first and last lines, because we&rsquo;re just inside the loop for now.</p>
+
+                <pre>
+                <code>
+        for i = 2 to A.length: # We are now on i = 3
+        if A[3] > max: # Current i is 3, so we compare A[3], which is 3, but 3 &lt; 5
+            max = A[3] # Since the condition is false, this line doesn't execute
+                </code>
+                </pre>
+
+                <p>The code then goes on to check A[4] and A[5], and then returns the max, which is 5.</p>
+
+                <p>Now let&rsquo;s look at pseudocode for another simple algorithm, linear search.</p>
+
+                <p>Assume A is our array, and target is an element that exists in that array.</p>
+
+                <p>In reality, with algorithms, you should always optimize them for the chance that the given value does not exist in the array.</p>
+
+                <p>However, for the sake of assessing how linear search works on a basic level, let&rsquo;s assume the case is that the element does exist in the array.</p>
+
+                <pre>
+                <code>
+        for i = 1 to A.length:
+        if target = A[i]:
+            return "Found target"
+                </code>
+                </pre>
+
+                <p>Let&rsquo;s use the same array we did before, [1, 5, 3, 4, 2].</p>
+
+                <p>Let&rsquo;s assign target the value of 3.</p>
+
+                <pre>
+                    <code>
+        # A = [1, 5, 3, 4, 2], target = 3
+        for i = 1 to A.length:
+            if target = A[1]: # Target is 3, and A[1] = 1. 3 != 1, so we do not return.
+                return "Found target"
+                    </code>
+                </pre>
+
+                <p>Since we didn&rsquo;t find the value matching the target, the loop continues.</p>
+
+                <pre>
+                <code>
+        for i = 1 to A.length: # We are now on i = 2
+            if target = A[2]: # Target is 3, and A[2] = 5. 3 != 5, so we do not return.
+            return "Found target"
+                </code>
+                </pre>
+
+                <p>The code has to go through more iterations until it finds its target.</p>
+
+                <pre>
+                    <code>
+        for i = 1 to A.length: # We are now on i = 3
+            if target = A[3]: # Target is 3, and A[3] = 3. 3 = 3, so we return.
+                return "Found target" # "Found target" is printed because the condition is true
+                    </code>
+                </pre>
+
+                <p>Unlike the other code, this code stops when the goal of the code, which in this case is finding the value that matches the target, is complete.</p>
+
+                <p>This is because the return line is inside the loop. The loop terminates when its condition is satisfied.</p>
+
+                <p>In the previous code, the return line was outside of the loop. This means that the loop had to execute for all values in the &ldquo;for&rdquo; loop, and only after that would the &ldquo;return&rdquo; line execute.</p>
+
+                <p>Now, let&rsquo;s look at a case where the target value does not exist within the array.</p>
+
+                <pre>
+                    <code>
+        for i = 1 to A.length:
+        if target = A[i]:
+            return "Found target"
+    return "Target not found"
+                    </code>
+                </pre>
+
+                <p>Let&rsquo;s use the same array, but change our target value to 6.</p>
+
+                <pre>
+                    <code>
+    # A = [1, 5, 3, 4, 2], target = 6
+    for i = 1 to A.length:
+        if target = A[i]:
+            return "Found target"
+    return "Target not found"
+                    </code>
+                </pre>
+
+                <p>In this scenario, the code iterates through the entire list.</p>
+
+                <p>It&rsquo;s the same concept as the previous version of this code, except that since the target value is not in the list, there is no point at which the code stops searching. It just searches until there are no more values left to search.</p>
+
+                <p>After iterating through the entire list, the code returns &ldquo;Target not found.&rdquo;</p>
+
+                <p>In a real implementation of an algorithm, you should always account for edge cases like that. The code needs to work for both cases of the target being found and not found.</p>
+
+                <p>Now that you&rsquo;ve seen examples of algorithm pseudocode, you can read all about more algorithms, like insertion sort and bubble sort.</p>
             </div>
         </div>
     </main>
     <footer>
         Github site by kendomi0
     </footer>
+<script>
+  hljs.highlightAll();
+</script>
 </body>
 </html>
