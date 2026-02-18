@@ -140,7 +140,17 @@ a {
     font-weight:600;
 }
 
+.emphasis {
+    color: #ff7b72;
+    font-weight: bold;
+}
 
 code {
     border-radius:13px;
+}
+
+.inline-code {
+    color: #1e8bf0;
+    font-weight: bold;
+    font-size: 20px;
 }
