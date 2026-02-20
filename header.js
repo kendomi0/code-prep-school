@@ -10,6 +10,9 @@ let appHeader = `
                 <a href="time-complexity-basics.html" class="nav-item">
                     Time Complexity Basics
                 </a>
+                <a href="built-in-methods.html" class="nav-item">
+                    Built-In Methods
+                </a>
                 <a href="constant-time-complexity.html" class="nav-item">
                     Constant Time Complexity
                 </a>
