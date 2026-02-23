@@ -145,8 +145,16 @@ a {
     font-weight: bold;
 }
 
+.italic {
+    font-style: italic;
+}
+
 code {
     border-radius:13px;
+}
+
+.new-section {
+    margin-top:8em;
 }
 
 .inline-code {
