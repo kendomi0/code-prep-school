@@ -17,6 +17,15 @@
         p {
             margin-bottom: 2em;
         }
+
+        .page-body a {
+            color: #BCBCE3 !important ;
+            text-decoration: underline;
+        }
+
+        .page-body a:hover {
+            color: #F0F0FF !important;
+        }
     </style>
 </head>
 <body>
@@ -30,11 +39,11 @@
             <div class="page-body">
                 <p>Here, we&rsquo;ll be looking at the time complexity of common Python built-in methods.</p>
 
-                <p>The important thing to remember about built-in methods is that just because they are one line does *not* mean their time complexity is O(1) (constant). Built-in methods are simply shorthand for longer functions, similar to how multiplication is shorthand for repetitive addition.</p>
+                <p>The important thing to remember about built-in methods is that just because they are one line does <span class="italic">not</span> mean their time complexity is O(1) (constant). Built-in methods are simply shorthand for longer functions, similar to how multiplication is shorthand for repetitive addition.</p>
 
                 <p>Let&rsquo;s look at some built-in functions for lists.</p>
 
-                <p>Let&rsquo;s compare the append() function to the insert() function.</p>
+                <p>Let&rsquo;s compare the <span class="inline-code">append()</span> function to the <span class="inline-code">insert()</span> function. Take a look first at the append() function.</p>
 
                 <pre>
                     <code>
@@ -45,9 +54,9 @@
 
                 <p>The append() function adds the given item to the end of the list. It does not need to iterate through the list to do so, and none of the indices of the current items must be shifted to account for the added item.</p>
 
-                <p>Therefore, the time complexity of this built-in function is O(1), or constant.</p>
+                <p>Therefore, the time complexity of this built-in function is <span class="inline-code">O(1)</span>, or constant.</p>
 
-                <p>Now let&rsquo;s look at the same code, but with the insert() function instead.</p>
+                <p>Now let&rsquo;s look at the same code, but with the <span class="inline-code">insert()</span> function instead.</p>
 
                 <pre>
                     <code>
@@ -56,18 +65,18 @@
                     </code>
                 </pre>
 
-                <p>The insert() function takes 2 parameters: an index *and* an item.</p>
+                <p>The insert() function takes 2 parameters: an index <span class="italic">and</span> an item.</p>
 
-                <p>While at first glance, it may look like this code and the previous code do the same thing since 2 is the last index in the list, they don&rsquo;t. The difference between the previous code and this code is that this code adds &ldquo;Reba&rdquo; *at* index 2 instead of after it.</p>
+                <p>While at first glance, it may look like this code and the previous code do the same thing since 2 is the last index in the list, they don&rsquo;t. The difference between the previous code and this code is that this code adds &ldquo;Reba&rdquo; <span class="italic">at</span> index 2 instead of after it.</p>
 
-                <p> &ldquo;Reba&rdquo; will be added at index 2, after &ldquo;Boy Meets World,&rdquo; and &ldquo;Friends&rdquo; then becomes the last item in the list. Therefore, the time complexity cannot be constant, because items must shift to account for the inserted item. This results in a time complexity of O(n).</p>
+                <p> &ldquo;Reba&rdquo; will be added at index 2, after &ldquo;Boy Meets World,&rdquo; and &ldquo;Friends&rdquo; then becomes the last item in the list. Therefore, the time complexity cannot be constant, because items must shift to account for the inserted item. This results in a time complexity of <span class="inline-code">O(n)</span>.</p>
 
                 <p>Let&rsquo;s look at what this code would be if we translated the insert() method into a code that is functionally equivalent.</p>
 
                 <pre>
                     <code>
     shows = ["Full House", "Boy Meets World", "Friends"]
-    shows.append(None) # Add a value of "None" to the end of the list
+    shows.append(None) # Add a value of "None" to the end of the list as a placeholder
     for i in range(len(shows) - 1, 2, -1): # Loop going backwards from the end 
                                             # to the given index
         shows[i] = shows[i - 1] # Change the value at the current index to the value
@@ -76,7 +85,7 @@
                     </code>
                 </pre>
 
-                <p>The for loop moves backwards from the last index *len(shows) - 1*, to the index we will insert the new item into (2). The code inside the loop changes the item at the current index to the item at the previous index, but it doesn&rsquo;t actually &ldquo;move&rdquo; the item at the previous index; it just copies it.</p>
+                <p>The for loop moves backwards from the last index <span class="inline-code">len(shows) - 1</span>, to the index we will insert the new item into (<span class="inline-code">2</span>). The code inside the loop changes the item at the current index to the item at the previous index, but it doesn&rsquo;t actually &ldquo;move&rdquo; the item at the previous index; it just copies it.</p>
 
                 <p>After every item following the given index has been shifted one to the right, we change the item at the given index (2) to our preferred value (&rdquo;Reba&rdquo;).</p>
 
@@ -85,7 +94,7 @@
                 <pre>
                     <code>
     shows = ["Full House", "Boy Meets World", "Friends"]
-    shows.append(None) # Add a value of "None" to the end of the list
+    shows.append(None) # Add a value of "None" to the end of the list as a placeholder
     i = len(shows) - 1 # The last index in the array, creates basis for backwards loop
     while i > 2: # The loop goes on as long as the index is higher than the given index
         shows[i] = shows[i - 1] # Change the value at the current index to the value
@@ -95,13 +104,19 @@
                     </code>
                 </pre>
 
-                <p>This code assigns the number of the last index to the variable i. The while loop runs as long as *i* is higher than the index at which we want to insert our given value (2). The code inside the while loop overwrites the value at the current index with the value at the previous index. Then it reduces the value of i by 1 and the while loop runs again if the condition is satisfied, simulating the behavior of a backwards for loop. Then when the while loop is complete, the code overwrites the value at the index of 2 with &ldquo;Reba.&rdquo;</p>
+                <p>This code assigns the number of the last index to the variable <span class="inline-code">i</span>.</p>
 
-                <p>This code, and the code with the backwards for loop, mimic the internal behavior of the insert() method. This explains why the insert() method has a time complexity of O(n) despite being a built-in method.</p>
+                <p>The while loop runs as long as <span class="inline-code">i</span> is higher than the index at which we want to insert our given value (<span class="inline-code">2</span>).</p> 
 
-                <p>Removing a list item through the remove() method functions similarly, but opposite. The list&rsquo;s items after the given index must all shift one to the left to account for the removed item.</p>
+                <p>The code inside the while loop overwrites the value at the current index with the value at the previous index. Then it reduces the value of <span class="inline-code">i</span> by 1 and the while loop runs again if the condition is satisfied, simulating the behavior of a backwards for loop. </p>
 
-                <p>Now let&rsquo;s look at adding and removing items in *sets* instead of lists.</p>
+                <p>Then when the while loop is complete, the code overwrites the value at the index of <span class="inline-code">2</span> with &ldquo;Reba.&rdquo;</p>
+
+                <p>This code, and the code with the backwards for loop, mimic the internal behavior of the insert() method. This explains why the insert() method has a time complexity of <span class="inline-code">O(n)</span> despite being a built-in method.</p>
+
+                <p>Removing a list item through the <span class="inline-code">remove()</span> method functions similarly, but opposite. The list&rsquo;s items after the given index must all shift one to the left to account for the removed item.</p>
+
+                <p class="new-section">Now let&rsquo;s look at adding and removing items in <span class="emphasis">sets</span> instead of lists.</p>
 
                 <p>Each item in a set must be unique, as sets don&rsquo;t allow for duplicates. Sets are implemented through hash tables, a type of data structure, in which each item has a hash code determined by a hash function.</p>
 
@@ -109,7 +124,7 @@
 
                 <p>Therefore, adding or removing elements doesn&rsquo;t require &ldquo;looking through&rdquo; a set in the same way it would for adding or removing an element at a certain index in a list.</p>
 
-                <p>Let&rsquo;s take a look at this code.</p>
+                <p>Let&rsquo;s take a look at this code that uses the <span class="inline-code">add()</span> method.</p>
 
                 <pre>
                     <code>
@@ -118,17 +133,17 @@
                     </code>
                 </pre>
 
-                <p>This code adds &ldquo;purple&rdquo; to the set *colors*.</p>
+                <p>This code adds &ldquo;purple&rdquo; to the set <span class="inline-code">colors</span>.</p>
 
-                <p>The add() method is functionally equivalent to the append() method for lists.</p>
+                <p>The add() method is functionally similar to the append() method for lists.</p>
 
-                <p>For most purposes, the time complexity of the add() method is O(1), as this is its average-case time complexity.</p>
+                <p>For most purposes, the time complexity of the add() method is <span class="inline-code">O(1)</span>, as this is its average-case time complexity.</p>
 
                 <p>However, in the worst-case scenario where there are hash collisions, the time complexity would be O(n). This scenario is rare enough in practice that we can refer to the time complexity of add() as O(1), so unless you are working with a specific scenario in which hash collisions are likely, we can go with the average-case time complexity of O(1).</p>
 
                 <p></p>
 
-                <p>Now let&rsquo;s take a look at removing an item in a set.</p>
+                <p>Now let&rsquo;s take a look at removing an item in a set with the <span class="inline-code">remove()</span> method.</p>
 
                 <pre>
                     <code>
@@ -141,9 +156,9 @@
 
                 <p>However, it&rsquo;s not the same with sets, as they don&rsquo;t have indices, so no shifting is necessary.</p>
 
-                <p>Therefore, the time complexity of the remove() function is O(1).</p>
+                <p>Therefore, the time complexity of the remove() function is <span class="inline-code">O(1)</span>.</p>
 
-                <p>If we look at the time complexity of the in method with sets, we&rsquo;ll see this same concept at work.</p>
+                <p>If we look at the time complexity of the <span class="inline-code">in</span> method with sets, we&rsquo;ll see this same concept at work.</p>
 
                 <pre>
                     <code>
@@ -152,9 +167,9 @@
                     </code>
                 </pre>
 
-                <p>Since set methods don&rsquo;t require iterating through a set, the time complexity of set membership lookup is also constant. Therefore, the time complexity of the in method with sets is O(1).</p>
+                <p>Since set methods don&rsquo;t require iterating through a set, the time complexity of set membership lookup is also constant. Therefore, the time complexity of the in method with sets is <span class="inline-code">O(1)</span>.</p>
 
-                <p>Let&rsquo;s look at the how the time complexity of the *in* method differs with lists.</p>
+                <p>Let&rsquo;s look at the how the time complexity of the <span class="inline-code">in</span> method differs with lists.</p>
 
                 <pre>
                     <code>
@@ -163,7 +178,7 @@
                     </code>
                 </pre>
 
-                <p>Here, animals is a list of 3 items: cat, dog, and rabbit. The second line searches for &ldquo;dog&rdquo; in the list and returns a boolean.</p>
+                <p>Here, <span class="inline-code">animals</span> is a list of 3 items: cat, dog, and rabbit. The second line searches for &ldquo;dog&rdquo; in the list and returns a boolean.</p>
 
                 <p>The in method must iterate through the list to locate the given item.</p>
 
@@ -181,15 +196,15 @@
                     </code>
                 </pre>
 
-                <p>We store the boolean value in the variable *found*, and initialize it to false because it will be false until the condition is satisfied.</p>
+                <p>We store the boolean value in the variable <span class="inline-code">found</span>, and initialize it to false because it will be false until the condition is satisfied.</p>
 
-                <p>The for loop iterates through the list animals. It checks every item to see if it is equal to &ldquo;dog&rdquo;. If it is equal, the *found* variable changes to True, the loop is exited, and the value of *found* is printed.</p>
+                <p>The for loop iterates through the list animals. It checks every item to see if it is equal to &ldquo;dog&rdquo;. If it is equal, the <span class="inline-code">found</span> variable changes to True, the loop is exited, and the value of <span class="inline-code">found</span> is printed.</p>
 
-                <p>If there were no item equal to &ldquo;dog&rdquo;, the code would complete the loop by running through the entire list, then printing the value of *found*, which would be False.</p>
+                <p>If there were no item equal to &ldquo;dog&rdquo;, the code would complete the loop by running through the entire list, then printing the value of <span class="inline-code">found</span>, which would be False.</p>
 
-                <p>This is functionally equivalent to the final line of the previous code. The in method does the same thing as this code; it just uses fewer lines to do so. Therefore, the time complexity is O(n).</p>
+                <p>This is functionally equivalent to the final line of the previous code. The in method does the same thing as this code; it just uses fewer lines to do so. Therefore, the time complexity is <span class="inline-code">O(n)</span>.</p>
 
-                <p>For time complexities of other built-in methods, you can check out the Python Time & Space Complexity website.</p>
+                <p>For time complexities of other built-in methods, you can check out the <a href="https://pythoncomplexity.com/">Python Time & Space Complexity website</a>.</p>
             </div>
         </div>
     </main>
