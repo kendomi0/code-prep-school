@@ -19,33 +19,33 @@
                 Time Complexity Basics
             </div>
             <div class="page-body">
-                Time complexity: How many operations a piece of code performs.<br>
-                <br>
-                Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called optimization) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously. <br>
-                <br>
-                There are three different measures of time complexity: Worst-case, average-case, and best-case. When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.<br>
-                <br>
-                We use certain notations to express a code's time complexity. For worst-case, we use O-notation. This means, O(value). If the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.<br>
-                <br>
-                For best-case, we use Omega(value), or &#937;(value). For average-case, we use Theta(value), or &#920;(value). But again, you want to be focused on worst-case time complexity when it comes to code, because we have to think about how to optimize it.<br>
-                <br>
-                So a code with a time complexity of O(n^2) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1). Imagine doing the same thing once, versus 5 times, versus 25 (5^2) times. That's what O(1) versus O(n) versus O(n^2) means. <br>
-                <br>
-                But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.<br>
-                <br>
-                Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's assume n is 8.<br>
-                <br>
-                1. O(1): Constant time complexity. Input size is irrelevant, because the code always runs same number of times.<br>
-                2. O(logn): Logarithmic time complexity. When n=8, O(log(n)) = O(log(8)) = 3 operations.<br>
-                3. O(n): Linear time complexity. When n=8, O(n) = O(8) = 8 operations.<br>
-                4. O(nlogn): Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.<br>
-                5. O(n^2): Quadratic time complexity. When n=8, O(n^2) = O(8^2) = 64 operations.<br>
-                6. O(2^n): Exponential time complexity. When n=8, O(2^n) = O(2^8) = 256 operations.<br>
-                7. O(n!): Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.<br>
-                <br>
-                There's also space complexity, which is discussed less often. Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.<br>
-                <br>
-                Check out the pages on specific time complexities for in-depth explanations with code snippets showing how they work.
+                <p>Time complexity: How many operations a piece of code performs.</p>
+
+                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called optimization) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
+
+                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
+
+                <p>We use certain notations to express a code's time complexity. For worst-case, we use O-notation. This means, O(value). If the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
+
+                <p>For best-case, we use Omega(value), or &#937;(value). For average-case, we use Theta(value), or &#920;(value). But again, you want to be focused on worst-case time complexity when it comes to code, because we have to think about how to optimize it.</p>
+
+                <p>So a code with a time complexity of O(n^2) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1). Imagine doing the same thing once, versus 5 times, versus 25 (5^2) times. That's what O(1) versus O(n) versus O(n^2) means.</p>
+
+                <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
+
+                <p>Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's assume n is 8.</p>
+
+                <p>1. O(1): Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
+                <p>2. O(logn): Logarithmic time complexity. When n=8, O(log(n)) = O(log(8)) = 3 operations.</p> 
+                <p>3. O(n): Linear time complexity. When n=8, O(n) = O(8) = 8 operations.</p> 
+                <p>4. O(nlogn): Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.</p> 
+                <p>5. O(n^2): Quadratic time complexity. When n=8, O(n^2) = O(8^2) = 64 operations.</p> 
+                <p>6. O(2^n): Exponential time complexity. When n=8, O(2^n) = O(2^8) = 256 operations.</p> 
+                <p>7. O(n!): Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
+
+                <p>There's also space complexity, which is discussed less often. Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.</p>
+
+                <p>Check out the pages on specific time complexities for in-depth explanations with code snippets showing how they work.</p>
             </div>
         </div>
     </main>
