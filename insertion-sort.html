@@ -26,7 +26,7 @@
 
                 <p>Insertion sort is used to sort elements in ascending (increasing) or descending (decreasing) order. It compares each value to its previous value to determine if a shift is necessary, and if it is, the previous value shifts one position to the right. The shifting repeats until the value is correctly ordered within the already sorted part of the list.</p>
 
-                <p>Let&rsquo;s look at this pseudocode for insertion sort. As this is pseudocode, we will be using 1-based indexing, so the first element is A[1].</p>
+                <p>Let&rsquo;s look at this pseudocode for insertion sort. As this is pseudocode, we will be using 1-based indexing, so the first element is <span class="inline-code">A[1]</span>.</p>
 
                 <pre>
                     <code class="language-python">
@@ -47,25 +47,25 @@
 
                 <p>Line 1 is a for loop that goes from the second element in the list to the last element. The first element is considered already sorted, because there is no previous element to compare it to.</p>
 
-                <p>Line 2 uses a variable, key, to store the value in the list that is at the index j.</p>
+                <p>Line 2 uses a variable, <span class="inline-code">key</span>, to store the value in the list that is at the index <span class="inline-code">j</span>.</p>
 
-                <p>Line 3 uses a variable, i, to store the index previous to j.</p>
+                <p>Line 3 uses a variable, <span class="inline-code">i</span>, to store the index previous to <span class="inline-code">j</span>.</p>
 
-                <p>Line 4 is a loop that runs while i is greater than 0 and the value in the list at the index i is greater than key (which is the value at A[j]).</p>
+                <p>Line 4 is a loop that runs while <span class="inline-code">i</span> is greater than 0 and the value in the list at the index <span class="inline-code">i</span> is greater than <span class="inline-code">key</span> (which is the value at <span class="inline-code">A[j]</span>).</p>
 
-                <p>Line 5 changes the value that is at the index after i to the value that is at the index of i.</p>
+                <p>Line 5 changes the value that is at the index after <span class="inline-code">i</span> to the value that is at the index of <span class="inline-code">i</span>.</p>
 
-                <p>Line 6 decreases the value of i by 1.</p>
+                <p>Line 6 decreases the value of <span class="inline-code">i</span> by 1.</p>
 
-                <p>Line 7 is outside of the while loop, but remains inside the for loop. It changes the value that is at the index after i to be the value of key.</p>
+                <p>Line 7 is outside of the while loop, but remains inside the for loop. It changes the value that is at the index after <span class="inline-code">i</span> to be the value of <span class="inline-code">key</span>.</p>
 
                 <p>To explain the logic behind the code in shorthand form:</p>
 
-                <p>The value at the current index in the for loop (key, which is A[j]) is compared to the value at the index before it (A[i]) to determine if a shift is necessary.</p>
+                <p>The value at the current index in the for loop (<span class="inline-code">key</span>, which is <span class="inline-code">A[j]</span>) is compared to the value at the index before it (A[i]) to determine if a shift is necessary.</p>
 
-                <p>If a shift is necessary, the value at A[i] shifts one to the right. Then i decreases by 1 to allow the while loop to run again if necessary. The while loop will need to run another time if i > 0, because that means there are additional elements that need to be changed to account for the changes that have already been made.</p>
+                <p>If a shift is necessary, the value at <span class="inline-code">A[i]</span> shifts one to the right. Then <span class="inline-code">i</span> decreases by 1 to allow the while loop to run again if necessary. The while loop will need to run another time if <span class="inline-code">i</span> > 0, because that means there are additional elements that need to be changed to account for the changes that have already been made.</p>
 
-                <p>Then after the while loop concludes, the for loop replaces the value after A[i] with the value of key.</p>
+                <p>Then after the while loop concludes, the for loop replaces the value after <span class="inline-code">A[i]</span> with the value of key.</p>
 
                 <p></p>
 
@@ -131,7 +131,7 @@ for j = 2 to A.length: # We are now on j = 3
                     </code>
                 </pre>
 
-                <p>The fully sorted list is <span class="inline-code">A = [1, 3, 4]</span></p>.
+                <p>The fully sorted list is <span class="inline-code">A = [1, 3, 4]</span>.</p>
 
                 <p>Now that you&rsquo;ve seen how insertion sort works, we can dive into its time complexity.</p>
 
@@ -141,11 +141,11 @@ for j = 2 to A.length: # We are now on j = 3
 
                 <p>Since the while loop is nested inside the for loop, we multiply O(n) * O(n) = O(n<sup>2</sup>).</p>
 
-                <p>Therefore, when the list is sorted in reverse order and the while loop must run for every element, this results in the worst-case time complexity of O(n<sup>2</sup>).</p>
+                <p>Therefore, when the list is sorted in reverse order and the while loop must run for every element, this results in the worst-case time complexity of <span class="inline-code">O(n<sup>2</sup>).</span></p>
 
-                <p>The average-case time complexity is also &#920;(n<sup>2</sup>), since on average, each element has to be compared with some previously sorted elements.</p>
+                <p>The average-case time complexity is also <span class="inline-code">&#920;(n<sup>2</sup>)</span>, since on average, each element has to be compared with some previously sorted elements.</p>
 
-                <p>In the best case, when the list is already sorted, the while loop never runs, only the for loop. Therefore, the best-case time complexity is &#937;(n).</p>
+                <p>In the best case, when the list is already sorted, the while loop never runs, only the for loop. Therefore, the best-case time complexity is <span class="inline-code">&#937;(n)</span>.</p>
 
                 <p>Since most real data requires some sorting, insertion sort is considered in practice to have a time complexity of O(n<sup>2</sup>).</p>
             </div>
