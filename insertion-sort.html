@@ -24,109 +24,130 @@
             <div class="page-body">
                 <p>Let&rsquo;s look at a relatively simple sorting algorithm, called insertion sort.</p>
 
-                <p>Insertion sort is used to sort elements in ascending (greater) or descending (lower) order.</p>
+                <p>Insertion sort is used to sort elements in ascending (increasing) or descending (decreasing) order. It compares each value to its previous value to determine if a shift is necessary, and if it is, the previous value shifts one position to the right. The shifting repeats until the value is correctly ordered within the already sorted part of the list.</p>
 
-                <p>Let&rsquo;s look at this pseudocode for insertion sort.</p>
+                <p>Let&rsquo;s look at this pseudocode for insertion sort. As this is pseudocode, we will be using 1-based indexing, so the first element is A[1].</p>
 
                 <pre>
-                    <code>
-            for j=2 to A.length
-                key = A[j]
-                i = j - 1
-                while i > 0 and A[i] > key
-                    A[i + 1] = A[i]
-                    i = i - 1
-                A[i + 1] = key
+                    <code class="language-python">
+1   for j=2 to A.length: # Loop goes from second element to last element
+2   key = A[j] # Variable stores the value of the element at the current index in the
+	        # for loop
+3   i = j - 1 # Variable stores the index before the current one in the for loop
+4   while i > 0 and A[i] > key: # While the previous index is greater than 0, 
+				# and the value at the previous index is greater than key
+5       A[i + 1] = A[i] # Change the value at the next index 
+			# to the value at the current index
+6       i = i - 1  # Decrease i by 1
+7   A[i + 1] = key # Change the value at the index after i to the value of key
                     </code>
                 </pre>
 
-                <p>Let&rsquo;s explain this code in simpler terms.</p>
+                <p>Let&rsquo;s go through the logic of each line.</p>
 
-                <p>Line 1: Loop goes from the second element in the list A to the final element. The very first element is considered already sorted because there is no previous element to compare it to.</p>
+                <p>Line 1 is a for loop that goes from the second element in the list to the last element. The first element is considered already sorted, because there is no previous element to compare it to.</p>
 
-                <p>Line 2: The key variable stores the value of the element in A at the current index j.</p>
+                <p>Line 2 uses a variable, key, to store the value in the list that is at the index j.</p>
 
-                <p>Line 3: The i variable stores the previous index of the current one we are on.</p>
+                <p>Line 3 uses a variable, i, to store the index previous to j.</p>
 
-                <p>Line 4: While loop inside the for loop.</p>
+                <p>Line 4 is a loop that runs while i is greater than 0 and the value in the list at the index i is greater than key (which is the value at A[j]).</p>
 
-                <p>While the previous index is greater than 0, so the loop does not try to run past the first element in the list since that&rsquo;s as far as it can go, and the value of the element at the previous index is greater than the value of the current element (key).</p>
+                <p>Line 5 changes the value that is at the index after i to the value that is at the index of i.</p>
 
-                <p>Line 5: Shift the value at A[i] one to the right, to the position of A[i+1].</p>
+                <p>Line 6 decreases the value of i by 1.</p>
 
-                <p>Line 6: Subtract 1 from the previous index to get the new previous index.</p>
+                <p>Line 7 is outside of the while loop, but remains inside the for loop. It changes the value that is at the index after i to be the value of key.</p>
 
-                <p>Line 7: Insert the key at the value at one greater than the new previous index.</p>
+                <p>To explain the logic behind the code in shorthand form:</p>
 
-                <p>Let&rsquo;s use an example to demonstrate what&rsquo;s happening in this code. Indices are used how they are in the pseudocode. A[2] refers to A[1] in Python.</p>
+                <p>The value at the current index in the for loop (key, which is A[j]) is compared to the value at the index before it (A[i]) to determine if a shift is necessary.</p>
+
+                <p>If a shift is necessary, the value at A[i] shifts one to the right. Then i decreases by 1 to allow the while loop to run again if necessary. The while loop will need to run another time if i > 0, because that means there are additional elements that need to be changed to account for the changes that have already been made.</p>
+
+                <p>Then after the while loop concludes, the for loop replaces the value after A[i] with the value of key.</p>
+
+                <p></p>
+
+                <p>Let&rsquo;s use an example to demonstrate what&rsquo;s happening in this code. We&rsquo;ll use the list <span class="inline-code">[4, 3, 1]</span>, and go through the first iteration of the for loop.</p>
 
                 <pre>
-                    <code>
-                A = [4, 3, 1]
+                    <code class="language-python">
+    A = [4, 3, 1]
+    for j = 2 to A.length:
+        key = A[j] # key = A[2], so key = 3
+        i = j - 1 # i = 2 - 1, so i = 1
+        while i > 0 and A[i] > key: # while i > 0 and A[1], which is 4, > 3
+                        # Condition is satisfied, so while loop runs
+            A[i + 1] = A[i] # A[1 + 1] = A[1], so A[2] = 4
+            i = i - 1 # i = 1 - 1, so i = 0
+                # While loop exits, because i is not greater than 0. 
+        A[i + 1] = key # A[0 + 1] = 3 
+                # Last line in the for loop for this iteration runs
+                # Then the for loop starts again with the next element
                     </code>
                 </pre>
 
-                <p>First iteration of outer loop:</p>
+                <p>Now our list reads <span class="inline-code">A = [3, 4, 1]</span>.</p>
 
-                <p>Line 1: Start loop at the second element, 3, and go to the end.</p>
+                <p>Now for the second iteration of the for loop:</p>
 
-                <p>Line 2: Key = A[j]. Since current j is 2, key = A[2], so key = 3.</p>
+                <pre>
+                    <code class="language-python">
+A = [3, 4, 1]
+for j = 2 to A.length: # We are now on j = 3
+    key = A[j] # key = A[3], so key = 1
+    i = j - 1 # i = 3 - 1, so i = 2
+    while i > 0 and A[i] > key: # while i > 0 and A[2], which is 4, > 1
+                                # Condition is satisfied, so while loop runs
+        A[i + 1] = A[i] # A[2 + 1] = A[2], so A[3] = 4
+        i = i - 1 # i = 2 - 1, so i = 1
+                # While loop continues, because i > 0
+    A[i + 1] = key # This line does not run yet, because the while loop has not completed
+                    </code>
+                </pre>
 
-                <p>Line 3: i = j - 1. j is 2, so i = 1, referring to the first element, 4.</p>
+                <p>The list is now <span class="inline-code">A = [3, 4, 4].</span></p>
 
-                <p>Line 4: While the previous index is greater than 0 and A[i] > key. i=1, so A[i] = 4, and key = 3. Condition is satisfied, while loop runs.</p>
+                <p>For this iteration, the while loop runs a second time. Let&rsquo;s look at the second iteration of the while loop.</p>
 
-                <p>Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[2] is now 4.</p>
+                <pre>
+                    <code class="language-python">
+    while i > 0 and A[i] > key: # while i > 0 and A[1], which is 3, > 1
+                    # Condition is satisfied, so while loop runs
+        A[i + 1] = A[i] # A[1 + 1] = A[1], so A[2] = 3
+        i = i - 1 # i = 1 - 1, so i = 0. 
+            # While loop ends because i is not greater than 0
+                    </code>
+                </pre>
 
-                <p>Line 6: i = i - 1, so now i = 0, as 1 - 1 = 0.</p>
+                <p>Now the list reads <span class="inline-code">A = [3, 3, 4]</span>.</p>
 
-                <p>At this point, the while loop terminates, because i = 0.</p>
+                <p>Now that the while loop has terminated for this iteration, we run the final line in the for loop.</p>
 
-                <p>Line 7: A[i + 1] = key. As i is now 0, this means A[1] now equals 3.</p>
+                <pre>
+                    <code class="language-python">
+        A[i + 1] = key # A[0 + 1] = key, so A[1] = 1
+                    </code>
+                </pre>
 
-                <p>Current list: [3, 4, 1]</p>
+                <p>The fully sorted list is <span class="inline-code">A = [1, 3, 4]</span></p>.
 
-                <p>Second iteration of outer loop:</p>
+                <p>Now that you&rsquo;ve seen how insertion sort works, we can dive into its time complexity.</p>
 
-                <p>Line 1: Continue loop at the third element, 1.</p>
+                <p>We have two loops: the outer for loop and the inner while loop. The outer for loop has a time complexity of O(n), as it runs n times.</p>
 
-                <p>Line 2: Key = A[j]. Since current j is 3, key = A[3], so key = 1.</p>
+                <p>The while loop can run up to n times, depending on whether the condition is met.</p>
 
-                <p>Line 3: i = j - 1. j is 3, so i = 2, referring to the second element, 4.</p>
+                <p>Since the while loop is nested inside the for loop, we multiply O(n) * O(n) = O(n<sup>2</sup>).</p>
 
-                <p>Line 4: While the previous index is greater than 0 and A[i] > key. A[i] = 4 and key = 1. Condition is satisfied, while loop runs.</p>
+                <p>Therefore, when the list is sorted in reverse order and the while loop must run for every element, this results in the worst-case time complexity of O(n<sup>2</sup>).</p>
 
-                <p>Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[3] is now 4.</p>
+                <p>The average-case time complexity is also &#920;(n<sup>2</sup>), since on average, each element has to be compared with some previously sorted elements.</p>
 
-                <p>A = [3, 4, 4]</p>
+                <p>In the best case, when the list is already sorted, the while loop never runs, only the for loop. Therefore, the best-case time complexity is &#937;(n).</p>
 
-                <p>Line 6: i = i - 1, so now i = 1, as 2 - 1 = 1.</p>
-
-                <p>The while loop runs a second time, because i > 0 and 3 > 1.</p>
-
-                <p>Line 5: Change value of the element at our current index to the value of the element at the previous index. Here, that means A[2] is now 3.</p>
-
-                <p>A = [3, 3, 4]</p>
-
-                <p>Line 6: i = i - 1, so now i = 0, as 1 - 1 = 0.</p>
-
-                <p>At this point, the while loop terminates, because i = 0.</p>
-
-                <p>Line 7: A[i + 1] = key. This means A[1] is now 1.</p>
-
-                <p>A = [1, 3, 4]</p>
-
-                <p>The outer loop terminates because we have reached the end of the list.</p>
-
-                <p>Our sorted list is now [1, 3, 4].</p>
-
-                <p>The time complexity for this specific list is O(n**2). This is considered worst-case, because our list was originally in descending order, and we sorted it in ascending order, the opposite, so every element had to be sorted. The inner loop had to run the maximum number of times per iteration of the outer loop. The average-case time complexity is also O(n**2).</p>
-
-                <p>In cases where each element is already sorted, like sorting [2, 4, 6] in ascending order, the time complexity is only O(n). This is because the while loop does not execute at all, as the value at the previous index, A[i], will never be greater than key. O(n) is the best-case time complexity for this algorithm.</p>
-
-                <p>If you want to count exactly how many times the code runs, add print statements at the end of the inner and outer loops.</p>
-
-                <p>Think of the inner loop as going backwards while the outer loop goes forwards. i = i - 1 ensures that in the next iteration of the inner loop, the numbers at the lesser indices will be compared, while the outer loop continues through the list.</p>
+                <p>Since most real data requires some sorting, insertion sort is considered in practice to have a time complexity of O(n<sup>2</sup>).</p>
             </div>
         </div>
     </main>
