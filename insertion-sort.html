@@ -31,33 +31,17 @@
                 <pre>
                     <code class="language-python">
 1   for j=2 to A.length: # Loop goes from second element to last element
-2   key = A[j] # Variable stores the value of the element at the current index in the
-	        # for loop
-3   i = j - 1 # Variable stores the index before the current one in the for loop
-4   while i > 0 and A[i] > key: # While the previous index is greater than 0, 
-				# and the value at the previous index is greater than key
-5       A[i + 1] = A[i] # Change the value at the next index 
-			# to the value at the current index
-6       i = i - 1  # Decrease i by 1
-7   A[i + 1] = key # Change the value at the index after i to the value of key
+2       key = A[j] # Variable stores the value of the element at the current index in the
+	           # for loop
+3       i = j - 1 # Variable stores the index before the current one in the for loop
+4       while i > 0 and A[i] > key: # While the previous index is greater than 0, 
+				    # and the value at the previous index is greater than key
+5           A[i + 1] = A[i] # Change the value at the next index 
+			    # to the value at the current index
+6           i = i - 1  # Decrease i by 1
+7       A[i + 1] = key # Change the value at the index after i to the value of key
                     </code>
                 </pre>
-
-                <p>Let&rsquo;s go through the logic of each line.</p>
-
-                <p>Line 1 is a for loop that goes from the second element in the list to the last element. The first element is considered already sorted, because there is no previous element to compare it to.</p>
-
-                <p>Line 2 uses a variable, <span class="inline-code">key</span>, to store the value in the list that is at the index <span class="inline-code">j</span>.</p>
-
-                <p>Line 3 uses a variable, <span class="inline-code">i</span>, to store the index previous to <span class="inline-code">j</span>.</p>
-
-                <p>Line 4 is a loop that runs while <span class="inline-code">i</span> is greater than 0 and the value in the list at the index <span class="inline-code">i</span> is greater than <span class="inline-code">key</span> (which is the value at <span class="inline-code">A[j]</span>).</p>
-
-                <p>Line 5 changes the value that is at the index after <span class="inline-code">i</span> to the value that is at the index of <span class="inline-code">i</span>.</p>
-
-                <p>Line 6 decreases the value of <span class="inline-code">i</span> by 1.</p>
-
-                <p>Line 7 is outside of the while loop, but remains inside the for loop. It changes the value that is at the index after <span class="inline-code">i</span> to be the value of <span class="inline-code">key</span>.</p>
 
                 <p>To explain the logic behind the code in shorthand form:</p>
 
@@ -94,16 +78,16 @@
 
                 <pre>
                     <code class="language-python">
-A = [3, 4, 1]
-for j = 2 to A.length: # We are now on j = 3
-    key = A[j] # key = A[3], so key = 1
-    i = j - 1 # i = 3 - 1, so i = 2
-    while i > 0 and A[i] > key: # while i > 0 and A[2], which is 4, > 1
-                                # Condition is satisfied, so while loop runs
-        A[i + 1] = A[i] # A[2 + 1] = A[2], so A[3] = 4
-        i = i - 1 # i = 2 - 1, so i = 1
-                # While loop continues, because i > 0
-    A[i + 1] = key # This line does not run yet, because the while loop has not completed
+    A = [3, 4, 1]
+    for j = 2 to A.length: # We are now on j = 3
+        key = A[j] # key = A[3], so key = 1
+        i = j - 1 # i = 3 - 1, so i = 2
+        while i > 0 and A[i] > key: # while i > 0 and A[2], which is 4, > 1
+                                    # Condition is satisfied, so while loop runs
+            A[i + 1] = A[i] # A[2 + 1] = A[2], so A[3] = 4
+            i = i - 1 # i = 2 - 1, so i = 1
+                    # While loop continues, because i > 0
+        A[i + 1] = key # This line does not run yet, because the while loop has not completed
                     </code>
                 </pre>
 
