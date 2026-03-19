@@ -200,6 +200,59 @@
 
                 <p>This is functionally equivalent to the final line of the previous code. The in method does the same thing as this code; it just uses fewer lines to do so. Therefore, the time complexity is <span class="inline-code">O(n)</span>.</p>
 
+                <p>Here's a table of the methods we've looked at and their time complexities.</p>
+
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Data Structure</th>
+                        <th>Time Complexity</th>
+                        <th>Reason</th>
+                    </tr>
+
+                    <tr>
+                        <td>append()</td>
+                        <td>List</td>
+                        <td>O(1)</td>
+                        <td>Does not need to go through the list first, as the given item is always added at the end</td>
+                    </tr>
+
+                    <tr>
+                        <td>insert()</td>
+                        <td>List</td>
+                        <td>O(n)</td>
+                        <td>Needs to shift subsequent items after inserting the given item</td>
+                    </tr>
+
+                    <tr>
+                        <td>add()</td>
+                        <td>Set</td>
+                        <td>O(1)</td>
+                        <td>No need to look through a set to add item. Sets don't have indices, so no need for shifting</td>
+                    </tr>
+
+                    <tr>
+                        <td>remove()</td>
+                        <td>Set</td>
+                        <td>O(1)</td>
+                        <td>No need to look through a set to locate and remove item. Sets don't have indices, so no need for shifting</td>
+                    </tr>
+
+                    <tr>
+                        <td>in</td>
+                        <td>Set</td>
+                        <td>O(1)</td>
+                        <td>Set membership lookup does not require looking through a set</td>
+                    </tr>
+
+                    <tr>
+                        <td>in</td>
+                        <td>List</td>
+                        <td>O(n)</td>
+                        <td>List membership lookup must look through the list to find the given item</td>
+                    </tr>
+                </table>
+
                 <p>For time complexities of other built-in methods, you can check out the <a href="https://pythoncomplexity.com/">Python Time & Space Complexity website</a>.</p>
             </div>
         </div>
