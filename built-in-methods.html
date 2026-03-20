@@ -225,6 +225,13 @@
                     </tr>
 
                     <tr>
+                        <td class="inline-code">remove()</td>
+                        <td>List</td>
+                        <td>O(n)</td>
+                        <td>Needs to shift subsequent items after removing the given item</td>
+                    </tr>
+
+                    <tr>
                         <td class="inline-code">add()</td>
                         <td>Set</td>
                         <td>O(1)</td>
@@ -235,21 +242,21 @@
                         <td class="inline-code">remove()</td>
                         <td>Set</td>
                         <td>O(1)</td>
-                        <td>No need to look through a set to locate and remove item. Sets don't have indices, so no need for shifting</td>
+                        <td>Uses hashing to directly locate and remove item. Sets don't have indices, so no need for shifting</td>
                     </tr>
 
                     <tr>
                         <td class="inline-code">in</td>
                         <td>Set</td>
                         <td>O(1)</td>
-                        <td>Set membership lookup does not require looking through a set</td>
+                        <td>Set membership lookup uses hashing, so it does not require iteration</td>
                     </tr>
 
                     <tr>
                         <td class="inline-code">in</td>
                         <td>List</td>
                         <td>O(n)</td>
-                        <td>List membership lookup must look through the list to find the given item</td>
+                        <td>List membership lookup must iterate through the list to find the given item</td>
                     </tr>
                 </table>
 
