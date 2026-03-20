@@ -44,6 +44,17 @@ a {
     text-decoration: none;
 }
 
+table {
+    border-collapse: collapse;
+    margin-bottom:2em;
+}
+
+td, th {
+  border: 1px solid #414154;
+  text-align: left;
+  padding: 8px;
+}
+
 .title {
     font-size: 30px;
     color: #BCBCE3;
