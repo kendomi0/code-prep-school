@@ -51,12 +51,15 @@
 
         <pre>
             <code class="language-python">
-        registered_users = ["Anna Connell", "Jenny Maxwell", "Bradley Newsom"]
-        inputted_user = input("Enter your full name: ")
-        for user in registered_users:
-            if user == inputted_user:
-                print("User is already registered")
-                break
+    registered_users = ["Anna Connell", "Jenny Maxwell", "Bradley Newsom"]
+    inputted_user = input("Enter your full name: ") # Prompt to enter user's name
+    found = False # Initialize a variable to store whether the user has been found
+    for user in registered_users: # Loop through list of users
+        if user == inputted_user: # Check to see if the current user matches the inputted user
+            found = True # Change found flag to true if they match
+            print("User is already registered")
+            break # Terminate loop if found
+    if not found: # If the user was not found (found is false), print this message
         print("User has not yet registered")
             </code>
         </pre>
@@ -65,7 +68,7 @@
 
                 <p>In the worst-case scenario, the user has either not been registered, or their name is last in the list of registered users. This would require the code to iterate through the entire list. For this code, that would mean <span class="inline-code">inputted_user</span> is either not in the list, or equals "Bradley Newsom".</p>
 
-                <p>In the best-case scenario, the user is both registered and is first in the list, so the for loop only needs to run once. For this code, that would mean <span class="inline-code">inputted_user</span> equals "Anna Connell."</p>
+                <p>In the best-case scenario, the user is both registered and is first in the list, so the for loop only needs to run once and then it terminates. For this code, that would mean <span class="inline-code">inputted_user</span> equals "Anna Connell."</p>
 
                 <p>The average-case scenario is a bit broader, since it's not necessarily a specific scenario. It refers to when the inputted user would have an equal chance of being anywhere in the list. This is the most realistic scenario, because in practice, you wouldn't know if the inputted user is or is not registered, or where their name is in the list. On average, half of the users in the list would be checked before finding the inputted user.</p>
 
