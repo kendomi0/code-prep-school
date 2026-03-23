@@ -9,6 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/b3ffa80bf4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+
+    <style>
+        .page-body a {
+            color: #BCBCE3 !important ;
+            text-decoration: underline;
+        }
+
+        .page-body a:hover {
+            color: #F0F0FF !important;
+        }
+    </style>
 </head>
 <body>
     <header id="app-header"></header>
@@ -21,21 +35,51 @@
             <div class="page-body">
                 <p>Time complexity: How many operations a piece of code performs.</p>
 
-                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called optimization) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
+                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called <span class="emphasis">optimization</span>) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
 
-                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
+                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. 
+
+                <p><span class="emphasis">Worst-case</span> time complexity represents the maximum number of operations a code could perform. In some cases, the worst-case time complexity is the same as the average-case and/or best-case time complexity. In some other cases, the worst-case time complexity differs from those cases.</p>
+                    
+                <p>When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
+
+                <p><span class="emphasis">Average-case</span> time complexity represents the average number of operations a code could perform.</p>
+
+                <p><span class="emphasis">Best-case</span> time complexity represents the minimum number of operations a code could perform.</p>
+
+                <p>Let's look at a simple algorithm to understand the concepts of worst-case, average-case, best-case, and notations in practice.</p>
+
+        <pre>
+            <code class="language-python">
+        registered_users = ["Anna Connell", "Jenny Maxwell", "Bradley Newsom"]
+        inputted_user = input("Enter your full name: ")
+        for user in registered_users:
+            if user == inputted_user:
+                print("User is already registered")
+                break
+        print("User has not yet registered")
+            </code>
+        </pre>
+
+                <p>This code iterates through a list to find out if a user has already been registered with the system. This form of searching is called linear search. To read more about this specific type of algorithm, check out the <a href="intro-to-algorithms.html">Intro to Algorithms</a> page.</p>
+
+                <p>In the worst-case scenario, the user has either not been registered, or their name is last in the list of registered users. This would require the code to iterate through the entire list. For this code, that would mean <span class="inline-code">inputted_user</span> is either not in the list, or equals "Bradley Newsom".</p>
+
+                <p>In the best-case scenario, the user is both registered and is first in the list, so the for loop only needs to run once. For this code, that would mean <span class="inline-code">inputted_user</span> equals "Anna Connell."</p>
+
+                <p>The average-case scenario is a bit broader, since it's not necessarily a specific scenario. It refers to when the inputted user would have an equal chance of being anywhere in the list. This is the most realistic scenario, because in practice, you wouldn't know if the inputted user is or is not registered, or where their name is in the list. On average, half of the users in the list would be checked before finding the inputted user.</p>
 
                 <p>We use certain notations to express a code's time complexity.</p>
                 
-                <p>For worst-case, we use O-notation: <span class="inline-code">O(value)</span>.</p> 
+                <p>For worst-case, we use Big O notation: <span class="inline-code">O(value)</span>.</p> 
                     
                 <p>For example, if the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
 
                 <p>For best-case, we use Omega(value), or <span class="inline-code">&#937;(value)</span>.</p>
                 
                 <p>For average-case, we use Theta(value), or <span class="inline-code">&#920;(value)</span>.</p>
-                
-                <p>But again, you want to be focused on worst-case time complexity when it comes to code, because we have to think about how to optimize it.</p>
+
+                <p>Some resources use big O notation for all types of cases, but we'll use the precise notations here.</p>
 
                 <p> Imagine doing the same thing once, versus 5 times, versus 25 (5<sup>2</sup>) times. That's what O(1) versus O(n) versus O(n<sup>2</sup>) means. So a code with a time complexity of O(n<sup>2</sup>) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1).</p>
 
@@ -51,7 +95,15 @@
                 <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=8, O(2<sup>n</sup>) = O(2<sup>8</sup>) = 256 operations.</p> 
                 <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
 
-                <p>There's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
+                <p>Let's return to the registered users example.</p>
+
+                <p>As said before, in the worst-case scenario, the user has either not been registered, or their name is at the end of the list of registered users. This would require the code to iterate through the entire list. This would result in a worst-case time complexity of <span class="inline-code">O(n)</span>, for <span class="inline-code">n</span> (number of items in list) operations.</p>
+
+                <p>In the best-case scenario that the user is present in the list at the first position, the loop terminates after running once. This would result in a best-case time complexity of <span class="inline-code">&#937;(1)</span>.</p>
+
+                <p>And in the average-case scenario that half of all users will be checked before locating the user, this would result in a time complexity of &#920;((n+1)/2). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>.</p>
+
+                <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
                     
                 <p>Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.</p>
 
@@ -62,5 +114,8 @@
     <footer>
         Github site by kendomi0
     </footer>
+<script>
+  hljs.highlightAll();
+</script>
 </body>
 </html>
