@@ -72,9 +72,15 @@
 
                 <p>The average-case scenario is a bit broader, since it's not necessarily a specific scenario. It refers to when the inputted user would have an equal chance of being anywhere in the list. This is the most realistic scenario, because in practice, you wouldn't know if the inputted user is or is not registered, or where their name is in the list. On average, half of the users in the list would be checked before finding the inputted user.</p>
 
-                <p>We use certain notations to express a code's time complexity.</p>
+                <p>Time complexity is about representing the algorithm's growth rate as the input size increases, so let's discuss the various types of growth.</p>
+
+                <p>Constant time complexity means there is no growth at all, regardless of the change in input size.</p> 
                 
-                <p>For worst-case, we use Big O notation: <span class="inline-code">O(value)</span>.</p> 
+                <p>Linear time complexity means the growth rate increases linearly in relation to the input size.</p>
+                
+                <p>Other types of time complexity function similarly: for instance, logarithmic time complexity means the growth rates increases logarithmically in relation to the input size.</p>
+
+                <p>We use certain notations to express a code's time complexity. For worst-case, we use Big O notation: <span class="inline-code">O(value)</span>. </p>
                     
                 <p>For example, if the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
 
@@ -104,7 +110,7 @@
 
                 <p>In the best-case scenario that the user is present in the list at the first position, the loop terminates after running once. This would result in a best-case time complexity of <span class="inline-code">&#937;(1)</span>.</p>
 
-                <p>And in the average-case scenario that half of all users will be checked before locating the user, this would result in a time complexity of &#920;((n+1)/2). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>.</p>
+                <p>And in the average-case scenario that half of all users will be checked before locating the user, this would result in a time complexity of &#920;((n+1)/2). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera.</p>
 
                 <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
                     
