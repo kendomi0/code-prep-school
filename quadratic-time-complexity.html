@@ -22,7 +22,7 @@
                 Quadratic Time Complexity
             </div>
             <div class="page-body">
-                <p>Quadratic time complexity: O(n^2). 
+                <p>Quadratic time complexity: O(n<sup>2</sup>). 
 
                 <p>Let's take a look at some examples of quadratic time complexity.</p>
 
@@ -36,9 +36,9 @@
                     </code>
                 </pre>
 
-                <p>Here, we have what's called a nested loop, a loop inside a loop. It means the inner loop runs inside the outer loop, and when the inner loop is finished for that iteration, it moves onto the next item in the outer loop. When x in odd is 1, every y in even is iterated through. When x in odd is 2, every y in even is iterated through again, and so on and so forth.</p>
+                <p>Here, we have what's called a nested loop, a loop inside a loop. It means the inner loop runs inside the outer loop, and when the inner loop is finished for that iteration, it moves onto the next item in the outer loop. When <span class="inline-code">x</span> in <span class="inline-code">odd</span> is 1, every <span class="inline-code">y</span> in <span class="inline-code">even</span> is iterated through. When <span class="inline-code">x</span> in odd is 2, every <span class="inline-code">y</span> in <span class="inline-code">even</span> is iterated through again, and so on and so forth.</p>
 
-                <p>So you multiply their input sizes, n*m, to get O(nm), which is conceptually equivalent to O(n^2), or quadratic time complexity, meaning an exponent of 2. In this case, n and m are of the same size, but in cases where they are not, it's more correct to just refer to the time complexity as O(nm), although the concept of quadratic growth is still the same.</p>
+                <p>So you multiply their input sizes, n*m, to get O(nm), which is conceptually equivalent to O(n<sup>2</sup>), or quadratic time complexity, meaning an exponent of 2. In this case, n and m are of the same size, but in cases where they are not, it's more correct to just refer to the time complexity as O(nm), although the concept of quadratic growth is still the same.</p>
 
                 <p>For this code, the output would be:</p>
 
@@ -80,9 +80,9 @@
 
                 <p>However, this is not how nested loops work.</p>
 
-                <p>The code would actually start at the first index of first_names and iterate through every item in last_names until it gets to the end, then move onto the second index of first_names, then so on and so forth.</p>
+                <p>The code would actually start at the first index of <span class="inline-code">first_names</span> and iterate through every item in <span class="inline-code">last_names</span> until it gets to the end, then move onto the second index of <span class="inline-code">first_names</span>, then so on and so forth.</p>
 
-                <p>So, after going through the first iteration (First index of first_names iterating through every index in last_names), full_names would consist of:</p>
+                <p>So, after going through the first iteration (First index of <span class="inline-code">first_names</span> iterating through every index in last_names), full_names would consist of:</p>
 
                 <pre>
                     <code>
@@ -90,7 +90,7 @@
                     </code>
                 </pre>
 
-                <p>And at the end, full_names would comprise:</p>
+                <p>And at the end, <span class="inline-code">full_names</span> would comprise:</p>
 
                 <pre>
                     <code>
@@ -99,9 +99,9 @@
                     </code>
                 </pre>
 
-                <p>Notice how there are 9 items in full_names. For O(n^2), when n = 3, n^2 = 9.</p>
+                <p>Notice how there are 9 items in full_names. For O(n<sup>2</sup>), when n = 3, n<sup>2</sup> = 9.</p>
 
-                <p>Some examples of algorithms with worst- and average-case time complexities of O(n^2) are bubble sort and insertion sort, which you can read about on their respective pages. However, with those algorithms, their best-case time complexities, which is when the given list is already sorted, are O(n), because their inner loops don't run if the condition is not satisfied.</p>
+                <p>Some examples of algorithms with worst- and average-case time complexities of O(n<sup>2</sup>) are bubble sort and insertion sort, which you can read about on their respective pages. However, with those algorithms, their best-case time complexities, which is when the given list is already sorted, are O(n), because their inner loops don't run if the condition is not satisfied.</p>
             </div>
         </div>
     </main>
