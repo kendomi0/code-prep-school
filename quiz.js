@@ -48,7 +48,7 @@ const feedback = {
         messages: {
             a: 'Not quite. Take a deeper look at what exactly this code is doing.',
             b: 'Not quite. There may not be an explicit nested loop, but think about what the line in the loop body does.',
-            c: 'Correct! Strings are immutable, so string concatenations do not "add" to strings. Instead, they copy each letter into a new string. Because the time complexity of the outer loop is O(n), and the code inside the loop has a time complexity is O(n), we multiply to get O(n^2).'
+            c: 'Correct! Strings are immutable, so string concatenations do not "add" to strings. Instead, they copy each letter into a new string. Because the time complexity of the outer loop is O(n), and the code inside the loop has a time complexity is O(n), we multiply to get O(n²).'
         }
      },
 
@@ -66,7 +66,7 @@ const feedback = {
         messages: {
             a: 'Not quite. Look at the loops in this code, then think about what the code itself does.',
             b: 'Not quite. Think about how the code inside the for loop works.',
-            c: 'Correct! The in operator has a time complexity of O(n), since it internally iterates through every item in the list. Because the in operator is inside a for loop, the full code has a time complexity of O(n^2).'
+            c: 'Correct! The in operator has a time complexity of O(n), since it internally iterates through every item in the list. Because the in operator is inside a for loop, the full code has a time complexity of O(n²).'
         }
      },
 
