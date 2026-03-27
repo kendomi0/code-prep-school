@@ -9,6 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/b3ffa80bf4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+
+    <style>
+        .page-body a {
+            color: #BCBCE3 !important ;
+            text-decoration: underline;
+        }
+
+        .page-body a:hover {
+            color: #F0F0FF !important;
+        }
+    </style>
 </head>
 <body>
     <header id="app-header"></header>
@@ -21,29 +35,95 @@
             <div class="page-body">
                 <p>Time complexity: How many operations a piece of code performs.</p>
 
-                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called optimization) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
+                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called <span class="emphasis">optimization</span>) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
 
-                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
+                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. 
 
-                <p>We use certain notations to express a code's time complexity. For worst-case, we use O-notation. This means, O(value). If the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
+                <p><span class="emphasis">Worst-case</span> time complexity represents the maximum number of operations a code could perform. In some cases, the worst-case time complexity is the same as the average-case and/or best-case time complexity. In some other cases, the worst-case time complexity differs from those cases.</p>
+                    
+                <p>When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
 
-                <p>For best-case, we use Omega(value), or &#937;(value). For average-case, we use Theta(value), or &#920;(value). But again, you want to be focused on worst-case time complexity when it comes to code, because we have to think about how to optimize it.</p>
+                <p><span class="emphasis">Average-case</span> time complexity represents the average number of operations a code could perform.</p>
 
-                <p>So a code with a time complexity of O(n^2) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1). Imagine doing the same thing once, versus 5 times, versus 25 (5^2) times. That's what O(1) versus O(n) versus O(n^2) means.</p>
+                <p><span class="emphasis">Best-case</span> time complexity represents the minimum number of operations a code could perform.</p>
 
-                <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
+                <p>Let's look at a simple algorithm to understand the concepts of worst-case, average-case, best-case, and notations in practice.</p>
 
-                <p>Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's assume n is 8.</p>
+        <pre>
+            <code class="language-python">
+    registered_users = ["Anna Connell", "Jenny Maxwell", "Bradley Newsom"]
+    inputted_user = input("Enter your full name: ") # Prompt to enter user's name
+    found = False # Initialize a variable to store whether the user has been found
+    for user in registered_users: # Loop through list of users
+        if user == inputted_user: # Check to see if the current user matches the inputted user
+            found = True # Change found flag to true if they match
+            print("User is already registered")
+            break # Terminate loop if found
+    if not found: # If the user was not found (found is false), print this message
+        print("User has not yet registered")
+            </code>
+        </pre>
 
-                <p>1. O(1): Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
-                <p>2. O(logn): Logarithmic time complexity. When n=8, O(log(n)) = O(log(8)) = 3 operations.</p> 
-                <p>3. O(n): Linear time complexity. When n=8, O(n) = O(8) = 8 operations.</p> 
-                <p>4. O(nlogn): Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.</p> 
-                <p>5. O(n^2): Quadratic time complexity. When n=8, O(n^2) = O(8^2) = 64 operations.</p> 
-                <p>6. O(2^n): Exponential time complexity. When n=8, O(2^n) = O(2^8) = 256 operations.</p> 
-                <p>7. O(n!): Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
+                <p>This code iterates through a list to find out if a user has already been registered with the system. This form of searching is called linear search. To read more about this specific type of algorithm, check out the <a href="intro-to-algorithms.html">Intro to Algorithms</a> page.</p>
 
-                <p>There's also space complexity, which is discussed less often. Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.</p>
+                <p>In the worst-case scenario, the user has either not been registered, or their name is last in the list of registered users. This would require the code to iterate through the entire list. For this code, that would mean <span class="inline-code">inputted_user</span> is either not in the list, or equals "Bradley Newsom".</p>
+
+                <p>In the best-case scenario, the user is both registered and is first in the list, so the for loop only needs to run once and then it terminates. For this code, that would mean <span class="inline-code">inputted_user</span> equals "Anna Connell."</p>
+
+                <p>The average-case scenario is a bit broader, since it's not necessarily a specific scenario. It refers to when the inputted user would have an equal chance of being anywhere in the list. This is the most realistic scenario, because in practice, you wouldn't know if the inputted user is or is not registered, or where their name is in the list. On average, half of the users in the list would be checked before finding the inputted user.</p>
+
+                <p>Time complexity is about representing the algorithm's growth rate as the input size increases, so let's discuss the various types of growth.</p>
+
+                <p>Constant time complexity means there is no growth at all, regardless of the change in input size.</p> 
+                
+                <p>Linear time complexity means the growth rate increases linearly in relation to the input size.</p>
+                
+                <p>Other types of time complexity function similarly: for instance, logarithmic time complexity means the growth rates increases logarithmically in relation to the input size.</p>
+
+                <p>We use certain notations to express a code's time complexity. For worst-case, we use Big O notation: <span class="inline-code">O(value)</span>. </p>
+                    
+                <p>For example, if the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
+
+                <p>For best-case, we use Omega(value), or <span class="inline-code">&#937;(value)</span>.</p>
+                
+                <p>For average-case, we use Theta(value), or <span class="inline-code">&#920;(value)</span>.</p>
+
+                <p>Some resources use big O notation for all types of cases, but we'll use the precise notations here. But when referring to an algorithm's <span class="italic">general</span> time complexity, you can use Big O notation. When used in general, big O notation doesn't necessarily mean the algorithm's worst-case complexity; it's just the notation being used to describe the algorithm's "typical" time complexity in practice.</p>
+
+                <p> Imagine doing the same thing once, versus 5 times, versus 25 (5<sup>2</sup>) times. That's what O(1) versus O(n) versus O(n<sup>2</sup>) means. So a code with a time complexity of O(n<sup>2</sup>) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1).</p>
+
+                <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). (When we use log in this context, it is with base 2.) That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
+
+                <p>Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's use n = 8 as our example.</p>
+
+                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
+                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=8, O(logn) = O(log8) = 3 operations.</p> 
+                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=8, O(n) = O(8) = 8 operations.</p> 
+                <p>4. <span class="inline-code">O(nlogn)</span>: Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.</p> 
+                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=8, O(n<sup>2</sup>) = O(8<sup>2</sup>) = 64 operations.</p> 
+                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=8, O(2<sup>n</sup>) = O(2<sup>8</sup>) = 256 operations.</p> 
+                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
+
+                <p>Let's return to the registered users example.</p>
+
+                <p>As said before, in the worst-case scenario, the user has either not been registered, or their name is at the end of the list of registered users. This would require the code to iterate through the entire list. This would result in a worst-case time complexity of <span class="inline-code">O(n)</span>, for <span class="inline-code">n</span> (number of items in list) operations.</p>
+
+                <p>In the best-case scenario that the user is present in the list at the first position, the loop terminates after running once. This would result in a best-case time complexity of <span class="inline-code">&#937;(1)</span>.</p>
+
+                <p>And in the average-case scenario that half of all users will be checked before locating the user, this would result in a time complexity of &#920;(
+                    
+                    <math display="inline">
+                        <mfrac>
+                            <mn>(n+1)</mn>
+                            <mn>2</mn>
+                        </mfrac>
+                    </math>
+                
+                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera.</p>
+
+                <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
+                    
+                <p>Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.</p>
 
                 <p>Check out the pages on specific time complexities for in-depth explanations with code snippets showing how they work.</p>
             </div>
@@ -52,5 +132,8 @@
     <footer>
         Github site by kendomi0
     </footer>
+<script>
+  hljs.highlightAll();
+</script>
 </body>
 </html>

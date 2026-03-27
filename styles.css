@@ -178,6 +178,11 @@ code {
     font-size: 20px;
 }
 
+math {
+    font-family: 'Noto Sans', sans-serif;
+    font-size:24px;
+}
+
 .page-body a {
     color: #BCBCE3 !important ;
     text-decoration: underline;
