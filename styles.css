@@ -177,3 +177,12 @@ code {
     font-weight: bold;
     font-size: 20px;
 }
+
+.page-body a {
+    color: #BCBCE3 !important ;
+    text-decoration: underline;
+}
+
+.page-body a:hover {
+    color: #F0F0FF !important;
+}
