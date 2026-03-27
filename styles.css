@@ -182,3 +182,12 @@ math {
     font-family: 'Noto Sans', sans-serif;
     font-size:24px;
 }
+
+.page-body a {
+    color: #BCBCE3 !important ;
+    text-decoration: underline;
+}
+
+.page-body a:hover {
+    color: #F0F0FF !important;
+}

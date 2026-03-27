@@ -18,53 +18,76 @@
     <script src="header.js"></script>
     <main>
         <div class="content-container">
+
             <div class="page-title">
                 Constant Time Complexity
             </div>
+            
             <div class="page-body">
-                <p>Constant time complexity is O(1).</p>
-                <p>A constant time complexity means each line only runs once. &ldquo;Constant&rdquo; refers to how it always runs the same amount of times, opposed to cases of linear time complexity where O(n) is dependent on the size of n.<br>
-                Let&rsquo;s look at some examples of constant time complexity.</p>
+                <p>Constant time complexity: <span class="inline-code">O(1)</span>.</p>
+
+                <p>A constant time complexity means each line only runs once. &ldquo;Constant&rdquo; refers to how it always runs the same amount of times, opposed to cases of linear time complexity where O(n) is dependent on the size of n.
+
+                <p>Let&rsquo;s look at some examples of constant time complexity.</p>
+
                 <pre>
                     <code>
-                food = ["fries", "pizza", "burger"]
-                print(food[0])
-                </code>
+    food = ["fries", "pizza", "burger"]
+    print(food[0])
+                    </code>
                 </pre>
-                <p>Line 1 initializes the list food. Simply initializing is always constant time.</p>
-                <p>Line 2 accesses the first value (value at 0th index) of food and prints it.</p>
-                <p>This code has an O(1) time complexity, since no lines have to iterate through anything. Accessing an item at an index in an array is always done in constant time, as it&rsquo;s not doing any looping.</p>
+                
+                <p>Line 1 initializes the list <span class="inline-code">food</span>. Simply initializing is always constant time.</p>
+
+                <p>Line 2 accesses the first value (value at 0th index) of <span class="inline-code">food</span> and prints it.</p>
+
+                <p>This code has an <span class="inline-code">O(1)</span> time complexity, since no lines have to iterate through anything. Accessing an item at an index in an array is always done in constant time, as it&rsquo;s not doing any looping.</p>
+
                 <p>Let&rsquo;s look at another example.</p>
+
                 <pre>
                     <code>
-                flowers = ["rose", "daisy", "sunflower"]
-                flowers.append("violet")
+    flowers = ["rose", "daisy", "sunflower"]
+    flowers.append("violet")
                     </code>
                 </pre>
-                <p>Line 1 initializes the list flowers.</p>
-                <p>Line 2 adds &ldquo;violet&rdquo; to the end of the list flowers, so that flowers now would consist of [&ldquo;rose&rdquo;, &ldquo;daisy&rdquo;, &ldquo;sunflower&rdquo;, &ldquo;violet&rdquo;].</p>
-                <p>This code&rsquo;s time complexity is O(1) because append() is a constant time operation, performing the opposite operation as pop().</p>
+
+                <p>Line 1 initializes the list <span class="inline-code">flowers</span>.</p>
+
+                <p>Line 2 adds &ldquo;violet&rdquo; to the end of the list <span class="inline-code">flowers</span>, so that <span class="inline-code">flowers</span> now would consist of [&ldquo;rose&rdquo;, &ldquo;daisy&rdquo;, &ldquo;sunflower&rdquo;, &ldquo;violet&rdquo;].</p>
+
+                <p>This code&rsquo;s time complexity is <span class="inline-code">O(1)</span> because append() is a constant time operation, performing the opposite operation as pop().</p>
+
                 <p>Let&rsquo;s look at an example that can get complex.</p>
+
                 <pre>
                     <code>
-                names = ["Anna", "Joe", "Will"]
-                names.pop()
+    names = ["Anna", "Joe", "Will"]
+    names.pop()
                     </code>
                 </pre>
-                <p>Line 1 initializes the list names, which is constant time.</p>
+
+                <p>Line 1 initializes the list <span class="inline-code">names</span>, which is constant time.</p>
+
                 <p>Line 2 removes the item at the last index, which would be &ldquo;Will.&rdquo;</p>
-                <p>This code also has a O(1) time complexity, since pop(), without any argument, is a constant time operation that requires no iterating or repeating.</p>
+
+                <p>This code also has a <span class="inline-code">O(1)</span> time complexity, since <span class="inline-code">pop()</span>, without any argument, is a constant time operation that requires no iterating or repeating.</p>
+
                 <p>However, this is only the case when pop() is not passed an argument, as in, when the parenthesis are empty.</p>
-                <p>In cases where pop() does have an argument that pops the element that is not the last in the list, the time complexity will increase to O(n) to account for having to shift the positions of the list&rsquo;s other elements. You can read a more thorough explanation of this on the Linear Time Complexity page.</p>
-                <p>You can access a list of constant operations' time complexities on the official Python website. Additionally, basic arithmetic operations that do not involve exponentials, such as</p>
+                
+                <p>In cases where pop() does have an argument that pops the element that is not the last in the list, the time complexity will increase to <span class="inline-code">O(n)</span> to account for having to shift the positions of the list&rsquo;s other elements. You can read a more thorough explanation of this on the <a href="linear-time-complexity.html">Linear Time Complexity</a> page.</p>
+
+                <p>Additionally, basic arithmetic operations that do not involve exponentials, such as</p>
+
                 <pre>
                     <code>
-                x = 2
-                result = x * 2
-                print(result)
+    x = 2
+    result = x * 2
+    print(result)
                     </code>
                 </pre>
-                <p>also have a time complexity of O(1), assuming the given numbers are not so large that they exceed a machine's word size.</p>
+
+                <p>also have a time complexity of <span class="inline-code">O(1)</span>, assuming the given numbers are not so large that they exceed a machine's word size.</p>
             </div>
         </div>
     </main>

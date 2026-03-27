@@ -14,14 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
 
     <style>
-        .page-body a {
-            color: #BCBCE3 !important ;
-            text-decoration: underline;
-        }
-
-        .page-body a:hover {
-            color: #F0F0FF !important;
-        }
     </style>
 </head>
 <body>
@@ -29,9 +21,11 @@
     <script src="header.js"></script>
     <main>
         <div class="content-container">
+
             <div class="page-title">
                 Built-In Methods
             </div>
+            
             <div class="page-body">
                 <p>Here, we&rsquo;ll be looking at the time complexity of common Python built-in methods.</p>
 
@@ -43,8 +37,8 @@
 
                 <pre>
                     <code>
-                shows = ["Full House", "Boy Meets World", "Friends"]
-                shows.append("Reba")
+    shows = ["Full House", "Boy Meets World", "Friends"]
+    shows.append("Reba")
                     </code>
                 </pre>
 
@@ -56,8 +50,8 @@
 
                 <pre>
                     <code>
-                shows = ["Full House", "Boy Meets World", "Friends"]
-                shows.insert(2, "Reba")
+    shows = ["Full House", "Boy Meets World", "Friends"]
+    shows.insert(2, "Reba")
                     </code>
                 </pre>
 
@@ -124,8 +118,8 @@
 
                 <pre>
                     <code>
-                    colors = {"red", "blue", "pink"}
-                    colors.add("purple")
+    colors = {"red", "blue", "pink"}
+    colors.add("purple")
                     </code>
                 </pre>
 
@@ -133,9 +127,9 @@
 
                 <p>The add() method is functionally similar to the append() method for lists.</p>
 
-                <p>For most purposes, the time complexity of the add() method is <span class="inline-code">O(1)</span>, as this is its average-case time complexity.</p>
+                <p>For most purposes, the time complexity of the add() method is <span class="inline-code">O(1)</span>, as this is its best-case and average-case time complexity (&#937;(1) in best-case notation, &#920;(1) in average-case notation.)
 
-                <p>However, in the worst-case scenario where there are hash collisions, the time complexity would be O(n). This scenario is rare enough in practice that we can refer to the time complexity of add() as O(1), so unless you are working with a specific scenario in which hash collisions are likely, we can go with the average-case time complexity of O(1).</p>
+                <p>However, in the worst-case scenario where there are hash collisions, the time complexity would be O(n). This scenario is rare enough in practice that we can refer to the time complexity of add() as O(1) unless you are working with a specific scenario in which hash collisions are likely.</p>
 
                 <p></p>
 
@@ -143,8 +137,8 @@
 
                 <pre>
                     <code>
-                    colors = {"red", "blue", "pink"}
-                    colors.remove("blue") 
+    colors = {"red", "blue", "pink"}
+    colors.remove("blue") 
                     </code>
                 </pre>
 
@@ -158,8 +152,8 @@
 
                 <pre>
                     <code>
-                    colors = {"red", "blue", "pink"}
-                    print("blue" in colors)
+    colors = {"red", "blue", "pink"}
+    print("blue" in colors)
                     </code>
                 </pre>
 
@@ -169,8 +163,8 @@
 
                 <pre>
                     <code>
-                    animals = ["cat", "dog", "rabbit"]
-                    print("dog" in animals)
+    animals = ["cat", "dog", "rabbit"]
+    print("dog" in animals)
                     </code>
                 </pre>
 
@@ -182,13 +176,13 @@
 
                 <pre>
                     <code>
-        animals = ["cat", "dog", "rabbit"]
-        found = False # Initialize found variable with 'default' value (False)
-        for item in animals: # Iterate through the list
-            if item == "dog": # Check to see if the value at the current index matches
-                found = True # Change value of found
-                break # If the condition is satisfied, terminate the loop
-        print(found) # Print the value of found after the loop has completed/terminated
+    animals = ["cat", "dog", "rabbit"]
+    found = False # Initialize found variable with 'default' value (False)
+    for item in animals: # Iterate through the list
+        if item == "dog": # Check to see if the value at the current index matches
+            found = True # Change value of found
+            break # If the condition is satisfied, terminate the loop
+    print(found) # Print the value of found after the loop has completed/terminated
                     </code>
                 </pre>
 
@@ -262,7 +256,7 @@
 
                 <p>For time complexities of other built-in methods, you can check out the <a href="https://pythoncomplexity.com/">Python Time & Space Complexity website</a>.</p>
             </div>
-        </div>
+        </div>       
     </main>
     <footer>
         Github site by kendomi0
