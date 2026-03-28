@@ -17,11 +17,17 @@
         .chosen-num { 
             display: inline-block;
             min-width: 22px;
-            color: red;
+            color:#ff7b72;
+            text-align: center;
         }
 
         .ops {
-            color: yellow;
+            color: #FFF6A1;
+            min-width:22px;
+        }
+
+        #num-input {
+            margin-right:10px;
         }
     </style>
 </head>
@@ -75,9 +81,9 @@
 
                 <p>Time complexity is about representing the algorithm's growth rate as the input size increases, so let's discuss the various types of growth.</p>
 
-                <p>Constant time complexity means there is no growth at all, regardless of the change in input size.</p> 
+                <p><span class="emphasis">Constant</span> time complexity means there is no growth at all, regardless of the change in input size.</p> 
                 
-                <p>Linear time complexity means the growth rate increases linearly in relation to the input size.</p>
+                <p><span class="emphasis">Linear</span> time complexity means the growth rate increases linearly in relation to the input size.</p>
                 
                 <p>Other types of time complexity function similarly: for instance, logarithmic time complexity means the growth rates increases logarithmically in relation to the input size.</p>
 
@@ -99,14 +105,14 @@
                     
                 <p>To show how exactly the values of O work, input a number from 1 to 10 for n, and see how the total number of operations changes. For your first try, try a number that's a perfect log, like 8.</p>
 
-                <p>Disclaimer: There are values of n that are edge cases, particularly for lower values. For example, for n = 3, the quadratic time complexity results in a higher number of operations than the exponential time complexity. However, this doesn't change the overall ranking, as the concept of growth remains the same regardless of specific edge cases.</p>
+                <p><span class="emphasis">Disclaimer:</span> There are values of n that are edge cases, particularly for lower values. For example, for n = 3, the quadratic time complexity results in a higher number of operations than the exponential time complexity. However, this doesn't change the overall ranking, as the concept of growth remains the same regardless of specific edge cases.</p>
 
                 <!-- Interactive example -->
 
                 <input id="num-input" type="number" placeholder="Enter a number from 1 to 10" />
                 <button id="demo-btn">Get results</button>
 
-                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
+                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs the same number of times.</p>
 
                 <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=<span class="chosen-num">&emsp;</span>, O(logn) = O(log<span class="chosen-num">&emsp;</span>) &asymp; <span id="log-ops" class="ops">&emsp;</span> operations.</p> 
 

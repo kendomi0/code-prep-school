@@ -40,6 +40,29 @@ header {
     border-bottom: 1px solid #2A2A3D;
 }
 
+input[type=number] {
+    background-color: #E3E3FA;
+    color: #1D1D2B;
+    font-size:inherit;
+    font-family: inherit;
+    width:400px;
+    padding:5px;
+    border-radius:7px;
+    margin-bottom:25px;
+    border: 2px solid white;
+}
+
+button {
+    background-color: #120A4A;
+    color: #E3E3FA;
+    font-size: inherit;
+    font-family: inherit;
+    padding:5px;
+    width:120px;
+    border-radius:7px;
+    border: 2px solid #C5BDDE;
+}
+
 a {
     text-decoration: none;
 }
