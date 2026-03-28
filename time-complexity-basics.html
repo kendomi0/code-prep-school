@@ -14,13 +14,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
 
     <style>
-        .page-body a {
-            color: #BCBCE3 !important ;
-            text-decoration: underline;
+        .chosen-num { 
+            display: inline-block;
+            min-width: 22px;
+            color: red;
         }
 
-        .page-body a:hover {
-            color: #F0F0FF !important;
+        .ops {
+            color: yellow;
         }
     </style>
 </head>
@@ -94,15 +95,32 @@
 
                 <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). (When we use log in this context, it is with base 2.) That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
 
-                <p>Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's use n = 8 as our example.</p>
+                <p>Here is a ranking of time complexities from fastest to slowest.</p>
+                    
+                <p>To show how exactly the values of O work, input a number from 1 to 10 for n, and see how the total number of operations changes. For your first try, try a number that's a perfect log, like 8.</p>
+
+                <p>Disclaimer: There are values of n that are edge cases, particularly for lower values. For example, for n = 3, the quadratic time complexity results in a higher number of operations than the exponential time complexity. However, this doesn't change the overall ranking, as the concept of growth remains the same regardless of specific edge cases.</p>
+
+                <!-- Interactive example -->
+
+                <input id="num-input" type="number" placeholder="Enter a number from 1 to 10" />
+                <button id="demo-btn">Get results</button>
 
                 <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
-                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=8, O(logn) = O(log8) = 3 operations.</p> 
-                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=8, O(n) = O(8) = 8 operations.</p> 
-                <p>4. <span class="inline-code">O(nlogn)</span>: Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.</p> 
-                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=8, O(n<sup>2</sup>) = O(8<sup>2</sup>) = 64 operations.</p> 
-                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=8, O(2<sup>n</sup>) = O(2<sup>8</sup>) = 256 operations.</p> 
-                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
+
+                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=<span class="chosen-num">&emsp;</span>, O(logn) = O(log<span class="chosen-num">&emsp;</span>) &asymp; <span id="log-ops" class="ops">&emsp;</span> operations.</p> 
+
+                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=<span class="chosen-num"></span>, O(n) = O(<span class="chosen-num"></span>) = <span id="linear-ops" class="ops"></span> operations.</p> 
+
+                <p>4. <span class="inline-code">O(nlogn)</span>: Loglinear time complexity. When n=<span class="chosen-num"></span>, O(nlogn) = O(<span class="chosen-num"></span>log<span class="chosen-num"></span>) &asymp; <span id="loglinear-ops" class="ops"></span> operations.</p> 
+
+                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=<span class="chosen-num"></span>, O(n<sup>2</sup>) = O(<span class="chosen-num"></span><sup>2</sup>) = <span id="quadratic-ops" class="ops"></span> operations.</p> 
+
+                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=<span class="chosen-num"></span>, O(2<sup>n</sup>) = O(2<sup><span class="chosen-num"></span></sup>) = <span id="exponential-ops" class="ops"></span> operations.</p> 
+
+                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=<span class="chosen-num"></span>, O(n!) = O(<span class="chosen-num"></span>!) = <span id="factorial-ops" class="ops"></span> operations.</p>
+
+                <!-- End interactive example -->
 
                 <p>Let's return to the registered users example.</p>
 
@@ -119,7 +137,7 @@
                         </mfrac>
                     </math>
                 
-                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera.</p>
+                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera. The exponent matters most, not the coefficient.</p>
 
                 <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
                     
@@ -133,7 +151,39 @@
         Github site by kendomi0
     </footer>
 <script>
-  hljs.highlightAll();
+    hljs.highlightAll();
+
+    const input = document.getElementById("num-input");
+    const chosenNums = document.querySelectorAll(".chosen-num");
+    const btn = document.getElementById("demo-btn");
+    const linearOps = document.getElementById("linear-ops");
+    const quadraticOps = document.getElementById("quadratic-ops");
+    const exponentialOps = document.getElementById("exponential-ops");
+    const logarithmicOps = document.getElementById("log-ops");
+    const logLinearOps = document.getElementById("loglinear-ops");
+    const factorialOps = document.getElementById("factorial-ops");
+
+    btn.addEventListener("click", function() {
+        const inputNumber = Number(input.value);
+        chosenNums.forEach(function(chosenNum) {
+            chosenNum.textContent = inputNumber;
+        });
+
+        linearOps.textContent = inputNumber;
+        quadraticOps.textContent = inputNumber ** 2;
+        exponentialOps.textContent = 2 ** inputNumber;
+        logarithmicOps.textContent = (Math.log2(inputNumber)).toFixed(3);
+        logLinearOps.textContent = (inputNumber * (Math.log2(inputNumber))).toFixed(3);
+
+        let total = 1
+
+        for (var i = inputNumber; i >= 1; i--) {
+            total = total * i
+        }
+
+        factorialOps.textContent = total;
+
+    });
 </script>
 </body>
 </html>
