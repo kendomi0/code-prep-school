@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
 
     <style>
         .chosen-num { 
@@ -33,6 +34,44 @@
         #invalid-msg {
             color: #ff7b72;
             margin-bottom:13px;
+        }
+
+        #btn-container {
+            display:flex;
+            justify-content: space-between;
+            margin-bottom:30px;
+        }
+
+        #constant-btn {
+            background-color: #530000;
+        }
+
+        #logarithmic-btn {
+            background-color: #C74440;
+        }
+
+        #linear-btn {
+            background-color: #66620D;
+        }
+
+        #loglinear-btn {
+            background-color: #348543;
+        }
+
+        #quadratic-btn {
+            background-color: #2D70B3;
+        }
+
+        #exponential-btn {
+            background-color: #6042A6;
+        }
+
+        #factorial-btn {
+            background-color: #a13f94;
+        }
+
+        .complexity-btn:hover {
+            background-color: black !important;
         }
     </style>
 </head>
@@ -133,6 +172,22 @@
                 <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=<span class="chosen-num"></span>, O(n!) = O(<span class="chosen-num"></span>!) = <span id="factorial-ops" class="ops"></span> operations.</p>
 
                 <!-- End interactive example -->
+
+                <p>Below, click the different types of time complexities to view graphs illustrating their growth rates.</p>
+
+                <!-- Begin graph section -->
+                <div id="btn-container">
+                    <button id="constant-btn" class="complexity-btn">Constant</button>
+                    <button id="logarithmic-btn" class="complexity-btn">Logarithmic</button>
+                    <button id="linear-btn" class="complexity-btn">Linear</button>
+                    <button id="loglinear-btn" class="complexity-btn">Loglinear</button>
+                    <button id="quadratic-btn" class="complexity-btn">Quadratic</button>
+                    <button id="exponential-btn" class="complexity-btn">Exponential</button>
+                    <button id="factorial-btn" class="complexity-btn">Factorial</button>
+                </div>
+
+
+                <!-- End graph section-->
 
                 <p>Let's return to the registered users example.</p>
 
