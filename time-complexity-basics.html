@@ -78,6 +78,11 @@
             display: flex;
             justify-content: center;
         }
+
+        #constant-graph-caption {
+            text-align: center;
+            font-size:13px;
+        }
     </style>
 </head>
 <body>
@@ -201,7 +206,7 @@
                     <canvas id="factorial-chart" class="chart" style="width:100%;max-width:600px"></canvas>
                 </div>
                 
-
+                <p id="constant-graph-caption">O(1) doesn't necessarily mean the number of operations is 1; it's about how the number of operations does not change regardless of n changing.</p>
 
                 <!-- End graph section-->
 
@@ -257,6 +262,8 @@
     const factorialBtn = document.getElementById("factorial-btn");
     const linearithmicBtn = document.getElementById("linearithmic-btn");
 
+    const constantGraphCaption = document.getElementById("constant-graph-caption");
+
     function factorial(x) {
 
         let total = 1
@@ -303,6 +310,7 @@
         graphs.forEach((graph) => {
             graph.style.display = 'none';
         });
+        constantGraphCaption.style.display = 'none';
     }
 
     function generateData(xArr, yArr, formula, i1, i2, step = 1) {
@@ -500,7 +508,7 @@
 
     const xValuesConstant = [];
     const yValuesConstant = [];
-    generateData(xValuesConstant, yValuesConstant, x => x = 1, 0, 10, 1)
+    generateData(xValuesConstant, yValuesConstant, x => 1, 0, 10, 1)
 
     const constantChart = document.getElementById('constant-chart');
 
@@ -532,11 +540,13 @@
     });
 
     constantChart.style.display = 'none';
+    constantGraphCaption.style.display = 'none';
 
     constantBtn.addEventListener('click', () => {
         if (constantChart.style.display === 'none') {
             reset();
             constantChart.style.display = 'block';
+            constantGraphCaption.style.display = 'block';
         } else {
             constantChart.style.display = "none";
         }
