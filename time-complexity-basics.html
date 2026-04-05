@@ -54,7 +54,7 @@
             background-color: #66620D;
         }
 
-        #loglinear-btn {
+        #linearithmic-btn {
             background-color: #348543;
         }
 
@@ -72,6 +72,11 @@
 
         .complexity-btn:hover {
             background-color: black !important;
+        }
+        
+        #charts {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -163,7 +168,7 @@
 
                 <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=<span class="chosen-num"></span>, O(n) = O(<span class="chosen-num"></span>) = <span id="linear-ops" class="ops"></span> operations.</p> 
 
-                <p>4. <span class="inline-code">O(nlogn)</span>: Loglinear time complexity. When n=<span class="chosen-num"></span>, O(nlogn) = O(<span class="chosen-num"></span>log<span class="chosen-num"></span>) &asymp; <span id="loglinear-ops" class="ops"></span> operations.</p> 
+                <p>4. <span class="inline-code">O(nlogn)</span>: Linearithmic/loglinear time complexity. When n=<span class="chosen-num"></span>, O(nlogn) = O(<span class="chosen-num"></span>log<span class="chosen-num"></span>) &asymp; <span id="linearithmic-ops" class="ops"></span> operations.</p> 
 
                 <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=<span class="chosen-num"></span>, O(n<sup>2</sup>) = O(<span class="chosen-num"></span><sup>2</sup>) = <span id="quadratic-ops" class="ops"></span> operations.</p> 
 
@@ -180,11 +185,22 @@
                     <button id="constant-btn" class="complexity-btn">Constant</button>
                     <button id="logarithmic-btn" class="complexity-btn">Logarithmic</button>
                     <button id="linear-btn" class="complexity-btn">Linear</button>
-                    <button id="loglinear-btn" class="complexity-btn">Loglinear</button>
+                    <button id="linearithmic-btn" class="complexity-btn">Linearithmic</button>
                     <button id="quadratic-btn" class="complexity-btn">Quadratic</button>
                     <button id="exponential-btn" class="complexity-btn">Exponential</button>
                     <button id="factorial-btn" class="complexity-btn">Factorial</button>
                 </div>
+
+                <div id="charts">
+                    <canvas id="linear-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="quadratic-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="exponential-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="logarithmic-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="constant-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="linearithmic-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="factorial-chart" class="chart" style="width:100%;max-width:600px"></canvas>
+                </div>
+                
 
 
                 <!-- End graph section-->
@@ -223,13 +239,35 @@
     const input = document.getElementById("num-input");
     const chosenNums = document.querySelectorAll(".chosen-num");
     const btn = document.getElementById("demo-btn");
+
     const linearOps = document.getElementById("linear-ops");
     const quadraticOps = document.getElementById("quadratic-ops");
     const exponentialOps = document.getElementById("exponential-ops");
     const logarithmicOps = document.getElementById("log-ops");
-    const logLinearOps = document.getElementById("loglinear-ops");
+    const linearithmicOps = document.getElementById("linearithmic-ops");
     const factorialOps = document.getElementById("factorial-ops");
+
     const invalidMsg = document.getElementById("invalid-msg");
+
+    const linearBtn = document.getElementById("linear-btn");
+    const quadraticBtn = document.getElementById("quadratic-btn");
+    const exponentialBtn = document.getElementById("exponential-btn");
+    const logarithmicBtn = document.getElementById("logarithmic-btn");
+    const constantBtn = document.getElementById("constant-btn");
+    const factorialBtn = document.getElementById("factorial-btn");
+    const linearithmicBtn = document.getElementById("linearithmic-btn");
+
+    function factorial(x) {
+
+        let total = 1
+
+        for (var i = x; i >= 1; i--) {
+            total = total * i
+        }
+
+        return total;
+
+    }
 
     btn.addEventListener("click", function() {
         const inputNumber = Number(input.value);
@@ -249,18 +287,354 @@
         quadraticOps.textContent = inputNumber ** 2;
         exponentialOps.textContent = 2 ** inputNumber;
         logarithmicOps.textContent = (Math.log2(inputNumber)).toFixed(3);
-        logLinearOps.textContent = (inputNumber * (Math.log2(inputNumber))).toFixed(3);
+        linearithmicOps.textContent = (inputNumber * (Math.log2(inputNumber))).toFixed(3);
+        factorialOps.textContent = factorial(inputNumber);
 
-        let total = 1
-
-        for (var i = inputNumber; i >= 1; i--) {
-            total = total * i
-        }
-
-        factorialOps.textContent = total;
         }
 
     });
+
+    // Charts
+
+    const graphs = document.querySelectorAll('.chart');
+    console.log(graphs);
+
+    function reset() {
+        graphs.forEach((graph) => {
+            graph.style.display = 'none';
+        });
+    }
+
+    function generateData(xArr, yArr, formula, i1, i2, step = 1) {
+        for (let x = i1; x <= i2; x += step) {
+            xArr.push(x);
+            yArr.push(formula(x));
+        }
+    }
+
+    // Linear chart
+
+    const xValues = [];
+    const yValues = [];
+    generateData(xValues, yValues, x => x, 0, 10, 1);
+
+    const linearChart = document.getElementById('linear-chart');
+
+    new Chart(linearChart, {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#66620D',
+                data: yValues
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(n)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    linearChart.style.display = 'none';
+
+    linearBtn.addEventListener('click', () => {
+        if (linearChart.style.display === 'none') {
+            reset();
+            linearChart.style.display = 'block';
+        } else {
+            linearChart.style.display = "none";
+        }
+    });
+
+    // Quadratic chart
+
+    const xValuesQuad = [];
+    const yValuesQuad = [];
+    generateData(xValuesQuad, yValuesQuad, x => x * x, 0, 10, 1);
+
+    const quadraticChart = document.getElementById('quadratic-chart');
+
+    new Chart(quadraticChart, {
+        type: "line",
+        data: {
+            labels: xValuesQuad,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#2D70B3',
+                data: yValuesQuad
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(n²)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    quadraticChart.style.display = 'none';
+
+    quadraticBtn.addEventListener('click', () => {
+        if (quadraticChart.style.display === 'none') {
+            reset();
+            quadraticChart.style.display = 'block';
+        } else {
+            quadraticChart.style.display = "none";
+        }
+    });
+
+    // Exponential chart
+
+    const xValuesExponent = [];
+    const yValuesExponent = [];
+    generateData(xValuesExponent, yValuesExponent, x => 2 ** x, 0, 10, 1)
+
+    const exponentialChart = document.getElementById('exponential-chart');
+
+    new Chart(exponentialChart, {
+        type: "line",
+        data: {
+            labels: xValuesExponent,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#6042A6',
+                data: yValuesExponent
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(2ⁿ)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    exponentialChart.style.display = 'none';
+
+    exponentialBtn.addEventListener('click', () => {
+        if (exponentialChart.style.display === 'none') {
+            reset();
+            exponentialChart.style.display = 'block';
+        } else {
+            exponentialChart.style.display = "none";
+        }
+    });
+
+    // Logarithmic chart
+
+    const xValuesLog = [];
+    const yValuesLog = [];
+    generateData(xValuesLog, yValuesLog, x => Math.log2(x), 0, 10, 1)
+
+    const logarithmicChart = document.getElementById('logarithmic-chart');
+
+    new Chart(logarithmicChart, {
+        type: "line",
+        data: {
+            labels: xValuesLog,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#C74440',
+                data: yValuesLog
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(logn)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    logarithmicChart.style.display = 'none';
+
+    logarithmicBtn.addEventListener('click', () => {
+        if (logarithmicChart.style.display === 'none') {
+            reset();
+            logarithmicChart.style.display = 'block';
+        } else {
+            logarithmicChart.style.display = "none";
+        }
+    });
+
+    // Constant chart
+
+    const xValuesConstant = [];
+    const yValuesConstant = [];
+    generateData(xValuesConstant, yValuesConstant, x => x = 1, 0, 10, 1)
+
+    const constantChart = document.getElementById('constant-chart');
+
+    new Chart(constantChart, {
+        type: "line",
+        data: {
+            labels: xValuesConstant,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#530000',
+                data: yValuesConstant
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(1)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    constantChart.style.display = 'none';
+
+    constantBtn.addEventListener('click', () => {
+        if (constantChart.style.display === 'none') {
+            reset();
+            constantChart.style.display = 'block';
+        } else {
+            constantChart.style.display = "none";
+        }
+    });
+
+    // Linearithmic chart
+
+    
+    const xValuesLinearithmic = [];
+    const yValuesLinearithmic = [];
+    generateData(xValuesLinearithmic, yValuesLinearithmic, x => x * Math.log2(x), 0, 10, 1)
+
+    const linearithmicChart = document.getElementById('linearithmic-chart');
+
+    new Chart(linearithmicChart, {
+        type: "line",
+        data: {
+            labels: xValuesLinearithmic,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#348543',
+                data: yValuesLinearithmic
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(nlogn)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    linearithmicChart.style.display = 'none';
+
+    linearithmicBtn.addEventListener('click', () => {
+        if (linearithmicChart.style.display === 'none') {
+            reset();
+            linearithmicChart.style.display = 'block';
+        } else {
+            linearithmicChart.style.display = "none";
+        }
+    });
+
+    // Factorial chart
+
+    const xValuesFactorial = [];
+    const yValuesFactorial = [];
+    generateData(xValuesFactorial, yValuesFactorial, x => factorial(x), 0, 10, 1)
+
+    const factorialChart = document.getElementById('factorial-chart');
+
+    new Chart(factorialChart, {
+        type: "line",
+        data: {
+            labels: xValuesFactorial,
+            datasets: [{
+                fill: false,
+                pointRadius: 1,
+                borderColor: '#a13f94',
+                data: yValuesFactorial
+            }]
+        },    
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'O(n!)',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                x: {title: { display: true, text: 'x' }},
+                y: {title: { display: true, text: 'y'}}
+            }
+        }
+    });
+
+    factorialChart.style.display = 'none';
+
+    factorialBtn.addEventListener('click', () => {
+        if (factorialChart.style.display === 'none') {
+            reset();
+            factorialChart.style.display = 'block';
+        } else {
+            factorialChart.style.display = "none";
+        }
+    });
+
 </script>
 </body>
 </html>
