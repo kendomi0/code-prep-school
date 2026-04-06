@@ -342,15 +342,17 @@
     const yQuad = [];
     const yExpo = [];
     const yFactorial = [];
-    const xEndpoint = 20;
+    const xEndpoint = 30;
+    const increment = 2;
+    const gridColor = '#242323';
 
-    generateData(xValues, yConstant, x => 1, 0, xEndpoint, 1);
-    generateData([], yLog, x => Math.log2(x), 0, xEndpoint, 1);
-    generateData([], yLinear, x => x, 0, xEndpoint, 1);
-    generateData([], yLinearithmic, x => x * Math.log2(x), 0, xEndpoint, 1);
-    generateData([], yQuad, x => x * x, 0, xEndpoint, 1);
-    generateData([], yExpo, x => 2 ** x, 0, xEndpoint, 1);
-    generateData([], yFactorial, x => factorial(x), 0, xEndpoint, 1);
+    generateData(xValues, yConstant, x => 1, 0, xEndpoint, increment);
+    generateData([], yLog, x => Math.log2(x), 0, xEndpoint, increment);
+    generateData([], yLinear, x => x, 0, xEndpoint, increment);
+    generateData([], yLinearithmic, x => x * Math.log2(x), 0, xEndpoint, increment);
+    generateData([], yQuad, x => x * x, 0, xEndpoint, increment);
+    generateData([], yExpo, x => 2 ** x, 0, xEndpoint, increment);
+    generateData([], yFactorial, x => factorial(x), 0, xEndpoint, increment);
 
     const complexityGraphChart = 
         new Chart(complexityGraph, {
@@ -372,9 +374,14 @@
                     legend: { display: false }
                 },
                 scales: {
+                    x: {
+                        grid: { color: gridColor }
+                    },
+
                     y: {
                         min: 0,
-                        max: 75
+                        max: 90,
+                        grid: { color: gridColor }
                     }
                 }
             }
