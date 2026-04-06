@@ -387,48 +387,16 @@
             }
         });
 
-    // Buttons for graph
+    // Toggle buttons for graph
 
-    constantBtn.addEventListener('click', () => {
-        constantBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[0].hidden = !complexityGraphChart.data.datasets[0].hidden;
-        complexityGraphChart.update();
-    });
+    complexityBtns = [constantBtn, logarithmicBtn, linearBtn, linearithmicBtn, quadraticBtn, exponentialBtn, factorialBtn]
 
-    logarithmicBtn.addEventListener('click', () => {
-        logarithmicBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[1].hidden = !complexityGraphChart.data.datasets[1].hidden;
-        complexityGraphChart.update();
-    });
-
-    linearBtn.addEventListener('click', () => {
-        linearBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[2].hidden = !complexityGraphChart.data.datasets[2].hidden;
-        complexityGraphChart.update();
-    });
-
-    linearithmicBtn.addEventListener('click', () => {
-        linearithmicBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[3].hidden = !complexityGraphChart.data.datasets[3].hidden;
-        complexityGraphChart.update();
-    });
-
-    quadraticBtn.addEventListener('click', () => {
-        quadraticBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[4].hidden = !complexityGraphChart.data.datasets[4].hidden;
-        complexityGraphChart.update();
-    });
-
-    exponentialBtn.addEventListener('click', () => {
-        exponentialBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[5].hidden = !complexityGraphChart.data.datasets[5].hidden;
-        complexityGraphChart.update();
-    });
-
-    factorialBtn.addEventListener('click', () => {
-        factorialBtn.classList.toggle('active');
-        complexityGraphChart.data.datasets[6].hidden = !complexityGraphChart.data.datasets[6].hidden;
-        complexityGraphChart.update();
+    complexityBtns.forEach((cBtn, index) => {
+        cBtn.addEventListener('click', () => {
+            cBtn.classList.toggle('active');
+            complexityGraphChart.data.datasets[index].hidden = !complexityGraphChart.data.datasets[index].hidden;
+            complexityGraphChart.update();
+        });
     });
 
 </script>
