@@ -12,16 +12,104 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
 
     <style>
-        .page-body a {
-            color: #BCBCE3 !important ;
-            text-decoration: underline;
+        .chosen-num { 
+            display: inline-block;
+            min-width: 22px;
+            color: #FFF6A1; 
+            text-align: center;
         }
 
-        .page-body a:hover {
-            color: #F0F0FF !important;
+        .ops {
+            color: #B5FFC0;
+            min-width:22px;
         }
+
+        #num-input {
+            margin-right:10px;
+        }
+
+        #invalid-msg {
+            color: #ff7b72;
+            margin-bottom:13px;
+        }
+
+        #btn-container {
+            display:flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        #constant-btn {
+            background-color: #530000;
+            border: 2px solid #610a0a;
+        }
+
+        #logarithmic-btn {
+            background-color: #C74440;
+            border: 2px solid #d35f5b;
+        }
+
+        #linear-btn {
+            background-color: #66620D;
+            border: 2px solid #757120;
+        }
+
+        #linearithmic-btn {
+            background-color: #348543;
+            border: 2px solid #4d9e5c;
+        }
+
+        #quadratic-btn {
+            background-color: #2D70B3;
+            border: 2px solid #3e80c2;
+        }
+
+        #exponential-btn {
+            background-color: #6042A6;
+            border: 2px solid #7255b4;
+        }
+
+        #factorial-btn {
+            background-color: #a13f94;
+            border: 2px solid #b153a4;
+        }
+
+        .complexity-btn {
+            border: none;
+            border-radius: 25px;
+            width:140px;
+        }
+
+        .complexity-btn:hover {
+            background-color: black !important;
+            border: 2px solid white !important;
+        }
+        
+        #charts {
+            display: flex;
+            justify-content: center;
+        }
+
+        #graph {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #constant-graph-disclaimer {
+            text-align: center;
+            font-size:13px;
+            color: #aeaeca;
+        }
+
+        .active {
+            background-color: gray !important;
+            color: white !important;
+            border: 2px solid white !important;
+        }
+
     </style>
 </head>
 <body>
@@ -74,9 +162,9 @@
 
                 <p>Time complexity is about representing the algorithm's growth rate as the input size increases, so let's discuss the various types of growth.</p>
 
-                <p>Constant time complexity means there is no growth at all, regardless of the change in input size.</p> 
+                <p><span class="emphasis">Constant</span> time complexity means there is no growth at all, regardless of the change in input size.</p> 
                 
-                <p>Linear time complexity means the growth rate increases linearly in relation to the input size.</p>
+                <p><span class="emphasis">Linear</span> time complexity means the growth rate increases linearly in relation to the input size.</p>
                 
                 <p>Other types of time complexity function similarly: for instance, logarithmic time complexity means the growth rates increases logarithmically in relation to the input size.</p>
 
@@ -94,15 +182,54 @@
 
                 <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). (When we use log in this context, it is with base 2.) That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
 
-                <p>Here is a ranking of time complexities from fastest to slowest. To show how exactly the values of O work, let's use n = 8 as our example.</p>
+                <p>Here is a ranking of time complexities from fastest to slowest.</p>
+                    
+                <p>To show how exactly the values of O work, input a number from 1 to 50 for n, and see how the total number of operations changes. For your first try, try a number that's a perfect log, like 8.</p>
 
-                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs same number of times.</p>
-                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=8, O(logn) = O(log8) = 3 operations.</p> 
-                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=8, O(n) = O(8) = 8 operations.</p> 
-                <p>4. <span class="inline-code">O(nlogn)</span>: Loglinear time complexity. When n=8, O(nlogn) = O(8log8) = 24 operations.</p> 
-                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=8, O(n<sup>2</sup>) = O(8<sup>2</sup>) = 64 operations.</p> 
-                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=8, O(2<sup>n</sup>) = O(2<sup>8</sup>) = 256 operations.</p> 
-                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=8, O(n!) = O(8*7*6*5*4*3*2*1) = 40,320 operations.</p>
+                <p><span class="emphasis">Disclaimer:</span> There are values of n that are edge cases, particularly for lower values. For example, for n = 3, the quadratic time complexity results in a higher number of operations than the exponential time complexity. However, this doesn't change the overall ranking, as the concept of growth remains the same regardless of specific edge cases.</p>
+
+                <!-- Interactive example -->
+
+                <input id="num-input" type="number" placeholder="Enter a number from 1 to 50" />
+                <button id="demo-btn">Get results</button>
+                <div id="invalid-msg" style="display:none">Use a number less than or equal to 50.</div>
+
+                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs the same number of times.</p>
+
+                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=<span class="chosen-num">&emsp;</span>, O(logn) = O(log<span class="chosen-num">&emsp;</span>) &asymp; <span id="log-ops" class="ops">&emsp;</span> operations.</p> 
+
+                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=<span class="chosen-num"></span>, O(n) = O(<span class="chosen-num"></span>) = <span id="linear-ops" class="ops"></span> operations.</p> 
+
+                <p>4. <span class="inline-code">O(nlogn)</span>: Linearithmic/loglinear time complexity. When n=<span class="chosen-num"></span>, O(nlogn) = O(<span class="chosen-num"></span>log<span class="chosen-num"></span>) &asymp; <span id="linearithmic-ops" class="ops"></span> operations.</p> 
+
+                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=<span class="chosen-num"></span>, O(n<sup>2</sup>) = O(<span class="chosen-num"></span><sup>2</sup>) = <span id="quadratic-ops" class="ops"></span> operations.</p> 
+
+                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=<span class="chosen-num"></span>, O(2<sup>n</sup>) = O(2<sup><span class="chosen-num"></span></sup>) = <span id="exponential-ops" class="ops"></span> operations.</p> 
+
+                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=<span class="chosen-num"></span>, O(n!) = O(<span class="chosen-num"></span>!) = <span id="factorial-ops" class="ops"></span> operations.</p>
+
+                <!-- End interactive example -->
+
+                <p>Below, click the different types of time complexities to view or hide graphs of their growth rates.</p>
+
+                <!-- Begin graph section -->
+
+                <div id="graph">
+                    <div id="btn-container">
+                        <button id="constant-btn" class="complexity-btn">Constant</button>
+                        <button id="logarithmic-btn" class="complexity-btn">Logarithmic</button>
+                        <button id="linear-btn" class="complexity-btn">Linear</button>
+                        <button id="linearithmic-btn" class="complexity-btn">Linearithmic</button>
+                        <button id="quadratic-btn" class="complexity-btn">Quadratic</button>
+                        <button id="exponential-btn" class="complexity-btn">Exponential</button>
+                        <button id="factorial-btn" class="complexity-btn">Factorial</button>
+                    </div>
+                    <canvas id="complexity-graph" style="width:100%;max-width:600px"></canvas>
+                </div>
+
+                <p id="constant-graph-disclaimer">Disclaimer: O(1) doesn't necessarily mean the number of operations is 1; it's about how the number of operations does not change regardless of n changing.</p>
+
+                <!-- End graph section-->
 
                 <p>Let's return to the registered users example.</p>
 
@@ -119,7 +246,7 @@
                         </mfrac>
                     </math>
                 
-                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera.</p>
+                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera. The exponent matters most, not the coefficient.</p>
 
                 <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
                     
@@ -133,7 +260,145 @@
         Github site by kendomi0
     </footer>
 <script>
-  hljs.highlightAll();
+    hljs.highlightAll();
+
+    const input = document.getElementById("num-input");
+    const chosenNums = document.querySelectorAll(".chosen-num");
+    const btn = document.getElementById("demo-btn");
+
+    const linearOps = document.getElementById("linear-ops");
+    const quadraticOps = document.getElementById("quadratic-ops");
+    const exponentialOps = document.getElementById("exponential-ops");
+    const logarithmicOps = document.getElementById("log-ops");
+    const linearithmicOps = document.getElementById("linearithmic-ops");
+    const factorialOps = document.getElementById("factorial-ops");
+
+    const invalidMsg = document.getElementById("invalid-msg");
+
+    const linearBtn = document.getElementById("linear-btn");
+    const quadraticBtn = document.getElementById("quadratic-btn");
+    const exponentialBtn = document.getElementById("exponential-btn");
+    const logarithmicBtn = document.getElementById("logarithmic-btn");
+    const constantBtn = document.getElementById("constant-btn");
+    const factorialBtn = document.getElementById("factorial-btn");
+    const linearithmicBtn = document.getElementById("linearithmic-btn");
+    const complexityGraph = document.getElementById("complexity-graph");
+
+    const constantGraphDisclaimer = document.getElementById("constant-graph-disclaimer");
+
+    function factorial(x) {
+
+        let total = 1
+
+        for (var i = x; i >= 1; i--) {
+            total = total * i
+        }
+
+        return total;
+
+    }
+
+    // Time complexity calculation buttons
+
+    btn.addEventListener("click", function() {
+        const inputNumber = Number(input.value);
+
+        if (inputNumber > 50) {
+            invalidMsg.style.display = "block";
+            return;
+        }
+
+        else {
+            invalidMsg.style.display = "none";
+            chosenNums.forEach(function(chosenNum) {
+            chosenNum.textContent = inputNumber;
+        });
+
+        linearOps.textContent = inputNumber;
+        quadraticOps.textContent = inputNumber ** 2;
+        exponentialOps.textContent = 2 ** inputNumber;
+        logarithmicOps.textContent = (Math.log2(inputNumber)).toFixed(3);
+        linearithmicOps.textContent = (inputNumber * (Math.log2(inputNumber))).toFixed(3);
+        factorialOps.textContent = factorial(inputNumber);
+
+        }
+
+    });
+
+    // Graph
+
+    function generateData(xArr, yArr, formula, i1, i2, step = 1) {
+        for (let x = i1; x <= i2; x += step) {
+            xArr.push(x);
+            yArr.push(formula(x));
+            }
+    }
+
+    const xValues = [];
+    const yConstant = [];
+    const yLog = [];
+    const yLinear = [];
+    const yLinearithmic = [];
+    const yQuad = [];
+    const yExpo = [];
+    const yFactorial = [];
+    const xEndpoint = 30;
+    const increment = 2;
+    const gridColor = '#242323';
+
+    generateData(xValues, yConstant, x => 1, 0, xEndpoint, increment);
+    generateData([], yLog, x => Math.log2(x), 0, xEndpoint, increment);
+    generateData([], yLinear, x => x, 0, xEndpoint, increment);
+    generateData([], yLinearithmic, x => x * Math.log2(x), 0, xEndpoint, increment);
+    generateData([], yQuad, x => x * x, 0, xEndpoint, increment);
+    generateData([], yExpo, x => 2 ** x, 0, xEndpoint, increment);
+    generateData([], yFactorial, x => factorial(x), 0, xEndpoint, increment);
+
+    const complexityGraphChart = 
+        new Chart(complexityGraph, {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [
+                    { label: 'O(1)', data: yConstant, borderColor: '#530000' },
+                    { label: 'O(logn)', data: yLog, borderColor: '#C74440' },
+                    { label: 'O(n)', data: yLinear, borderColor: '#66620D' },
+                    { label: 'O(nlogn)', data: yLinearithmic, borderColor: '#348543' },
+                    { label: 'O(n²)', data: yQuad, borderColor: '#2D70B3' },
+                    { label: 'O(2ⁿ)', data: yExpo, borderColor: '#6042A6' },
+                    { label: 'O(n!)', data: yFactorial, borderColor: '#a13f94' }
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: gridColor }
+                    },
+
+                    y: {
+                        min: 0,
+                        max: 90,
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
+
+    // Toggle buttons for graph
+
+    complexityBtns = [constantBtn, logarithmicBtn, linearBtn, linearithmicBtn, quadraticBtn, exponentialBtn, factorialBtn]
+
+    complexityBtns.forEach((cBtn, index) => {
+        cBtn.addEventListener('click', () => {
+            cBtn.classList.toggle('active');
+            complexityGraphChart.data.datasets[index].hidden = !complexityGraphChart.data.datasets[index].hidden;
+            complexityGraphChart.update();
+        });
+    });
+
 </script>
 </body>
 </html>
