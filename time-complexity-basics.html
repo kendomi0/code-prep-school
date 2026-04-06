@@ -44,34 +44,48 @@
 
         #constant-btn {
             background-color: #530000;
+            border: 2px solid #610a0a;
         }
 
         #logarithmic-btn {
             background-color: #C74440;
+            border: 2px solid #d35f5b;
         }
 
         #linear-btn {
             background-color: #66620D;
+            border: 2px solid #757120;
         }
 
         #linearithmic-btn {
             background-color: #348543;
+            border: 2px solid #4d9e5c;
         }
 
         #quadratic-btn {
             background-color: #2D70B3;
+            border: 2px solid #3e80c2;
         }
 
         #exponential-btn {
             background-color: #6042A6;
+            border: 2px solid #7255b4;
         }
 
         #factorial-btn {
             background-color: #a13f94;
+            border: 2px solid #b153a4;
+        }
+
+        .complexity-btn {
+            border: none;
+            border-radius: 25px;
+            width:140px;
         }
 
         .complexity-btn:hover {
             background-color: black !important;
+            border: 2px solid white !important;
         }
         
         #charts {
@@ -87,7 +101,15 @@
         #constant-graph-disclaimer {
             text-align: center;
             font-size:13px;
+            color: #aeaeca;
         }
+
+        .active {
+            background-color: gray !important;
+            color: white !important;
+            border: 2px solid white !important;
+        }
+
     </style>
 </head>
 <body>
@@ -188,7 +210,7 @@
 
                 <!-- End interactive example -->
 
-                <p>Below, click the different types of time complexities to view a graph of their growth rates.</p>
+                <p>Below, click the different types of time complexities to view or hide graphs of their growth rates.</p>
 
                 <!-- Begin graph section -->
 
@@ -276,6 +298,8 @@
 
     }
 
+    // Time complexity calculation buttons
+
     btn.addEventListener("click", function() {
         const inputNumber = Number(input.value);
 
@@ -301,7 +325,7 @@
 
     });
 
-    // Charts
+    // Graph
 
     function generateData(xArr, yArr, formula, i1, i2, step = 1) {
         for (let x = i1; x <= i2; x += step) {
@@ -328,27 +352,76 @@
     generateData([], yExpo, x => 2 ** x, 0, xEndpoint, 1);
     generateData([], yFactorial, x => factorial(x), 0, xEndpoint, 1);
 
-    new Chart(complexityGraph, {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [
-                { label: 'O(1)', data: yConstant, borderColor: '#530000' },
-                { label: 'O(logn)', data: yLog, borderColor: '#C74440' },
-                { label: 'O(n)', data: yLinear, borderColor: '#66620D' },
-                { label: 'O(nlogn)', data: yLinearithmic, borderColor: '#348543' },
-                { label: 'O(n²)', data: yQuad, borderColor: '#2D70B3' },
-                { label: 'O(2ⁿ)', data: yExpo, borderColor: '#6042A6' },
-                { label: 'O(n!)', data: yFactorial, borderColor: '#a13f94' }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    max: 75
+    const complexityGraphChart = 
+        new Chart(complexityGraph, {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [
+                    { label: 'O(1)', data: yConstant, borderColor: '#530000' },
+                    { label: 'O(logn)', data: yLog, borderColor: '#C74440' },
+                    { label: 'O(n)', data: yLinear, borderColor: '#66620D' },
+                    { label: 'O(nlogn)', data: yLinearithmic, borderColor: '#348543' },
+                    { label: 'O(n²)', data: yQuad, borderColor: '#2D70B3' },
+                    { label: 'O(2ⁿ)', data: yExpo, borderColor: '#6042A6' },
+                    { label: 'O(n!)', data: yFactorial, borderColor: '#a13f94' }
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 75
+                    }
                 }
             }
-        }
+        });
+
+    // Buttons for graph
+
+    constantBtn.addEventListener('click', () => {
+        constantBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[0].hidden = !complexityGraphChart.data.datasets[0].hidden;
+        complexityGraphChart.update();
+    });
+
+    logarithmicBtn.addEventListener('click', () => {
+        logarithmicBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[1].hidden = !complexityGraphChart.data.datasets[1].hidden;
+        complexityGraphChart.update();
+    });
+
+    linearBtn.addEventListener('click', () => {
+        linearBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[2].hidden = !complexityGraphChart.data.datasets[2].hidden;
+        complexityGraphChart.update();
+    });
+
+    linearithmicBtn.addEventListener('click', () => {
+        linearithmicBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[3].hidden = !complexityGraphChart.data.datasets[3].hidden;
+        complexityGraphChart.update();
+    });
+
+    quadraticBtn.addEventListener('click', () => {
+        quadraticBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[4].hidden = !complexityGraphChart.data.datasets[4].hidden;
+        complexityGraphChart.update();
+    });
+
+    exponentialBtn.addEventListener('click', () => {
+        exponentialBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[5].hidden = !complexityGraphChart.data.datasets[5].hidden;
+        complexityGraphChart.update();
+    });
+
+    factorialBtn.addEventListener('click', () => {
+        factorialBtn.classList.toggle('active');
+        complexityGraphChart.data.datasets[6].hidden = !complexityGraphChart.data.datasets[6].hidden;
+        complexityGraphChart.update();
     });
 
 </script>
