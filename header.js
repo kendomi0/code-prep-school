@@ -39,6 +39,9 @@ let appHeader = `
                 <a href="insertion-sort.html" class="nav-item">
                     Insertion Sort
                 </a>
+                <a href="bubble-sort.html" class="nav-item">
+                    Bubble Sort
+                </a>
             </div>
         </div>
     </nav>
