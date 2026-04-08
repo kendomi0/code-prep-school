@@ -12,6 +12,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+    <style>
+        #indexing-toggle {
+            width:inherit;
+            padding:12px;
+            border-radius:25px;
+        }
+
+        .zero-based-btn {
+            background-color: rgb(30, 0, 65);
+        }
+        
+        .one-based-btn {
+            background-color: rgb(0, 0, 83);
+        }
+
+    </style>
 </head>
 <body>
     <header id="app-header"></header>
@@ -23,8 +39,12 @@
             </div>
             <div class="page-body">
                 <p>Let's look at the <span class="emphasis">bubble sort</span> algorithm, which goes through the array, looks at pairs of elements, compares the individuals in the pairs, and swaps them if necessary, until all the elements in the array have been sorted.</p>
-                <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing.</p>
-                <pre>
+                <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing. If you'd like to see the pseudocode with 0-based indexing instead, use the toggle.</p>
+                <div class="center-button">
+                    <button id="indexing-toggle" class="one-based-btn">Switch to <span id="index-base">0</span>-based Indexing</button>
+                </div>
+                <div id="one-based-index-code">
+                    <pre>
                     <code class="language-python">
     # Assume arr is an array of numbers
     n = length(arr)
@@ -34,6 +54,21 @@
                 swap(A[j], A[j+1])
                     </code>
                 </pre>
+                </div>
+
+                <div id="zero-based-index-code">
+                    <pre>
+                    <code class="language-python">
+    # Assume arr is an array of numbers
+    n = length(arr)
+    for i = 0 to n - 1:
+        for j = 0 to n-1-i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                    </code>
+                </pre>
+                </div>
+
                 <p>The Python implementation of this, with 0-based indexing, would be: </p>
                 <pre>
 <code class="language-python">
@@ -49,9 +84,9 @@
                 <pre>
                     <code class="language-python">
     for i = 1 to n: # i = 1
-    for j = 1 to n - i: # j = 1
-        if A[j] > A[j+1]: # A[j] = 4, A[j+1] = 8
-            swap(A[j], A[j+1]) # 4 is not greater than 8, so no swap
+        for j = 1 to n - i: # j = 1
+            if A[j] > A[j+1]: # A[j] = 4, A[j+1] = 8
+                swap(A[j], A[j+1]) # 4 is not greater than 8, so no swap
                     </code>
             </pre>
                 <p>The array remains unchanged: <span class="inline-code">[4, 8, 3]</span>.</p>
@@ -102,6 +137,38 @@
     </footer>
 <script>
   hljs.highlightAll();
+
+  const oneBasedIndexCode = document.getElementById("one-based-index-code");
+  const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
+  const indexBase = document.getElementById("index-base");
+  const zeroBasedBtn = document.querySelector(".zero-based-btn");
+  const oneBasedBtn = document.querySelector(".one-based-btn");
+
+  zeroBasedIndexCode.style.display = "none";
+
+  const indexingToggle = document.getElementById("indexing-toggle");
+
+  indexingToggle.addEventListener("click", function() {
+    if (zeroBasedIndexCode.style.display === "none") {
+        zeroBasedIndexCode.style.display = "block";
+        oneBasedIndexCode.style.display = "none";
+
+        indexingToggle.classList.remove("one-based-btn");
+        indexingToggle.classList.add("zero-based-btn");
+
+        indexBase.textContent = "1";
+    }
+    else {
+        zeroBasedIndexCode.style.display = "none";
+        oneBasedIndexCode.style.display = "block";
+
+        indexingToggle.classList.remove("zero-based-btn");
+        indexingToggle.classList.add("one-based-btn");
+
+        indexBase.textContent = "0";
+    }
+  }
+)
 </script>
 </body>
 </html>

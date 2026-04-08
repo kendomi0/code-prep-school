@@ -214,3 +214,8 @@ math {
 .page-body a:hover {
     color: #F0F0FF !important;
 }
+
+.center-button {
+    display: flex;
+    justify-content: center;
+}
