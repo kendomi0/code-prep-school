@@ -22,6 +22,78 @@
                 Bubble Sort
             </div>
             <div class="page-body">
+                <p>Let's look at the <span class="emphasis">bubble sort</span> algorithm, which goes through the array, looks at pairs of elements, compares the individuals in the pairs, and swaps them if necessary, until all the elements in the array have been sorted.</p>
+                <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing.</p>
+                <pre>
+                    <code class="language-python">
+    # Assume arr is an array of numbers
+    n = length(arr)
+    for i = 1 to n:
+        for j = 1 to n-i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                    </code>
+                </pre>
+                <p>The Python implementation of this, with 0-based indexing, would be: </p>
+                <pre>
+<code class="language-python">
+    # Assume arr is an array of numbers
+    n = len(arr)
+    for i in range(n-1): # The loop will stop at the index that is one before n - 1
+        for j in range(n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                    </code>
+                </pre>
+                <p>Let's return to the pseudocode version. Let's go through the first iteration of the inner loop, with the array of <span class="inline-code">[4, 8, 3]</span>.</p>
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 1
+    for j = 1 to n - i: # j = 1
+        if A[j] > A[j+1]: # A[j] = 4, A[j+1] = 8
+            swap(A[j], A[j+1]) # 4 is not greater than 8, so no swap
+                    </code>
+            </pre>
+                <p>The array remains unchanged: <span class="inline-code">[4, 8, 3]</span>.</p>
+                <p>Now let's look at the second iteration of the inner loop.</p>
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 1
+        for j = 1 to n - i: # j = 2
+            if A[j] > A[j+1]: # A[j] = A[2] = 8, A[j+1] = A[3] = 3
+                swap(A[j], A[j+1]) # 8 is greater than 3, so swap
+                    </code>
+                </pre>
+                <p>Now the array reads: <span class="inline-code">[4, 3, 8]</span>.</p>
+                <p>The inner loop stops one before the end, because there are no more elements that need to be compared, since the last element has been sorted. Now we move on to the second iteration of the outer loop, which begins the second set of iterations of the inner loop.</p>
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 2
+        for j = 1 to n - i: # j = 1, n - i = 1
+            if A[j] > A[j+1]: # A[j] = A[1] = 4, A[j+1] = A[2] = 3
+                swap(A[j], A[j+1]) # 4 is greater than 3, so swap
+                    </code>
+                </pre>
+                <p>Now the array reads: <span class="inline-code">[3, 4, 8].</span></p>
+                <p>The next iteration of the inner loop does not run. This is because the next iteration would be for j = 2 to 1, which is not possible, so it terminates.</p>
+                <p>Then the outer loop would begin again, with i = 3. But note where the issue would be:</p>
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 3
+        for j = 1 to n - i: # j = 1, n - i = 0
+                    </code>
+                </pre>
+                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run, because the endpoint of the loop will always be 0, which is out-of-bounds (in this 1-based indexing). So the final interation of the outer loop is wasted.</p>
+                <p>Therefore, the code is functionally equivalent to:</p>
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n - 1:
+        for j = 1 to n - i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                    </code>
+                </pre>
+                <p>Some pseudocodes include the wasted iteration, while some don't. But seeing it written both ways, you can understand why it stops at one before <span class="inline-code">n</span> -- it's because the last iteration is functionally useless. </p>
             </div>
         </div>
     </main>
