@@ -91,7 +91,7 @@
 
                 <p>Let's look at the <span class="emphasis">bubble sort</span> algorithm, which goes through the array, looks at pairs of elements, compares the individuals in the pairs, and swaps them if necessary, until all the elements in the array have been sorted.</p>
 
-                <p>The algorithm is named for how the elements 'bubble' to the end after being sorted.</p>
+                <p>The algorithm is named for how the elements 'bubble' to the end through sorting.</p>
 
                 <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing. If you'd like to see the pseudocode with 0-based indexing instead, use the toggle.</p>
 
@@ -102,8 +102,8 @@
                 <div id="one-based-index-code">
                     <pre>
                         <code class="language-python">
-    # Assume arr is an array of numbers
-    n = length(arr)
+    # Assume A is an array of numbers
+    n = length(A)
     for i = 1 to n:
         for j = 1 to n-i:
             if A[j] > A[j+1]:
@@ -115,8 +115,8 @@
                 <div id="zero-based-index-code">
                     <pre>
                         <code class="language-python">
-    # Assume arr is an array of numbers
-    n = length(arr)
+    # Assume A is an array of numbers
+    n = length(A)
     for i = 0 to n - 1:
         for j = 0 to n - 1 - i:
             if A[j] > A[j+1]:
@@ -131,7 +131,7 @@
                     <code class="language-python">
     # Assume arr is an array of numbers
     n = len(arr)
-    for i in range(n-1): # The loop will stop at the index n - 2
+    for i in range(n-1): # Runs n-1 times, from index 0 to n-2
         for j in range(n-i-1):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
@@ -187,7 +187,7 @@
                     </code>
                 </pre>
 
-                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run, because the endpoint of the loop will always be 0, which is out-of-bounds (in this 1-based indexing). So the final interation of the outer loop is wasted.</p>
+                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run, because the endpoint of the loop will always be 0, so the start point would be greater than the endpoint, resulting in an empty range (in this 1-based indexing). So the final iteration of the outer loop is wasted.</p>
 
                 <p>Therefore, the code is functionally equivalent to:</p>
 
@@ -214,13 +214,13 @@
 
                     <div id="pseudocode-animate" class="manual-code-block">
                         <p>
-                            arr = [4, 8, 3]
+                            A = [4, 8, 3]
                             <span id="arrow-1" class="arrows">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </span>
                         </p>
                         <p>
-                            n = length(arr)
+                            n = length(A)
                             <span id="arrow-2" class="arrows">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </span>
@@ -258,15 +258,15 @@
                         <p>A[j + 1] = A[<span id="j-plus-one" class="num lines"></span>] = <span id="a-j-plus-one" class="num lines"></span></p>
                         <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
                         <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
-                        <p>arr = <span id="arr-value" class="num"></span></p>
+                        <p>A = <span id="arr-value" class="num"></span></p>
                     </div>
                 </div>
 
                 <p>Now, let's discuss bubble sort's <span class="emphasis">time complexity</span>.</p>
 
-                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times, so we multiply &#920;(n) for inner by &#920;(n) for outer.</p> 
+                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times, so we multiply O(n) for inner by O(n) for outer.</p> 
 
-                <p>In the average case, the inner loop and outer loop would, on average, run proportionally O(n) times, so we would again multiply O(n) by O(n).</p>
+                <p>In the average case, the inner loop and outer loop would, on average, run proportionally &#920;(n) times, so we would again multiply &#920;(n) for inner by &#920;(n) for outer.</p>
 
                 <p>In a best-case scenario, where all the elements are sorted and we are using an optimized version of the algorithm that uses a flag to terminate the loop, the outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop.</p>
         
