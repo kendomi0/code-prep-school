@@ -31,6 +31,7 @@
             display: flex;
             justify-content: space-between;
             margin-top:50px;
+            margin-bottom:30px;
         }
 
         #play-btn {
@@ -260,6 +261,16 @@
                         <p>arr = <span id="arr-value" class="num"></span></p>
                     </div>
                 </div>
+
+                <p>Now, let's discuss bubble sort's <span class="emphasis">time complexity</span>.</p>
+
+                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times, so we multiply &#920;(n) for inner by &#920;(n) for outer.</p> 
+
+                <p>In the average case, the inner loop and outer loop would, on average, run proportionally O(n) times, so we would again multiply O(n) by O(n).</p>
+
+                <p>In a best-case scenario, where all the elements are sorted and we are using an optimized version of the algorithm that uses a flag to terminate the loop, the outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop.</p>
+        
+                <p>This means that the best-case time complexity is <span class="inline-code">&#937;(n)</span>, the average-case time complexity is <span class="inline-code">&#920;(n&sup2;)</span>, and the worst-case time complexity is <span class="inline-code">O(n&sup2;)</span>. The general time complexity for the algorithm is <span class="inline-code">O(n&sup2;)</span>.</p>
             </div>
         </div>
     </main>
