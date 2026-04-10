@@ -52,7 +52,13 @@
             width: 480px;
         }
 
-        .loop-time, .boolean {
+        .loop-time {
+            color: #FF7B72;
+            display: inline-block;
+            min-width:60px;
+        }
+
+        .boolean {
             color: #FF7B72;
         }
 
@@ -83,6 +89,8 @@
             <div class="page-body">
 
                 <p>Let's look at the <span class="emphasis">bubble sort</span> algorithm, which goes through the array, looks at pairs of elements, compares the individuals in the pairs, and swaps them if necessary, until all the elements in the array have been sorted.</p>
+
+                <p>The algorithm is named for how the elements 'bubble' to the end after being sorted.</p>
 
                 <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing. If you'd like to see the pseudocode with 0-based indexing instead, use the toggle.</p>
 
@@ -122,7 +130,7 @@
                     <code class="language-python">
     # Assume arr is an array of numbers
     n = len(arr)
-    for i in range(n-1): # The loop will stop at the index that is one before n - 1
+    for i in range(n-1): # The loop will stop at the index n - 2
         for j in range(n-i-1):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
@@ -154,7 +162,7 @@
 
                 <p>Now the array reads: <span class="inline-code">[4, 3, 8]</span>.</p>
 
-                <p>The inner loop stops one before the end, because there are no more elements that need to be compared, since the last element has been sorted. Now we move on to the second iteration of the outer loop, which begins the second set of iterations of the inner loop.</p>
+                <p>The inner loop stops one before the end, because there are no more elements that need to be compared. Now we move on to the second iteration of the outer loop, which begins the second set of iterations of the inner loop.</p>
 
                 <pre>
                     <code class="language-python">
@@ -239,8 +247,8 @@
                     </div>
 
                     <div id="variable-changes" class="manual-code-block">
-                        <p># <span id="inner-loop-time" class="loop-time lines"> </span> iteration of inner loop</p>
-                        <p># inside <span id="outer-loop-time" class="loop-time lines"> </span> iteration</p>
+                        <p># <span id="inner-loop-time" class="loop-time lines">&nbsp;</span> iteration of inner loop</p>
+                        <p># inside <span id="outer-loop-time" class="loop-time lines">&nbsp;</span> iteration</p>
                         <p># of outer loop</p>
                         <p>n = <span id="n-value" class="num"> </span></p>
                         <p>i = <span id="i-value" class="num lines"></span></p>
@@ -308,6 +316,7 @@
     const isGreaterThan = document.getElementById('is-greater-than');
     const doSwap = document.getElementById("do-swap");
     const lines = document.querySelectorAll(".lines");
+    const loopTimes = document.querySelectorAll('.loop-time');
 
     const arrow1 = document.getElementById("arrow-1");
     const arrow2 = document.getElementById("arrow-2");
@@ -321,13 +330,24 @@
         element.textContent = "";
     }
 
+    function resetLines() {
+        lines.forEach(reset);
+        loopTimes.forEach((loopTime) => {
+            loopTime.innerHTML = '&nbsp';
+        });
+    }
+
     function hide(element) {
         element.style.visibility = "hidden";
     }
 
-    function resetAndHide() {
-        lines.forEach(reset);
+    function resetAndHide(clearEverything = null) {
+        resetLines();
         hideAllArrows();
+        if (clearEverything) {
+            reset(nValue);
+            reset(arrValue);
+        }
     }
 
     function hideAllArrows() {
@@ -344,6 +364,7 @@
     }
 
     function bubbleSortAnimation() {
+        playBtn.disabled = true;
         const steps = [
             // First step
             () => showArrow(arrow1),
@@ -420,13 +441,20 @@
             () => doSwap.textContent = "Yes",
             () => arrValue.textContent = "[3, 4, 8]",
             () => hideAllArrows(),
+
+            // Run complete multiple times so it remains longer
             () => playBtn.textContent = "Complete!",
+            () => playBtn.textContent = "Complete!",
+
+            () => playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again',
+            () => playBtn.disabled = false
         ];
 
         steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
     }
 
     playBtn.addEventListener('click', () => {
+        resetAndHide(true);
         playBtn.textContent = "Playing...";
         bubbleSortAnimation();
     });
