@@ -29,7 +29,7 @@
 
         #code-animation {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             margin-top:50px;
         }
 
@@ -49,10 +49,10 @@
             padding: 1em;
             border-radius: 13px;
             line-height: 0.05;
-            width: 400px;
+            width: 480px;
         }
 
-        .loop-time {
+        .loop-time, .boolean {
             color: #FF7B72;
         }
 
@@ -60,9 +60,9 @@
             color:#79C0FF;
         }
 
-        #pseudocode-animate {
+        #pseudocode-animate, #variable-changes {
             padding-top:50px;
-            padding-left:20px;
+            padding-left:30px;
         }
 
         .arrows {
@@ -195,8 +195,6 @@
                 
                 <p>Here's an animation of the code, step-by-step, so you can see the changes in the variables and array in real time. </p>
 
-                <p>On the left is the pseudocode, and on the right is the variables, which you can watch change as each line on the left runs.</p>
-
                 <p class="italic">Press play to start.</p>
 
                 <div class="center-button">
@@ -219,37 +217,38 @@
                             </span>
                         </p>
                         <p>
-                            <span class="code-keyword">for</span> i = 1 to n:
+                            <span class="code-keyword">for</span> i = <span class="num">1</span> to n:
                             <span id="arrow-3" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
                         </p>
 
                         <p class="indent-one">
-                            <span class="code-keyword">for</span> j = 1 to n-i:
+                            <span class="code-keyword">for</span> j = <span class='num'>1</span> to n-i:
                             <span id="arrow-4" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
                         </p>
 
                         <p class="indent-two">
-                            <span class="code-keyword">if</span> A[j] > A[j+1]:
+                            <span class="code-keyword">if</span> A[j] > A[j+<span class="num">1</span>]:
                             <span id="arrow-5" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
                         </p>
 
-                        <p class="indent-three">swap(A[j], A[j+1])
+                        <p class="indent-three">swap(A[j], A[j+<span class="num">1</span>])
                             <span id="arrow-6" class="arrows">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </span>
                         </p>   
                     </div>
 
-                    <div class="manual-code-block">
-                        <p># <span id="outer-loop-time" class="loop-time lines"> </span> iteration of outer loop</p>
+                    <div id="variable-changes" class="manual-code-block">
                         <p># <span id="inner-loop-time" class="loop-time lines"> </span> iteration of inner loop</p>
+                        <p># inside <span id="outer-loop-time" class="loop-time lines"> </span> iteration</p>
+                        <p># of outer loop</p>
                         <p>n = <span id="n-value" class="num"> </span></p>
                         <p>i = <span id="i-value" class="num lines"></span></p>
                         <p>j = <span id="j-value-1" class="num lines"></span></p>
                         <p>A[j] = A[<span id="j-value-2" class="num lines"></span>] = <span id="a-j-value" class="num lines"></span></p>
                         <p>A[j + 1] = A[<span id="j-plus-one" class="num lines"></span>] = <span id="a-j-plus-one" class="num lines"></span></p>
-                        <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines"></span></p>
-                        <p>Swap: <span id="do-swap" class="lines"></span></p>
+                        <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
+                        <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
                         <p>arr = <span id="arr-value" class="num"></span></p>
                     </div>
                 </div>
@@ -344,16 +343,14 @@
         showArrow(numberArrow);
     }
 
-    // Make description of outer loop/inner loop iterations clearer
-
     function bubbleSortAnimation() {
         const steps = [
             // First step
             () => showArrow(arrow1),
 
             () => arrValue.textContent = "[4, 8, 3]",
-            () => outerLoopTime.textContent = "First",
             () => innerLoopTime.textContent = "First",
+            () => outerLoopTime.textContent = "first",
 
             () => hideAndShow(arrow2),
             () => nValue.textContent = "3",
@@ -378,8 +375,8 @@
 
             () => resetAndHide(),
 
-            () => outerLoopTime.textContent = "First",
             () => innerLoopTime.textContent = "Second",
+            () => outerLoopTime.textContent = "first",
 
 
             () => showArrow(arrow3),
@@ -403,8 +400,8 @@
 
             () => resetAndHide(),
 
-            () => outerLoopTime.textContent = "Second",
             () => innerLoopTime.textContent = "First",
+            () => outerLoopTime.textContent = "second",
 
             () => showArrow(arrow3),
             () => iValue.textContent = "2",
