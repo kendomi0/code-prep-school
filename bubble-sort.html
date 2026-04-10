@@ -26,6 +26,49 @@
         .one-based-btn {
             background-color: #0860b3;
         }
+
+        #code-animation {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top:50px;
+        }
+
+        #play-btn {
+            width: inherit;
+            padding: 10px 30px 10px 30px;
+            font-size:21px;
+            border-radius: 25px;
+            background-color: #0860b3;
+        }
+
+        .manual-code-block {
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+            font-size: 18px;
+            padding: 1em;
+            border-radius: 13px;
+            line-height: 0.05;
+            width: 400px;
+        }
+
+        .loop-time {
+            color: #FF7B72;
+        }
+
+        .num {
+            color:#79C0FF;
+        }
+
+        #pseudocode-animate {
+            padding-top:50px;
+            padding-left:20px;
+        }
+
+        .arrows {
+            visibility: hidden;
+        }
+
     </style>
 </head>
 <body>
@@ -149,6 +192,67 @@
                 </pre>
 
                 <p>Some pseudocodes include the wasted iteration, while some don't. But seeing it written both ways, you can understand why it stops at one before <span class="inline-code">n</span> -- it's because the last iteration is functionally useless. </p>
+                
+                <p>Here's an animation of the code, step-by-step, so you can see the changes in the variables and array in real time. </p>
+
+                <p>On the left is the pseudocode, and on the right is the variables, which you can watch change as each line on the left runs.</p>
+
+                <p class="italic">Press play to start.</p>
+
+                <div class="center-button">
+                    <button id="play-btn"><i class="fa-solid fa-play"></i> Play</button>
+                </div>
+
+                <div id="code-animation">
+
+                    <div id="pseudocode-animate" class="manual-code-block">
+                        <p>
+                            arr = [4, 8, 3]
+                            <span id="arrow-1" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>
+                        <p>
+                            n = length(arr)
+                            <span id="arrow-2" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="code-keyword">for</span> i = 1 to n:
+                            <span id="arrow-3" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-one">
+                            <span class="code-keyword">for</span> j = 1 to n-i:
+                            <span id="arrow-4" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-two">
+                            <span class="code-keyword">if</span> A[j] > A[j+1]:
+                            <span id="arrow-5" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-three">swap(A[j], A[j+1])
+                            <span id="arrow-6" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>   
+                    </div>
+
+                    <div class="manual-code-block">
+                        <p># <span id="outer-loop-time" class="loop-time lines"> </span> iteration of outer loop</p>
+                        <p># <span id="inner-loop-time" class="loop-time lines"> </span> iteration of inner loop</p>
+                        <p>n = <span id="n-value" class="num"> </span></p>
+                        <p>i = <span id="i-value" class="num lines"></span></p>
+                        <p>j = <span id="j-value-1" class="num lines"></span></p>
+                        <p>A[j] = A[<span id="j-value-2" class="num lines"></span>] = <span id="a-j-value" class="num lines"></span></p>
+                        <p>A[j + 1] = A[<span id="j-plus-one" class="num lines"></span>] = <span id="a-j-plus-one" class="num lines"></span></p>
+                        <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines"></span></p>
+                        <p>Swap: <span id="do-swap" class="lines"></span></p>
+                        <p>arr = <span id="arr-value" class="num"></span></p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -156,19 +260,19 @@
         Github site by kendomi0
     </footer>
 <script>
-  hljs.highlightAll();
+    hljs.highlightAll();
 
-  const oneBasedIndexCode = document.getElementById("one-based-index-code");
-  const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
-  const indexBase = document.getElementById("index-base");
-  const zeroBasedBtn = document.querySelector(".zero-based-btn");
-  const oneBasedBtn = document.querySelector(".one-based-btn");
+    const oneBasedIndexCode = document.getElementById("one-based-index-code");
+    const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
+    const indexBase = document.getElementById("index-base");
+    const zeroBasedBtn = document.querySelector(".zero-based-btn");
+    const oneBasedBtn = document.querySelector(".one-based-btn");
 
-  zeroBasedIndexCode.style.display = "none";
+    zeroBasedIndexCode.style.display = "none";
 
-  const indexingToggle = document.getElementById("indexing-toggle");
+    const indexingToggle = document.getElementById("indexing-toggle");
 
-  indexingToggle.addEventListener("click", function() {
+    indexingToggle.addEventListener("click", function() {
     if (zeroBasedIndexCode.style.display === "none") {
         zeroBasedIndexCode.style.display = "block";
         oneBasedIndexCode.style.display = "none";
@@ -187,8 +291,148 @@
 
         indexBase.textContent = "0";
     }
-  });
+    });
 
+    // Bubble sort animation
+
+    const outerLoopTime = document.getElementById("outer-loop-time");
+    const innerLoopTime = document.getElementById("inner-loop-time");
+    const nValue = document.getElementById("n-value");
+    const iValue = document.getElementById("i-value");
+    const playBtn = document.getElementById("play-btn");
+    const jValue1 = document.getElementById("j-value-1");
+    const jValue2 = document.getElementById("j-value-2");
+    const jPlusOne = document.getElementById("j-plus-one");
+    const arrValue = document.getElementById("arr-value");
+    const ajValue = document.getElementById("a-j-value");
+    const ajPlusOne = document.getElementById("a-j-plus-one");
+    const isGreaterThan = document.getElementById('is-greater-than');
+    const doSwap = document.getElementById("do-swap");
+    const lines = document.querySelectorAll(".lines");
+
+    const arrow1 = document.getElementById("arrow-1");
+    const arrow2 = document.getElementById("arrow-2");
+    const arrow3 = document.getElementById("arrow-3");
+    const arrow4 = document.getElementById("arrow-4");
+    const arrow5 = document.getElementById("arrow-5");
+    const arrow6 = document.getElementById("arrow-6");
+    const arrows = document.querySelectorAll('.arrows');
+
+    function reset(element) {
+        element.textContent = "";
+    }
+
+    function hide(element) {
+        element.style.visibility = "hidden";
+    }
+
+    function resetAndHide() {
+        lines.forEach(reset);
+        hideAllArrows();
+    }
+
+    function hideAllArrows() {
+        arrows.forEach(hide);
+    }
+
+    function showArrow(numberArrow) {
+        numberArrow.style.visibility = "visible";
+    }
+
+    function hideAndShow(numberArrow) {
+        hideAllArrows();
+        showArrow(numberArrow);
+    }
+
+    // Make description of outer loop/inner loop iterations clearer
+
+    function bubbleSortAnimation() {
+        const steps = [
+            // First step
+            () => showArrow(arrow1),
+
+            () => arrValue.textContent = "[4, 8, 3]",
+            () => outerLoopTime.textContent = "First",
+            () => innerLoopTime.textContent = "First",
+
+            () => hideAndShow(arrow2),
+            () => nValue.textContent = "3",
+
+            () => hideAndShow(arrow3),
+            () => iValue.textContent = "1",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "1",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "1",
+            () => ajValue.textContent = "4",
+            () => jPlusOne.textContent = "2",
+            () => ajPlusOne.textContent = "8",
+            () => isGreaterThan.textContent = "No",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "No",
+
+            // Second step
+
+            () => resetAndHide(),
+
+            () => outerLoopTime.textContent = "First",
+            () => innerLoopTime.textContent = "Second",
+
+
+            () => showArrow(arrow3),
+            () => iValue.textContent = "1",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "2",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "2",
+            () => ajValue.textContent = "8",
+            () => jPlusOne.textContent = "3",
+            () => ajPlusOne.textContent = "3",
+            () => isGreaterThan.textContent = "Yes",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "Yes",
+            () => arrValue.textContent = "[4, 3, 8]",
+
+            // Third step
+
+            () => resetAndHide(),
+
+            () => outerLoopTime.textContent = "Second",
+            () => innerLoopTime.textContent = "First",
+
+            () => showArrow(arrow3),
+            () => iValue.textContent = "2",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "1",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "1",
+            () => ajValue.textContent = "4",
+            () => jPlusOne.textContent = "2",
+            () => ajPlusOne.textContent = "3",
+            () => isGreaterThan.textContent = "Yes",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "Yes",
+            () => arrValue.textContent = "[3, 4, 8]",
+            () => hideAllArrows(),
+            () => playBtn.textContent = "Complete!",
+        ];
+
+        steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
+    }
+
+    playBtn.addEventListener('click', () => {
+        playBtn.textContent = "Playing...";
+        bubbleSortAnimation();
+    });
 
 </script>
 </body>
