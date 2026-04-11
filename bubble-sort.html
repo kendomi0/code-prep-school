@@ -76,6 +76,14 @@
             visibility: hidden;
         }
 
+        .swapped {
+            color: #FFFAA8;
+        }
+
+        .index {
+            min-width:55px;
+        }
+
     </style>
 </head>
 <body>
@@ -254,8 +262,9 @@
                         <p>n = <span id="n-value" class="num"> </span></p>
                         <p>i = <span id="i-value" class="num lines"></span></p>
                         <p>j = <span id="j-value-1" class="num lines"></span></p>
-                        <p>A[j] = A[<span id="j-value-2" class="num lines"></span>] = <span id="a-j-value" class="num lines"></span></p>
-                        <p>A[j + 1] = A[<span id="j-plus-one" class="num lines"></span>] = <span id="a-j-plus-one" class="num lines"></span></p>
+                        <p>n - i = <span id="n-minus-i" class="num lines"></span></p>
+                        <p>A[j] = A[<span id="j-value-2" class="num lines index">&nbsp;</span>] = <span id="a-j-value" class="num lines"></span></p>
+                        <p>A[j + 1] = A[<span id="j-plus-one" class="num lines index">&nbsp;</span>] = <span id="a-j-plus-one" class="num lines"></span></p>
                         <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
                         <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
                         <p>A = <span id="arr-value" class="num"></span></p>
@@ -328,6 +337,8 @@
     const doSwap = document.getElementById("do-swap");
     const lines = document.querySelectorAll(".lines");
     const loopTimes = document.querySelectorAll('.loop-time');
+    let nMinusI = document.getElementById('n-minus-i');
+    let indices = document.querySelectorAll('.index');
 
     const arrow1 = document.getElementById("arrow-1");
     const arrow2 = document.getElementById("arrow-2");
@@ -343,8 +354,13 @@
 
     function resetLines() {
         lines.forEach(reset);
+
         loopTimes.forEach((loopTime) => {
-            loopTime.innerHTML = '&nbsp';
+            loopTime.innerHTML = '&nbsp;';
+        });
+
+        indices.forEach((index) => {
+            index.innerHTML = '&nbsp;';
         });
     }
 
@@ -392,6 +408,7 @@
 
             () => hideAndShow(arrow4),
             () => jValue1.textContent = "1",
+            () => nMinusI.textContent = "2",
 
             () => hideAndShow(arrow5),
             () => jValue2.textContent = "1",
@@ -405,14 +422,14 @@
 
             // Second step
 
-            () => resetAndHide(),
+            () => {
+                resetAndHide(),
+                iValue.textContent = "1";
+                nMinusI.textContent = "2";
+                outerLoopTime.textContent = "first";
+            },
 
             () => innerLoopTime.textContent = "Second",
-            () => outerLoopTime.textContent = "first",
-
-
-            () => showArrow(arrow3),
-            () => iValue.textContent = "1",
 
             () => hideAndShow(arrow4),
             () => jValue1.textContent = "2",
@@ -426,11 +443,14 @@
 
             () => hideAndShow(arrow6),
             () => doSwap.textContent = "Yes",
-            () => arrValue.textContent = "[4, 3, 8]",
+            () => arrValue.innerHTML = "[4, <span class='swapped'>3, 8</span>]",
 
             // Third step
 
-            () => resetAndHide(),
+            () => {
+                resetAndHide();
+                arrValue.innerHTML = "[4, 3, 8]";
+            },
 
             () => innerLoopTime.textContent = "First",
             () => outerLoopTime.textContent = "second",
@@ -440,6 +460,7 @@
 
             () => hideAndShow(arrow4),
             () => jValue1.textContent = "1",
+            () => nMinusI.textContent = "1",
 
             () => hideAndShow(arrow5),
             () => jValue2.textContent = "1",
@@ -450,15 +471,18 @@
 
             () => hideAndShow(arrow6),
             () => doSwap.textContent = "Yes",
-            () => arrValue.textContent = "[3, 4, 8]",
-            () => hideAllArrows(),
+            () => arrValue.innerHTML = "[<span class='swapped'>3, 4,</span> 8]",
 
-            // Run complete multiple times so it remains longer
-            () => playBtn.textContent = "Complete!",
-            () => playBtn.textContent = "Complete!",
+            () => {
+                arrValue.innerHTML = "[3, 4, 8]";
+                hideAllArrows();
+                playBtn.textContent = "Complete!"
+            },
 
-            () => playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again',
-            () => playBtn.disabled = false
+            () => {
+                playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again';
+                playBtn.disabled = false
+            },
         ];
 
         steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
