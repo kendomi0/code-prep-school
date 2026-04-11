@@ -63,6 +63,10 @@ button {
     border: 2px solid #C5BDDE;
 }
 
+button:hover {
+    cursor:pointer;
+}
+
 a {
     text-decoration: none;
 }
@@ -213,4 +217,34 @@ math {
 
 .page-body a:hover {
     color: #F0F0FF !important;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.indent-one {
+    padding-left:2.5ch;
+}
+
+.indent-two {
+    padding-left:5ch;
+}
+
+.indent-three {
+    padding-left: 7.5ch;
+}
+
+.code-keyword {
+    color:#FF7B72;
+}
+
+.center-text {
+    text-align:center;
 }

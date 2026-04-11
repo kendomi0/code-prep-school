@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/b3ffa80bf4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+    <style>
+        #indexing-toggle {
+            width:inherit;
+            padding:12px;
+            border-radius:25px;
+        }
+
+        .zero-based-btn {
+            background-color: #b6332a;
+        }
+        
+        .one-based-btn {
+            background-color: #0860b3;
+        }
+
+        #code-animation {
+            display: flex;
+            justify-content: space-between;
+            margin-top:50px;
+            margin-bottom:30px;
+        }
+
+        #play-btn {
+            width: inherit;
+            padding: 10px 30px 10px 30px;
+            font-size:21px;
+            border-radius: 25px;
+            background-color: #0860b3;
+        }
+
+        .manual-code-block {
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+            font-size: 18px;
+            padding: 1em;
+            border-radius: 13px;
+            line-height: 0.05;
+            width: 480px;
+        }
+
+        .loop-time {
+            color: #FF7B72;
+            display: inline-block;
+            min-width:60px;
+        }
+
+        .boolean {
+            color: #FF7B72;
+        }
+
+        .num {
+            color:#79C0FF;
+        }
+
+        #pseudocode-animate, #variable-changes {
+            padding-top:50px;
+            padding-left:30px;
+        }
+
+        .arrows {
+            visibility: hidden;
+        }
+
+        .swapped {
+            color: #FFFAA8;
+        }
+
+        .index {
+            min-width:55px;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="app-header"></header>
+    <script src="header.js"></script>
+    <main>
+        <div class="content-container">
+            <div class="page-title">
+                Bubble Sort
+            </div>
+
+            <div class="page-body">
+
+                <p>Let's look at the <span class="emphasis">bubble sort</span> algorithm, which goes through the array, looks at pairs of elements, compares the individuals in the pairs, and swaps them if necessary, until all the elements in the array have been sorted.</p>
+
+                <p>The algorithm is named for how the elements 'bubble' to the end through sorting.</p>
+
+                <p>Take a look at this pseudocode for bubble sort, which uses <span class="inline-code">1</span>-based indexing. If you'd like to see the pseudocode with <span class="inline-code">0</span>-based indexing instead, use the toggle.</p>
+
+                <div class="center-button">
+                    <button id="indexing-toggle" class="one-based-btn">Switch to <span id="index-base">0</span>-based indexing</button>
+                </div>
+
+                <div id="one-based-index-code">
+                    <pre>
+                        <code class="language-python">
+    # Assume A is an array of numbers
+    n = length(A)
+    for i = 1 to n:
+        for j = 1 to n-i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                        </code>
+                    </pre>
+                </div>
+
+                <div id="zero-based-index-code">
+                    <pre>
+                        <code class="language-python">
+    # Assume A is an array of numbers
+    n = length(A)
+    for i = 0 to n - 1:
+        for j = 0 to n - 1 - i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                        </code>
+                    </pre>
+                </div>
+
+                <p>The Python implementation of this, with 0-based indexing, would be: </p>
+
+                <pre>
+                    <code class="language-python">
+    # Assume arr is an array of numbers
+    n = len(A)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if A[j] > A[j+1]:
+                A[j], A[j+1] = A[j+1], A[j]
+                    </code>
+                </pre>
+                <p>Let's return to the pseudocode version, with 1-based indexing. Let's go through the first iteration of the inner loop, with the array of <span class="inline-code">[4, 8, 3]</span>.</p>
+
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 1
+        for j = 1 to n - i: # j = 1
+            if A[j] > A[j+1]: # A[j] = 4, A[j+1] = 8
+                swap(A[j], A[j+1]) # 4 is not greater than 8, so no swap
+                    </code>
+            </pre>
+
+                <p>The array remains unchanged: <span class="inline-code">[4, 8, 3]</span>.</p>
+
+                <p>Now let's look at the second iteration of the inner loop.</p>
+
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 1
+        for j = 1 to n - i: # j = 2
+            if A[j] > A[j+1]: # A[j] = A[2] = 8, A[j+1] = A[3] = 3
+                swap(A[j], A[j+1]) # 8 is greater than 3, so swap
+                    </code>
+                </pre>
+
+                <p>Now the array reads: <span class="inline-code">[4, 3, 8]</span>.</p>
+
+                <p>The inner loop stops one before the end, because there are no more elements that need to be compared. Now we move on to the second iteration of the outer loop, which begins the second set of iterations of the inner loop.</p>
+
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 2
+        for j = 1 to n - i: # j = 1, n - i = 1
+            if A[j] > A[j+1]: # A[j] = A[1] = 4, A[j+1] = A[2] = 3
+                swap(A[j], A[j+1]) # 4 is greater than 3, so swap
+                    </code>
+                </pre>
+
+                <p>Now the array reads: <span class="inline-code">[3, 4, 8].</span></p>
+
+                <p>The next iteration of the inner loop does not run. This is because the next iteration would be for j = 2 to 1, which is not possible (empty range), so it terminates.</p>
+
+                <p>Then the outer loop would begin again, with i = 3. But note where the issue would be:</p>
+
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n: # i = 3
+        for j = 1 to n - i: # j = 1, n - i = 0
+                    </code>
+                </pre>
+
+                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run. This is because the endpoint of the loop will always be 0, so the start point would be greater than the endpoint, resulting in an empty range. So the final iteration of the outer loop is wasted.</p>
+
+                <p>Therefore, the code is functionally equivalent to:</p>
+
+                <pre>
+                    <code class="language-python">
+    for i = 1 to n - 1:
+        for j = 1 to n - i:
+            if A[j] > A[j+1]:
+                swap(A[j], A[j+1])
+                    </code>
+                </pre>
+
+                <p>Some pseudocodes include the wasted iteration, while some don't. But seeing it written both ways, you can understand why it stops at one before <span class="inline-code">n</span> -- it's because the last iteration is functionally useless. </p>
+                
+                <p>Here's an animation of the code, step-by-step, so you can see the changes in the variables and array in real time. </p>
+
+                <p class="italic center-text">Press play to start.</p>
+
+                <div class="center-button">
+                    <button id="play-btn"><i class="fa-solid fa-play"></i> Play</button>
+                </div>
+
+                <div id="code-animation">
+
+                    <div id="pseudocode-animate" class="manual-code-block">
+                        <p>
+                            A = [4, 8, 3]
+                            <span id="arrow-1" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>
+                        <p>
+                            n = length(A)
+                            <span id="arrow-2" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="code-keyword">for</span> i = <span class="num">1</span> to n:
+                            <span id="arrow-3" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-one">
+                            <span class="code-keyword">for</span> j = <span class='num'>1</span> to n-i:
+                            <span id="arrow-4" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-two">
+                            <span class="code-keyword">if</span> A[j] > A[j+<span class="num">1</span>]:
+                            <span id="arrow-5" class="arrows"><i class="fa-solid fa-arrow-left"></i></span>
+                        </p>
+
+                        <p class="indent-three">swap(A[j], A[j+<span class="num">1</span>])
+                            <span id="arrow-6" class="arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </span>
+                        </p>   
+                    </div>
+
+                    <div id="variable-changes" class="manual-code-block">
+                        <p># <span id="inner-loop-time" class="loop-time lines">&nbsp;</span> iteration of inner loop</p>
+                        <p># inside <span id="outer-loop-time" class="loop-time lines">&nbsp;</span> iteration</p>
+                        <p># of outer loop</p>
+                        <p>n = <span id="n-value" class="num"> </span></p>
+                        <p>i = <span id="i-value" class="num lines"></span></p>
+                        <p>j = <span id="j-value-1" class="num lines"></span></p>
+                        <p>n - i = <span id="n-minus-i" class="num lines"></span></p>
+                        <p>A[j] = A[<span id="j-value-2" class="num lines index">&nbsp;</span>] = <span id="a-j-value" class="num lines"></span></p>
+                        <p>A[j + 1] = A[<span id="j-plus-one" class="num lines index">&nbsp;</span>] = <span id="a-j-plus-one" class="num lines"></span></p>
+                        <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
+                        <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
+                        <p>A = <span id="arr-value" class="num"></span></p>
+                    </div>
+                </div>
+
+                <p>Now, let's discuss bubble sort's <span class="emphasis">time complexity</span>.</p>
+
+                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times. There would be a linear time complexity of O(n) for each individual loop, so we multiply O(n) for inner by O(n) for outer.</p> 
+
+                <p>In the average case, the inner loop and outer loop would, on average, run proportionally &#920;(n) times, so we would again multiply &#920;(n) for inner by &#920;(n) for outer.</p>
+
+                <p>In a best-case scenario, all the elements are sorted and we are using an optimized version of the algorithm that uses a flag to terminate the loop when necessary and does not include the wasted outer loop iteration.</p>
+
+                <p>Example of optimized version:</p>
+
+                <pre>
+                    <code class="language-python">
+    # Assume A is an array of numbers
+    n = length(A)
+    for i = 1 to n - 1:
+        swapped = False
+        for j = 1 to n-i:
+            if A[j] > A[j+1]:
+                swapped = True
+                swap(A[j], A[j+1])
+        if not swapped:
+            break
+                    </code>
+                </pre>
+
+                <p>The outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop (linear).</p>
+
+        
+                <p>This means that the best-case time complexity is <span class="inline-code">&#937;(n)</span>, the average-case time complexity is <span class="inline-code">&#920;(n&sup2;)</span>, and the worst-case time complexity is <span class="inline-code">O(n&sup2;)</span>. The general time complexity for the algorithm is <span class="inline-code">O(n&sup2;)</span>.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        Github site by kendomi0
+    </footer>
+<script>
+    hljs.highlightAll();
+
+    const oneBasedIndexCode = document.getElementById("one-based-index-code");
+    const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
+    const indexBase = document.getElementById("index-base");
+    const zeroBasedBtn = document.querySelector(".zero-based-btn");
+    const oneBasedBtn = document.querySelector(".one-based-btn");
+
+    zeroBasedIndexCode.style.display = "none";
+
+    const indexingToggle = document.getElementById("indexing-toggle");
+
+    indexingToggle.addEventListener("click", function() {
+    if (zeroBasedIndexCode.style.display === "none") {
+        zeroBasedIndexCode.style.display = "block";
+        oneBasedIndexCode.style.display = "none";
+
+        indexingToggle.classList.remove("one-based-btn");
+        indexingToggle.classList.add("zero-based-btn");
+
+        indexBase.textContent = "1";
+    }
+    else {
+        zeroBasedIndexCode.style.display = "none";
+        oneBasedIndexCode.style.display = "block";
+
+        indexingToggle.classList.remove("zero-based-btn");
+        indexingToggle.classList.add("one-based-btn");
+
+        indexBase.textContent = "0";
+    }
+    });
+
+    // Bubble sort animation
+
+    const outerLoopTime = document.getElementById("outer-loop-time");
+    const innerLoopTime = document.getElementById("inner-loop-time");
+    const nValue = document.getElementById("n-value");
+    const iValue = document.getElementById("i-value");
+    const playBtn = document.getElementById("play-btn");
+    const jValue1 = document.getElementById("j-value-1");
+    const jValue2 = document.getElementById("j-value-2");
+    const jPlusOne = document.getElementById("j-plus-one");
+    const arrValue = document.getElementById("arr-value");
+    const ajValue = document.getElementById("a-j-value");
+    const ajPlusOne = document.getElementById("a-j-plus-one");
+    const isGreaterThan = document.getElementById('is-greater-than');
+    const doSwap = document.getElementById("do-swap");
+    const lines = document.querySelectorAll(".lines");
+    const loopTimes = document.querySelectorAll('.loop-time');
+    let nMinusI = document.getElementById('n-minus-i');
+    let indices = document.querySelectorAll('.index');
+
+    const arrow1 = document.getElementById("arrow-1");
+    const arrow2 = document.getElementById("arrow-2");
+    const arrow3 = document.getElementById("arrow-3");
+    const arrow4 = document.getElementById("arrow-4");
+    const arrow5 = document.getElementById("arrow-5");
+    const arrow6 = document.getElementById("arrow-6");
+    const arrows = document.querySelectorAll('.arrows');
+
+    function reset(element) {
+        element.textContent = "";
+    }
+
+    function resetLines() {
+        lines.forEach(reset);
+
+        loopTimes.forEach((loopTime) => {
+            loopTime.innerHTML = '&nbsp;';
+        });
+
+        indices.forEach((index) => {
+            index.innerHTML = '&nbsp;';
+        });
+    }
+
+    function hide(element) {
+        element.style.visibility = "hidden";
+    }
+
+    function resetAndHide(clearEverything = null) {
+        resetLines();
+        hideAllArrows();
+        if (clearEverything) {
+            reset(nValue);
+            reset(arrValue);
+        }
+    }
+
+    function hideAllArrows() {
+        arrows.forEach(hide);
+    }
+
+    function showArrow(numberArrow) {
+        numberArrow.style.visibility = "visible";
+    }
+
+    function hideAndShow(numberArrow) {
+        hideAllArrows();
+        showArrow(numberArrow);
+    }
+
+    function bubbleSortAnimation() {
+        playBtn.disabled = true;
+        const steps = [
+            // First step
+            () => showArrow(arrow1),
+
+            () => arrValue.textContent = "[4, 8, 3]",
+            () => innerLoopTime.textContent = "First",
+            () => outerLoopTime.textContent = "first",
+
+            () => hideAndShow(arrow2),
+            () => nValue.textContent = "3",
+
+            () => hideAndShow(arrow3),
+            () => iValue.textContent = "1",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "1",
+            () => nMinusI.textContent = "2",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "1",
+            () => ajValue.textContent = "4",
+            () => jPlusOne.textContent = "2",
+            () => ajPlusOne.textContent = "8",
+            () => isGreaterThan.textContent = "No",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "No",
+
+            // Second step
+
+            () => {
+                resetAndHide(),
+                iValue.textContent = "1";
+                nMinusI.textContent = "2";
+                outerLoopTime.textContent = "first";
+            },
+
+            () => innerLoopTime.textContent = "Second",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "2",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "2",
+            () => ajValue.textContent = "8",
+            () => jPlusOne.textContent = "3",
+            () => ajPlusOne.textContent = "3",
+            () => isGreaterThan.textContent = "Yes",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "Yes",
+            () => arrValue.innerHTML = "[4, <span class='swapped'>3, 8</span>]",
+
+            // Third step
+
+            () => {
+                resetAndHide();
+                arrValue.innerHTML = "[4, 3, 8]";
+            },
+
+            () => innerLoopTime.textContent = "First",
+            () => outerLoopTime.textContent = "second",
+
+            () => showArrow(arrow3),
+            () => iValue.textContent = "2",
+
+            () => hideAndShow(arrow4),
+            () => jValue1.textContent = "1",
+            () => nMinusI.textContent = "1",
+
+            () => hideAndShow(arrow5),
+            () => jValue2.textContent = "1",
+            () => ajValue.textContent = "4",
+            () => jPlusOne.textContent = "2",
+            () => ajPlusOne.textContent = "3",
+            () => isGreaterThan.textContent = "Yes",
+
+            () => hideAndShow(arrow6),
+            () => doSwap.textContent = "Yes",
+            () => arrValue.innerHTML = "[<span class='swapped'>3, 4,</span> 8]",
+
+            () => {
+                arrValue.innerHTML = "[3, 4, 8]";
+                hideAllArrows();
+                playBtn.textContent = "Complete!"
+            },
+
+            () => {
+                playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again';
+                playBtn.disabled = false
+            },
+        ];
+
+        steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
+    }
+
+    playBtn.addEventListener('click', () => {
+        resetAndHide(true);
+        playBtn.textContent = "Playing...";
+        bubbleSortAnimation();
+    });
+
+</script>
+</body>
+</html>
