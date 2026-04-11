@@ -277,7 +277,27 @@
 
                 <p>In the average case, the inner loop and outer loop would, on average, run proportionally &#920;(n) times, so we would again multiply &#920;(n) for inner by &#920;(n) for outer.</p>
 
-                <p>In a best-case scenario, where all the elements are sorted and we are using an optimized version of the algorithm that uses a flag (a variable like <span class="inline-code">swapped</span> that would hold a boolean) to terminate the loop, the outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop (linear).</p>
+                <p>In a best-case scenario, all the elements are sorted and we are using an optimized version of the algorithm that uses a flag to terminate the loop when necessary and does not include the wasted outer loop iteration.</p>
+
+                <p>Example of optimized version:</p>
+
+                <pre>
+                    <code class="language-python">
+    # Assume A is an array of numbers
+    n = length(A)
+    for i = 1 to n - 1:
+        swapped = False
+        for j = 1 to n-i:
+            if A[j] > A[j+1]:
+                swapped = True
+                swap(A[j], A[j+1])
+        if not swapped:
+            break
+                    </code>
+                </pre>
+
+                <p>The outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop (linear).</p>
+
         
                 <p>This means that the best-case time complexity is <span class="inline-code">&#937;(n)</span>, the average-case time complexity is <span class="inline-code">&#920;(n&sup2;)</span>, and the worst-case time complexity is <span class="inline-code">O(n&sup2;)</span>. The general time complexity for the algorithm is <span class="inline-code">O(n&sup2;)</span>.</p>
             </div>
