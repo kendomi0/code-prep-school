@@ -93,7 +93,7 @@
 
                 <p>The algorithm is named for how the elements 'bubble' to the end through sorting.</p>
 
-                <p>Take a look at this pseudocode for bubble sort, which uses 1-based indexing. If you'd like to see the pseudocode with 0-based indexing instead, use the toggle.</p>
+                <p>Take a look at this pseudocode for bubble sort, which uses <span class="inline-code">1</span>-based indexing. If you'd like to see the pseudocode with <span class="inline-code">0</span>-based indexing instead, use the toggle.</p>
 
                 <div class="center-button">
                     <button id="indexing-toggle" class="one-based-btn">Switch to <span id="index-base">0</span>-based indexing</button>
@@ -176,7 +176,7 @@
 
                 <p>Now the array reads: <span class="inline-code">[3, 4, 8].</span></p>
 
-                <p>The next iteration of the inner loop does not run. This is because the next iteration would be for j = 2 to 1, which is not possible, so it terminates.</p>
+                <p>The next iteration of the inner loop does not run. This is because the next iteration would be for j = 2 to 1, which is not possible (empty range), so it terminates.</p>
 
                 <p>Then the outer loop would begin again, with i = 3. But note where the issue would be:</p>
 
@@ -187,7 +187,7 @@
                     </code>
                 </pre>
 
-                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run, because the endpoint of the loop will always be 0, so the start point would be greater than the endpoint, resulting in an empty range (in this 1-based indexing). So the final iteration of the outer loop is wasted.</p>
+                <p>In this final iteration of the outer loop, regardless of <span class="inline-code">j</span>'s value, the inner loop does not run. This is because the endpoint of the loop will always be 0, so the start point would be greater than the endpoint, resulting in an empty range. So the final iteration of the outer loop is wasted.</p>
 
                 <p>Therefore, the code is functionally equivalent to:</p>
 
@@ -204,7 +204,7 @@
                 
                 <p>Here's an animation of the code, step-by-step, so you can see the changes in the variables and array in real time. </p>
 
-                <p class="italic">Press play to start.</p>
+                <p class="italic center-text">Press play to start.</p>
 
                 <div class="center-button">
                     <button id="play-btn"><i class="fa-solid fa-play"></i> Play</button>
@@ -264,11 +264,11 @@
 
                 <p>Now, let's discuss bubble sort's <span class="emphasis">time complexity</span>.</p>
 
-                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times, so we multiply O(n) for inner by O(n) for outer.</p> 
+                <p>Bubble sort uses a <span class="emphasis">nested loop</span>. In a worst-case scenario, when the elements are in reverse order, the outer and inner loops run the maximum number of times. There would be a linear time complexity of O(n) for each individual loop, so we multiply O(n) for inner by O(n) for outer.</p> 
 
                 <p>In the average case, the inner loop and outer loop would, on average, run proportionally &#920;(n) times, so we would again multiply &#920;(n) for inner by &#920;(n) for outer.</p>
 
-                <p>In a best-case scenario, where all the elements are sorted and we are using an optimized version of the algorithm that uses a flag to terminate the loop, the outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop.</p>
+                <p>In a best-case scenario, where all the elements are sorted and we are using an optimized version of the algorithm that uses a flag (a variable like <span class="inline-code">swapped</span> that would hold a boolean) to terminate the loop, the outer loop would only need to run once, making its time complexity functionally equivalent to an algorithm with a single loop (linear).</p>
         
                 <p>This means that the best-case time complexity is <span class="inline-code">&#937;(n)</span>, the average-case time complexity is <span class="inline-code">&#920;(n&sup2;)</span>, and the worst-case time complexity is <span class="inline-code">O(n&sup2;)</span>. The general time complexity for the algorithm is <span class="inline-code">O(n&sup2;)</span>.</p>
             </div>

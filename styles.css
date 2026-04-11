@@ -244,3 +244,7 @@ math {
 .code-keyword {
     color:#FF7B72;
 }
+
+.center-text {
+    text-align:center;
+}
