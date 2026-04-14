@@ -134,15 +134,16 @@ const mobileDropdownTitles = document.querySelectorAll('.mobile-dropdown-title')
 const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-links');
 
-function resetDropdownLinks() {
+function resetDropdownLinks(index) {
     mobileNavLinks.forEach((mnl) => {
+        if (mnl == mobileNavLinks[index]) return;
         mnl.style.display = 'none';
     });
 }
 
 mobileDropdownTitles.forEach((title, index) => {
   title.addEventListener('click', () => {
-    resetDropdownLinks();
-    mobileNavLinks[index].style.display = 'none' ? 'block': 'none';
+    resetDropdownLinks(index);
+    mobileNavLinks[index].style.display = mobileNavLinks[index].style.display === 'block' ? 'none' : 'block';
   });
 });
