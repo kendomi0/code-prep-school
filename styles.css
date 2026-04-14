@@ -218,10 +218,6 @@ header {
     border-radius:0px 0px 6px 6px;
 }
 
-.mobile-dropdown:hover .mobile-nav-links {
-  display: block;
-}
-
 .mobile-odd-nav {
     border-radius: 6px 6px 0px 0px;
 }
@@ -234,10 +230,6 @@ header {
     color: #BCBCE3;
     padding: 10px 16px;
     display: block;
-}
-
-.mobile-nav-links a:hover {
-    background-color: #2A2A3D;
 }
 
 .mobile-dropdown-title {
@@ -264,11 +256,6 @@ header {
 #mobile-menu-icon {
     position: relative;
     cursor: pointer;
-}
-
-
-#mobile-menu-icon:hover #full-mobile-dropdown {
-    visibility: visible;
 }
 
 /* Page body */

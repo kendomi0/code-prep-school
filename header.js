@@ -59,17 +59,17 @@ let mobileHeader = `
     <nav class="mobile-nav">
 
     <div id="mobile-menu-icon">
-        <i class="fa-solid fa-bars fa-xl"></i>
+        <i id="hamburger-menu" class="fa-solid fa-bars fa-xl"></i>
 
          <div id="full-mobile-dropdown">
 
             <div class="mobile-dropdown">
-                <div class="mobile-dropdown-title mobile-odd-nav">
+                <div id="time-complexity-title" class="mobile-dropdown-title mobile-odd-nav">
                     Time Complexity
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
 
-                <div class="mobile-nav-links">
+                <div id="time-complexity-links" class="mobile-nav-links">
                     <a href="time-complexity-basics.html" class="mobile-nav-item">
                         Time Complexity Basics
                     </a>
@@ -94,12 +94,12 @@ let mobileHeader = `
 
             <div class="mobile-dropdown" id="dropdown-algorithms">
 
-                <div class="mobile-dropdown-title mobile-even-nav">
+                <div id="algorithm-title" class="mobile-dropdown-title mobile-even-nav">
                     Algorithms
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
 
-                <div class="mobile-nav-links">
+                <div id="algorithm-links" class="mobile-nav-links">
                     <a href="intro-to-algorithms.html" class="mobile-nav-item">
                         Intro to Algorithms
                     </a>
@@ -118,3 +118,32 @@ let mobileHeader = `
 `;
 
 document.getElementById("mobile-header").innerHTML = mobileHeader;
+
+// Open the dropdown by clicking menu icon
+
+const dropdown = document.getElementById('full-mobile-dropdown');
+
+document.getElementById('hamburger-menu').addEventListener('click', function(e) {
+    e.stopPropagation();
+  dropdown.style.visibility = dropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
+});
+
+// Open the subdropdowns
+
+const mobileDropdownTitles = document.querySelectorAll('.mobile-dropdown-title');
+const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-links');
+
+function resetDropdownLinks(index) {
+    mobileNavLinks.forEach((mnl) => {
+        if (mnl == mobileNavLinks[index]) return;
+        mnl.style.display = 'none';
+    });
+}
+
+mobileDropdownTitles.forEach((title, index) => {
+  title.addEventListener('click', () => {
+    resetDropdownLinks(index);
+    mobileNavLinks[index].style.display = mobileNavLinks[index].style.display === 'block' ? 'none' : 'block';
+  });
+});
