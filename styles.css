@@ -12,7 +12,7 @@ html, body {
     margin: 0;
     overflow-wrap: normal;
     word-break: normal;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 
 body {
@@ -257,7 +257,7 @@ header {
     z-index: 1;
     right: -1.7rem;
     left: auto;
-    top: 103%;
+    top: 95%;
     border-radius:6px;
 }
 
