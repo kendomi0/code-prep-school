@@ -29,6 +29,7 @@
 
         #code-animation {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             margin-top:50px;
             margin-bottom:30px;
@@ -40,6 +41,12 @@
             font-size:21px;
             border-radius: 25px;
             background-color: #0860b3;
+        }
+
+        @media (max-width:600px) {
+            #code-animation {
+                flex-direction: column;
+            }
         }
 
         .manual-code-block {
@@ -88,6 +95,7 @@
 </head>
 <body>
     <header id="app-header"></header>
+    <header id="mobile-header"></header>
     <script src="header.js"></script>
     <main>
         <div class="content-container">
