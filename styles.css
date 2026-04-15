@@ -266,6 +266,7 @@ header {
 
 .content-container {
     max-width: 1000px;
+    width:90%;
     margin: 0 auto;
     padding: 10px;
 }
@@ -358,7 +359,7 @@ math {
     text-align:center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
   #mobile-header {
     display: flex;
     visibility: visible;
