@@ -165,7 +165,8 @@
     inputted_user = input("Enter your full name: ") # Prompt to enter user's name
     found = False # Initialize a variable to store whether the user has been found
     for user in registered_users: # Loop through list of users
-        if user == inputted_user: # Check to see if the current user matches the inputted user
+        if user == inputted_user: # Check to see if the current user 
+                                  # matches the inputted user
             found = True # Change found flag to true if they match
             print("User is already registered")
             break # Terminate loop if found
