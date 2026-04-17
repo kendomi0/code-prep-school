@@ -28,7 +28,7 @@
 
         let total = 1
 
-        for (var i = x; i >= 1; i--) {
+        for (let i = x; i >= 1; i--) {
             total = total * i
         }
 
