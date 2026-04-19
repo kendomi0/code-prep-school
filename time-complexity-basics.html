@@ -1,165 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Time Complexity Basics</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/b3ffa80bf4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/b3ffa80bf4.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
 
     <style>
-        .chosen-num { 
-            display: inline-block;
-            min-width: 22px;
-            color: #FFF6A1; 
-            text-align: center;
-        }
+      .chosen-num {
+        display: inline-block;
+        min-width: 22px;
+        color: #fff6a1;
+        text-align: center;
+      }
 
-        .ops {
-            color: #B5FFC0;
-            min-width:22px;
-        }
+      .ops {
+        color: #b5ffc0;
+        min-width: 22px;
+      }
 
-        #num-input {
-            margin-right:10px;
-        }
+      #num-input {
+        margin-right: 10px;
+      }
 
-        #invalid-msg {
-            color: #ff7b72;
-            margin-bottom:13px;
+      #invalid-msg {
+        color: #ff7b72;
+        margin-bottom: 13px;
+      }
+
+      #btn-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+
+      #constant-btn {
+        background-color: #530000;
+        border: 2px solid #610a0a;
+      }
+
+      #logarithmic-btn {
+        background-color: #c74440;
+        border: 2px solid #d35f5b;
+      }
+
+      #linear-btn {
+        background-color: #66620d;
+        border: 2px solid #757120;
+      }
+
+      #linearithmic-btn {
+        background-color: #348543;
+        border: 2px solid #4d9e5c;
+      }
+
+      #quadratic-btn {
+        background-color: #2d70b3;
+        border: 2px solid #3e80c2;
+      }
+
+      #exponential-btn {
+        background-color: #6042a6;
+        border: 2px solid #7255b4;
+      }
+
+      #factorial-btn {
+        background-color: #a13f94;
+        border: 2px solid #b153a4;
+      }
+
+      .complexity-btn {
+        border: none;
+        border-radius: 25px;
+        width: 140px;
+      }
+
+      .complexity-btn:hover {
+        background-color: black !important;
+        border: 2px solid white !important;
+      }
+
+      #charts {
+        display: flex;
+        justify-content: center;
+      }
+
+      #graph {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      #constant-graph-disclaimer {
+        text-align: center;
+        font-size: 13px;
+        color: #aeaeca;
+      }
+
+      .active {
+        background-color: gray !important;
+        color: white !important;
+        border: 2px solid white !important;
+      }
+
+      @media (max-width: 600px) {
+        #graph {
+          flex-direction: column !important;
         }
 
         #btn-container {
-            display:flex;
-            flex-direction: column;
-            justify-content: space-evenly;
+          align-items: center;
+          margin-bottom: 1rem;
+          gap: 1rem;
         }
 
-        #constant-btn {
-            background-color: #530000;
-            border: 2px solid #610a0a;
+        #num-input {
+          max-width: 90%;
         }
 
-        #logarithmic-btn {
-            background-color: #C74440;
-            border: 2px solid #d35f5b;
+        #demo-btn {
+          margin-bottom: 1rem;
         }
-
-        #linear-btn {
-            background-color: #66620D;
-            border: 2px solid #757120;
-        }
-
-        #linearithmic-btn {
-            background-color: #348543;
-            border: 2px solid #4d9e5c;
-        }
-
-        #quadratic-btn {
-            background-color: #2D70B3;
-            border: 2px solid #3e80c2;
-        }
-
-        #exponential-btn {
-            background-color: #6042A6;
-            border: 2px solid #7255b4;
-        }
-
-        #factorial-btn {
-            background-color: #a13f94;
-            border: 2px solid #b153a4;
-        }
-
-        .complexity-btn {
-            border: none;
-            border-radius: 25px;
-            width:140px;
-        }
-
-        .complexity-btn:hover {
-            background-color: black !important;
-            border: 2px solid white !important;
-        }
-        
-        #charts {
-            display: flex;
-            justify-content: center;
-        }
-
-        #graph {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-        }
-
-        #constant-graph-disclaimer {
-            text-align: center;
-            font-size:13px;
-            color: #aeaeca;
-        }
-
-        .active {
-            background-color: gray !important;
-            color: white !important;
-            border: 2px solid white !important;
-        }
-
-        @media (max-width:600px) {
-              #graph {
-                flex-direction: column !important;
-            }
-
-            #btn-container {
-                align-items: center;
-                margin-bottom:1rem;
-                gap:1rem;
-            }
-
-            #num-input {
-                max-width: 90%;
-            }
-
-            #demo-btn {
-                margin-bottom:1rem;
-            }
-        }
-
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header id="app-header"></header>
     <header id="mobile-header"></header>
     <script src="header.js"></script>
     <main>
-        <div class="content-container">
-            <div class="page-title">
-                Time Complexity Basics
-            </div>
-            <div class="page-body">
-                <p><span class="emphasis">Time complexity</span>: How many operations a piece of code performs.</p>
+      <div class="content-container">
+        <div class="page-title">Time Complexity Basics</div>
+        <div class="page-body">
+          <p>
+            <span class="emphasis">Time complexity</span>: How many operations a
+            piece of code performs.
+          </p>
 
-                <p>Let&rsquo;s take a look at time complexity. Understanding time complexity is important because writing your code to run as quickly as possible (this is called <span class="emphasis">optimization</span>) is essential. Code that takes longer to run is prone to loading issues, especially if multiple users are running that code simultaneously.</p>
+          <p>
+            Let&rsquo;s take a look at time complexity. Understanding time
+            complexity is important because writing your code to run as quickly
+            as possible (this is called
+            <span class="emphasis">optimization</span>) is essential. Code that
+            takes longer to run is prone to loading issues, especially if
+            multiple users are running that code simultaneously.
+          </p>
 
-                <p>There are three different measures of time complexity: Worst-case, average-case, and best-case. 
+          <p>
+            There are three different measures of time complexity: Worst-case,
+            average-case, and best-case.
+          </p>
 
-                <p><span class="emphasis">Worst-case</span> time complexity represents the maximum number of operations a code could perform. In some cases, the worst-case time complexity is the same as the average-case and/or best-case time complexity. In some other cases, the worst-case time complexity differs from those cases.</p>
-                    
-                <p>When you write code, you want to focus on the worst-case time complexity. However, it's helpful to be aware of what average-case and best-case means.</p>
+          <p>
+            <span class="emphasis">Worst-case</span> time complexity represents
+            the maximum number of operations a code could perform. In some
+            cases, the worst-case time complexity is the same as the
+            average-case and/or best-case time complexity. In some other cases,
+            the worst-case time complexity differs from those cases.
+          </p>
 
-                <p><span class="emphasis">Average-case</span> time complexity represents the average number of operations a code could perform.</p>
+          <p>
+            When you write code, you want to focus on the worst-case time
+            complexity. However, it's helpful to be aware of what average-case
+            and best-case means.
+          </p>
 
-                <p><span class="emphasis">Best-case</span> time complexity represents the minimum number of operations a code could perform.</p>
+          <p>
+            <span class="emphasis">Average-case</span> time complexity
+            represents the average number of operations a code could perform.
+          </p>
 
-                <p>Let's look at a simple algorithm to understand the concepts of worst-case, average-case, best-case, and notations in practice.</p>
+          <p>
+            <span class="emphasis">Best-case</span> time complexity represents
+            the minimum number of operations a code could perform.
+          </p>
 
-        <pre>
+          <p>
+            Let's look at a simple algorithm to understand the concepts of
+            worst-case, average-case, best-case, and notations in practice.
+          </p>
+
+          <pre>
             <code class="language-python">
     registered_users = ["Anna Connell", "Jenny Maxwell", "Bradley Newsom"]
     inputted_user = input("Enter your full name: ") # Prompt to enter user's name
@@ -175,113 +213,293 @@
             </code>
         </pre>
 
-                <p>This code iterates through a list to find out if a user has already been registered with the system. This form of searching is called linear search. To read more about this specific type of algorithm, check out the <a href="intro-to-algorithms.html">Intro to Algorithms</a> page.</p>
+          <p>
+            This code iterates through a list to find out if a user has already
+            been registered with the system. This form of searching is called
+            linear search. To read more about this specific type of algorithm,
+            check out the
+            <a href="intro-to-algorithms.html">Intro to Algorithms</a> page.
+          </p>
 
-                <p>In the worst-case scenario, the user has either not been registered, or their name is last in the list of registered users. This would require the code to iterate through the entire list. For this code, that would mean <span class="inline-code">inputted_user</span> is either not in the list, or equals "Bradley Newsom".</p>
+          <p>
+            In the worst-case scenario, the user has either not been registered,
+            or their name is last in the list of registered users. This would
+            require the code to iterate through the entire list. For this code,
+            that would mean <span class="inline-code">inputted_user</span> is
+            either not in the list, or equals "Bradley Newsom".
+          </p>
 
-                <p>In the best-case scenario, the user is both registered and is first in the list, so the for loop only needs to run once and then it terminates. For this code, that would mean <span class="inline-code">inputted_user</span> equals "Anna Connell."</p>
+          <p>
+            In the best-case scenario, the user is both registered and is first
+            in the list, so the for loop only needs to run once and then it
+            terminates. For this code, that would mean
+            <span class="inline-code">inputted_user</span> equals "Anna
+            Connell."
+          </p>
 
-                <p>The average-case scenario is a bit broader, since it's not necessarily a specific scenario. It refers to when the inputted user would have an equal chance of being anywhere in the list. This is the most realistic scenario, because in practice, you wouldn't know if the inputted user is or is not registered, or where their name is in the list. On average, half of the users in the list would be checked before finding the inputted user.</p>
+          <p>
+            The average-case scenario is a bit broader, since it's not
+            necessarily a specific scenario. It refers to when the inputted user
+            would have an equal chance of being anywhere in the list. This is
+            the most realistic scenario, because in practice, you wouldn't know
+            if the inputted user is or is not registered, or where their name is
+            in the list. On average, half of the users in the list would be
+            checked before finding the inputted user.
+          </p>
 
-                <p>Time complexity is about representing the algorithm's growth rate as the input size increases, so let's discuss the various types of growth.</p>
+          <p>
+            Time complexity is about representing the algorithm's growth rate as
+            the input size increases, so let's discuss the various types of
+            growth.
+          </p>
 
-                <p><span class="emphasis">Constant</span> time complexity means there is no growth at all, regardless of the change in input size.</p> 
-                
-                <p><span class="emphasis">Linear</span> time complexity means the growth rate increases linearly in relation to the input size.</p>
-                
-                <p>Other types of time complexity function similarly: for instance, logarithmic time complexity means the growth rates increases logarithmically in relation to the input size.</p>
+          <p>
+            <span class="emphasis">Constant</span> time complexity means there
+            is no growth at all, regardless of the change in input size.
+          </p>
 
-                <p>We use certain notations to express a code's time complexity. For worst-case, we use Big O notation: <span class="inline-code">O(value)</span>. </p>
-                    
-                <p>For example, if the time complexity is constant, it's O(1). If the time complexity is linear, it's O(n). N refers to the input size. If we have a list, and that list has n items, that's what n refers to.</p>
+          <p>
+            <span class="emphasis">Linear</span> time complexity means the
+            growth rate increases linearly in relation to the input size.
+          </p>
 
-                <p>For best-case, we use Omega(value), or <span class="inline-code">&#937;(value)</span>.</p>
-                
-                <p>For average-case, we use Theta(value), or <span class="inline-code">&#920;(value)</span>.</p>
+          <p>
+            Other types of time complexity function similarly: for instance,
+            logarithmic time complexity means the growth rates increases
+            logarithmically in relation to the input size.
+          </p>
 
-                <p>Some resources use big O notation for all types of cases, but we'll use the precise notations here. But when referring to an algorithm's <span class="italic">general</span> time complexity, you can use Big O notation. When used in general, big O notation doesn't necessarily mean the algorithm's worst-case complexity; it's just the notation being used to describe the algorithm's "typical" time complexity in practice.</p>
+          <p>
+            We use certain notations to express a code's time complexity. For
+            worst-case, we use Big O notation:
+            <span class="inline-code">O(value)</span>.
+          </p>
 
-                <p> Imagine doing the same thing once, versus 5 times, versus 25 (5<sup>2</sup>) times. That's what O(1) versus O(n) versus O(n<sup>2</sup>) means. So a code with a time complexity of O(n<sup>2</sup>) takes longer to run than a code with a time complexity of O(n), which takes longer than a code with a time complexity of O(1).</p>
+          <p>
+            For example, if the time complexity is constant, it's O(1). If the
+            time complexity is linear, it's O(n). N refers to the input size. If
+            we have a list, and that list has n items, that's what n refers to.
+          </p>
 
-                <p>But of course, there are lots of different time complexities. There's logarithmic time complexity, which is O(logn). (When we use log in this context, it is with base 2.) That's a smaller time complexity than O(n). You can read more in depth about specific time complexities on their respective pages.</p>
+          <p>
+            For best-case, we use Omega(value), or
+            <span class="inline-code">&#937;(value)</span>.
+          </p>
 
-                <p>Here is a ranking of time complexities from fastest to slowest.</p>
-                    
-                <p>To show how exactly the values of O work, input a number from 1 to 50 for n, and see how the total number of operations changes. For your first try, try a number that's a perfect log, like 8.</p>
+          <p>
+            For average-case, we use Theta(value), or
+            <span class="inline-code">&#920;(value)</span>.
+          </p>
 
-                <p><span class="emphasis">Disclaimer:</span> There are values of n that are edge cases, particularly for lower values. For example, for n = 3, the quadratic time complexity results in a higher number of operations than the exponential time complexity. However, this doesn't change the overall ranking, as the concept of growth remains the same regardless of specific edge cases.</p>
+          <p>
+            Some resources use big O notation for all types of cases, but we'll
+            use the precise notations here. But when referring to an algorithm's
+            <span class="italic">general</span> time complexity, you can use Big
+            O notation. When used in general, big O notation doesn't necessarily
+            mean the algorithm's worst-case complexity; it's just the notation
+            being used to describe the algorithm's "typical" time complexity in
+            practice.
+          </p>
 
-                <!-- Interactive example -->
+          <p>
+            Imagine doing the same thing once, versus 5 times, versus 25
+            (5<sup>2</sup>) times. That's what O(1) versus O(n) versus
+            O(n<sup>2</sup>) means. So a code with a time complexity of
+            O(n<sup>2</sup>) takes longer to run than a code with a time
+            complexity of O(n), which takes longer than a code with a time
+            complexity of O(1).
+          </p>
 
-                <input id="num-input" type="number" placeholder="Enter a number from 1 to 50" />
-                <button id="demo-btn">Get results</button>
-                <div id="invalid-msg" style="display:none">Use a number less than or equal to 50.</div>
+          <p>
+            But of course, there are lots of different time complexities.
+            There's logarithmic time complexity, which is O(logn). (When we use
+            log in this context, it is with base 2.) That's a smaller time
+            complexity than O(n). You can read more in depth about specific time
+            complexities on their respective pages.
+          </p>
 
-                <p>1. <span class="inline-code">O(1)</span>: Constant time complexity. Input size is irrelevant, because the code always runs the same number of times.</p>
+          <p>Here is a ranking of time complexities from fastest to slowest.</p>
 
-                <p>2. <span class="inline-code">O(logn)</span>: Logarithmic time complexity. When n=<span class="chosen-num">&emsp;</span>, O(logn) = O(log<span class="chosen-num">&emsp;</span>) &asymp; <span id="log-ops" class="ops">&emsp;</span> operations.</p> 
+          <p>
+            To show how exactly the values of O work, input a number from 1 to
+            50 for n, and see how the total number of operations changes. For
+            your first try, try a number that's a perfect log, like 8.
+          </p>
 
-                <p>3. <span class="inline-code">O(n)</span>: Linear time complexity. When n=<span class="chosen-num"></span>, O(n) = O(<span class="chosen-num"></span>) = <span id="linear-ops" class="ops"></span> operations.</p> 
+          <p>
+            <span class="emphasis">Disclaimer:</span> There are values of n that
+            are edge cases, particularly for lower values. For example, for n =
+            3, the quadratic time complexity results in a higher number of
+            operations than the exponential time complexity. However, this
+            doesn't change the overall ranking, as the concept of growth remains
+            the same regardless of specific edge cases.
+          </p>
 
-                <p>4. <span class="inline-code">O(nlogn)</span>: Linearithmic/loglinear time complexity. When n=<span class="chosen-num"></span>, O(nlogn) = O(<span class="chosen-num"></span>log<span class="chosen-num"></span>) &asymp; <span id="linearithmic-ops" class="ops"></span> operations.</p> 
+          <!-- Interactive example -->
 
-                <p>5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time complexity. When n=<span class="chosen-num"></span>, O(n<sup>2</sup>) = O(<span class="chosen-num"></span><sup>2</sup>) = <span id="quadratic-ops" class="ops"></span> operations.</p> 
+          <input
+            id="num-input"
+            type="number"
+            placeholder="Enter a number from 1 to 50"
+          />
+          <button id="demo-btn">Get results</button>
+          <div id="invalid-msg" style="display: none">
+            Use a number less than or equal to 50.
+          </div>
 
-                <p>6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential time complexity. When n=<span class="chosen-num"></span>, O(2<sup>n</sup>) = O(2<sup><span class="chosen-num"></span></sup>) = <span id="exponential-ops" class="ops"></span> operations.</p> 
+          <p>
+            1. <span class="inline-code">O(1)</span>: Constant time complexity.
+            Input size is irrelevant, because the code always runs the same
+            number of times.
+          </p>
 
-                <p>7. <span class="inline-code">O(n!)</span>: Factorial time complexity. When n=<span class="chosen-num"></span>, O(n!) = O(<span class="chosen-num"></span>!) = <span id="factorial-ops" class="ops"></span> operations.</p>
+          <p>
+            2. <span class="inline-code">O(logn)</span>: Logarithmic time
+            complexity. When n=<span class="chosen-num">&emsp;</span>, O(logn) =
+            O(log<span class="chosen-num">&emsp;</span>) &asymp;
+            <span id="log-ops" class="ops">&emsp;</span> operations.
+          </p>
 
-                <!-- End interactive example -->
+          <p>
+            3. <span class="inline-code">O(n)</span>: Linear time complexity.
+            When n=<span class="chosen-num"></span>, O(n) = O(<span
+              class="chosen-num"
+            ></span
+            >) = <span id="linear-ops" class="ops"></span> operations.
+          </p>
 
-                <p>Below, click the different types of time complexities to view or hide graphs of their growth rates.</p>
+          <p>
+            4. <span class="inline-code">O(nlogn)</span>: Linearithmic/loglinear
+            time complexity. When n=<span class="chosen-num"></span>, O(nlogn) =
+            O(<span class="chosen-num"></span>log<span class="chosen-num"></span
+            >) &asymp;
+            <span id="linearithmic-ops" class="ops"></span> operations.
+          </p>
 
-                <!-- Begin graph section -->
+          <p>
+            5. <span class="inline-code">O(n<sup>2</sup>)</span>: Quadratic time
+            complexity. When n=<span class="chosen-num"></span>,
+            O(n<sup>2</sup>) = O(<span class="chosen-num"></span><sup>2</sup>) =
+            <span id="quadratic-ops" class="ops"></span> operations.
+          </p>
 
-                <div id="graph">
-                    <div id="btn-container">
-                        <button id="constant-btn" class="complexity-btn">Constant</button>
-                        <button id="logarithmic-btn" class="complexity-btn">Logarithmic</button>
-                        <button id="linear-btn" class="complexity-btn">Linear</button>
-                        <button id="linearithmic-btn" class="complexity-btn">Linearithmic</button>
-                        <button id="quadratic-btn" class="complexity-btn">Quadratic</button>
-                        <button id="exponential-btn" class="complexity-btn">Exponential</button>
-                        <button id="factorial-btn" class="complexity-btn">Factorial</button>
-                    </div>
-                    <canvas id="complexity-graph" style="width:100%;max-width:600px"></canvas>
-                </div>
+          <p>
+            6. <span class="inline-code">O(2<sup>n</sup>)</span>: Exponential
+            time complexity. When n=<span class="chosen-num"></span>,
+            O(2<sup>n</sup>) = O(2<sup><span class="chosen-num"></span></sup>) =
+            <span id="exponential-ops" class="ops"></span> operations.
+          </p>
 
-                <p id="constant-graph-disclaimer">Disclaimer: O(1) doesn't necessarily mean the number of operations is 1; it's about how the number of operations does not change regardless of n changing.</p>
+          <p>
+            7. <span class="inline-code">O(n!)</span>: Factorial time
+            complexity. When n=<span class="chosen-num"></span>, O(n!) = O(<span
+              class="chosen-num"
+            ></span
+            >!) = <span id="factorial-ops" class="ops"></span> operations.
+          </p>
 
-                <!-- End graph section-->
+          <!-- End interactive example -->
 
-                <p>Let's return to the registered users example.</p>
+          <p>
+            Below, click the different types of time complexities to view or
+            hide graphs of their growth rates.
+          </p>
 
-                <p>As said before, in the worst-case scenario, the user has either not been registered, or their name is at the end of the list of registered users. This would require the code to iterate through the entire list. This would result in a worst-case time complexity of <span class="inline-code">O(n)</span>, for <span class="inline-code">n</span> (number of items in list) operations.</p>
+          <!-- Begin graph section -->
 
-                <p>In the best-case scenario that the user is present in the list at the first position, the loop terminates after running once. This would result in a best-case time complexity of <span class="inline-code">&#937;(1)</span>.</p>
-
-                <p>And in the average-case scenario that half of all users will be checked before locating the user, this would result in a time complexity of &#920;(
-                    
-                    <math display="inline">
-                        <mfrac>
-                            <mn>(n+1)</mn>
-                            <mn>2</mn>
-                        </mfrac>
-                    </math>
-                
-                ). However, since we drop constants when using Big O notation, we would simplify this to <span class="inline-code">&#920;(n)</span>, as the time complexity would still be linear. Constants are unnecessary in Big O notation because it's more about the type of growth: constant, logarithmic, linear, etcetera. The exponent matters most, not the coefficient.</p>
-
-                <p>In addition to time complexity, there's also <span class="emphasis">space complexity</span>, which is discussed less often.</p>
-                    
-                <p>Space complexity refers to the amount of memory space an algorithm occupies. Space complexity is a similar concept to time complexity, but time complexity is more important in writing efficient code.</p>
-
-                <p>Check out the pages on specific time complexities for in-depth explanations with code snippets showing how they work.</p>
+          <div id="graph">
+            <div id="btn-container">
+              <button id="constant-btn" class="complexity-btn">Constant</button>
+              <button id="logarithmic-btn" class="complexity-btn">
+                Logarithmic
+              </button>
+              <button id="linear-btn" class="complexity-btn">Linear</button>
+              <button id="linearithmic-btn" class="complexity-btn">
+                Linearithmic
+              </button>
+              <button id="quadratic-btn" class="complexity-btn">
+                Quadratic
+              </button>
+              <button id="exponential-btn" class="complexity-btn">
+                Exponential
+              </button>
+              <button id="factorial-btn" class="complexity-btn">
+                Factorial
+              </button>
             </div>
+            <canvas
+              id="complexity-graph"
+              style="width: 100%; max-width: 600px"
+            ></canvas>
+          </div>
+
+          <p id="constant-graph-disclaimer">
+            Disclaimer: O(1) doesn't necessarily mean the number of operations
+            is 1; it's about how the number of operations does not change
+            regardless of n changing.
+          </p>
+
+          <!-- End graph section-->
+
+          <p>Let's return to the registered users example.</p>
+
+          <p>
+            As said before, in the worst-case scenario, the user has either not
+            been registered, or their name is at the end of the list of
+            registered users. This would require the code to iterate through the
+            entire list. This would result in a worst-case time complexity of
+            <span class="inline-code">O(n)</span>, for
+            <span class="inline-code">n</span> (number of items in list)
+            operations.
+          </p>
+
+          <p>
+            In the best-case scenario that the user is present in the list at
+            the first position, the loop terminates after running once. This
+            would result in a best-case time complexity of
+            <span class="inline-code">&#937;(1)</span>.
+          </p>
+
+          <p>
+            And in the average-case scenario that half of all users will be
+            checked before locating the user, this would result in a time
+            complexity of &#920;(
+
+            <math display="inline">
+              <mfrac>
+                <mn>(n+1)</mn>
+                <mn>2</mn>
+              </mfrac>
+            </math>
+
+            ). However, since we drop constants when using Big O notation, we
+            would simplify this to <span class="inline-code">&#920;(n)</span>,
+            as the time complexity would still be linear. Constants are
+            unnecessary in Big O notation because it's more about the type of
+            growth: constant, logarithmic, linear, etcetera. The exponent
+            matters most, not the coefficient.
+          </p>
+
+          <p>
+            In addition to time complexity, there's also
+            <span class="emphasis">space complexity</span>, which is discussed
+            less often.
+          </p>
+
+          <p>
+            Space complexity refers to the amount of memory space an algorithm
+            occupies. Space complexity is a similar concept to time complexity,
+            but time complexity is more important in writing efficient code.
+          </p>
+
+          <p>
+            Check out the pages on specific time complexities for in-depth
+            explanations with code snippets showing how they work.
+          </p>
         </div>
+      </div>
     </main>
-    <footer>
-        Github site by kendomi0
-    </footer>
-<script src="time-complexity-basics.js"></script>
-</body>
+    <footer>Github site by kendomi0</footer>
+    <script src="time-complexity-basics.js"></script>
+  </body>
 </html>

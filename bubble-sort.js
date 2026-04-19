@@ -10,8 +10,8 @@ zeroBasedIndexCode.style.display = "none";
 
 const indexingToggle = document.getElementById("indexing-toggle");
 
-indexingToggle.addEventListener("click", function() {
-if (zeroBasedIndexCode.style.display === "none") {
+indexingToggle.addEventListener("click", function () {
+  if (zeroBasedIndexCode.style.display === "none") {
     zeroBasedIndexCode.style.display = "block";
     oneBasedIndexCode.style.display = "none";
 
@@ -19,8 +19,7 @@ if (zeroBasedIndexCode.style.display === "none") {
     indexingToggle.classList.add("zero-based-btn");
 
     indexBase.textContent = "1";
-}
-else {
+  } else {
     zeroBasedIndexCode.style.display = "none";
     oneBasedIndexCode.style.display = "block";
 
@@ -28,7 +27,7 @@ else {
     indexingToggle.classList.add("one-based-btn");
 
     indexBase.textContent = "0";
-}
+  }
 });
 
 // Bubble sort animation
@@ -44,12 +43,12 @@ const jPlusOne = document.getElementById("j-plus-one");
 const arrValue = document.getElementById("arr-value");
 const ajValue = document.getElementById("a-j-value");
 const ajPlusOne = document.getElementById("a-j-plus-one");
-const isGreaterThan = document.getElementById('is-greater-than');
+const isGreaterThan = document.getElementById("is-greater-than");
 const doSwap = document.getElementById("do-swap");
 const lines = document.querySelectorAll(".lines");
-const loopTimes = document.querySelectorAll('.loop-time');
-let nMinusI = document.getElementById('n-minus-i');
-let indices = document.querySelectorAll('.index');
+const loopTimes = document.querySelectorAll(".loop-time");
+let nMinusI = document.getElementById("n-minus-i");
+let indices = document.querySelectorAll(".index");
 
 const arrow1 = document.getElementById("arrow-1");
 const arrow2 = document.getElementById("arrow-2");
@@ -57,150 +56,149 @@ const arrow3 = document.getElementById("arrow-3");
 const arrow4 = document.getElementById("arrow-4");
 const arrow5 = document.getElementById("arrow-5");
 const arrow6 = document.getElementById("arrow-6");
-const arrows = document.querySelectorAll('.arrows');
+const arrows = document.querySelectorAll(".arrows");
 
 function reset(element) {
-    element.textContent = "";
+  element.textContent = "";
 }
 
 function resetLines() {
-    lines.forEach(reset);
+  lines.forEach(reset);
 
-    loopTimes.forEach((loopTime) => {
-        loopTime.innerHTML = '&nbsp;';
-    });
+  loopTimes.forEach((loopTime) => {
+    loopTime.innerHTML = "&nbsp;";
+  });
 
-    indices.forEach((index) => {
-        index.innerHTML = '&nbsp;';
-    });
+  indices.forEach((index) => {
+    index.innerHTML = "&nbsp;";
+  });
 }
 
 function hide(element) {
-    element.style.visibility = "hidden";
+  element.style.visibility = "hidden";
 }
 
 function resetAndHide(clearEverything = null) {
-    resetLines();
-    hideAllArrows();
-    if (clearEverything) {
-        reset(nValue);
-        reset(arrValue);
-    }
+  resetLines();
+  hideAllArrows();
+  if (clearEverything) {
+    reset(nValue);
+    reset(arrValue);
+  }
 }
 
 function hideAllArrows() {
-    arrows.forEach(hide);
+  arrows.forEach(hide);
 }
 
 function showArrow(numberArrow) {
-    numberArrow.style.visibility = "visible";
+  numberArrow.style.visibility = "visible";
 }
 
 function hideAndShow(numberArrow) {
-    hideAllArrows();
-    showArrow(numberArrow);
+  hideAllArrows();
+  showArrow(numberArrow);
 }
 
 function bubbleSortAnimation() {
-    playBtn.disabled = true;
-    const steps = [
-        // First step
-        () => showArrow(arrow1),
+  playBtn.disabled = true;
+  const steps = [
+    // First step
+    () => showArrow(arrow1),
 
-        () => arrValue.textContent = "[4, 8, 3]",
-        () => innerLoopTime.textContent = "First",
-        () => outerLoopTime.textContent = "first",
+    () => (arrValue.textContent = "[4, 8, 3]"),
+    () => (innerLoopTime.textContent = "First"),
+    () => (outerLoopTime.textContent = "first"),
 
-        () => hideAndShow(arrow2),
-        () => nValue.textContent = "3",
+    () => hideAndShow(arrow2),
+    () => (nValue.textContent = "3"),
 
-        () => hideAndShow(arrow3),
-        () => iValue.textContent = "1",
+    () => hideAndShow(arrow3),
+    () => (iValue.textContent = "1"),
 
-        () => hideAndShow(arrow4),
-        () => jValue1.textContent = "1",
-        () => nMinusI.textContent = "2",
+    () => hideAndShow(arrow4),
+    () => (jValue1.textContent = "1"),
+    () => (nMinusI.textContent = "2"),
 
-        () => hideAndShow(arrow5),
-        () => jValue2.textContent = "1",
-        () => ajValue.textContent = "4",
-        () => jPlusOne.textContent = "2",
-        () => ajPlusOne.textContent = "8",
-        () => isGreaterThan.textContent = "No",
+    () => hideAndShow(arrow5),
+    () => (jValue2.textContent = "1"),
+    () => (ajValue.textContent = "4"),
+    () => (jPlusOne.textContent = "2"),
+    () => (ajPlusOne.textContent = "8"),
+    () => (isGreaterThan.textContent = "No"),
 
-        () => hideAndShow(arrow6),
-        () => doSwap.textContent = "No",
+    () => hideAndShow(arrow6),
+    () => (doSwap.textContent = "No"),
 
-        // Second step
+    // Second step
 
-        () => {
-            resetAndHide(),
-            iValue.textContent = "1";
-            nMinusI.textContent = "2";
-            outerLoopTime.textContent = "first";
-        },
+    () => {
+      (resetAndHide(), (iValue.textContent = "1"));
+      nMinusI.textContent = "2";
+      outerLoopTime.textContent = "first";
+    },
 
-        () => innerLoopTime.textContent = "Second",
+    () => (innerLoopTime.textContent = "Second"),
 
-        () => hideAndShow(arrow4),
-        () => jValue1.textContent = "2",
+    () => hideAndShow(arrow4),
+    () => (jValue1.textContent = "2"),
 
-        () => hideAndShow(arrow5),
-        () => jValue2.textContent = "2",
-        () => ajValue.textContent = "8",
-        () => jPlusOne.textContent = "3",
-        () => ajPlusOne.textContent = "3",
-        () => isGreaterThan.textContent = "Yes",
+    () => hideAndShow(arrow5),
+    () => (jValue2.textContent = "2"),
+    () => (ajValue.textContent = "8"),
+    () => (jPlusOne.textContent = "3"),
+    () => (ajPlusOne.textContent = "3"),
+    () => (isGreaterThan.textContent = "Yes"),
 
-        () => hideAndShow(arrow6),
-        () => doSwap.textContent = "Yes",
-        () => arrValue.innerHTML = "[4, <span class='swapped'>3, 8</span>]",
+    () => hideAndShow(arrow6),
+    () => (doSwap.textContent = "Yes"),
+    () => (arrValue.innerHTML = "[4, <span class='swapped'>3, 8</span>]"),
 
-        // Third step
+    // Third step
 
-        () => {
-            resetAndHide();
-            arrValue.innerHTML = "[4, 3, 8]";
-        },
+    () => {
+      resetAndHide();
+      arrValue.innerHTML = "[4, 3, 8]";
+    },
 
-        () => innerLoopTime.textContent = "First",
-        () => outerLoopTime.textContent = "second",
+    () => (innerLoopTime.textContent = "First"),
+    () => (outerLoopTime.textContent = "second"),
 
-        () => showArrow(arrow3),
-        () => iValue.textContent = "2",
+    () => showArrow(arrow3),
+    () => (iValue.textContent = "2"),
 
-        () => hideAndShow(arrow4),
-        () => jValue1.textContent = "1",
-        () => nMinusI.textContent = "1",
+    () => hideAndShow(arrow4),
+    () => (jValue1.textContent = "1"),
+    () => (nMinusI.textContent = "1"),
 
-        () => hideAndShow(arrow5),
-        () => jValue2.textContent = "1",
-        () => ajValue.textContent = "4",
-        () => jPlusOne.textContent = "2",
-        () => ajPlusOne.textContent = "3",
-        () => isGreaterThan.textContent = "Yes",
+    () => hideAndShow(arrow5),
+    () => (jValue2.textContent = "1"),
+    () => (ajValue.textContent = "4"),
+    () => (jPlusOne.textContent = "2"),
+    () => (ajPlusOne.textContent = "3"),
+    () => (isGreaterThan.textContent = "Yes"),
 
-        () => hideAndShow(arrow6),
-        () => doSwap.textContent = "Yes",
-        () => arrValue.innerHTML = "[<span class='swapped'>3, 4,</span> 8]",
+    () => hideAndShow(arrow6),
+    () => (doSwap.textContent = "Yes"),
+    () => (arrValue.innerHTML = "[<span class='swapped'>3, 4,</span> 8]"),
 
-        () => {
-            arrValue.innerHTML = "[3, 4, 8]";
-            hideAllArrows();
-            playBtn.textContent = "Complete!"
-        },
+    () => {
+      arrValue.innerHTML = "[3, 4, 8]";
+      hideAllArrows();
+      playBtn.textContent = "Complete!";
+    },
 
-        () => {
-            playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again';
-            playBtn.disabled = false
-        },
-    ];
+    () => {
+      playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again';
+      playBtn.disabled = false;
+    },
+  ];
 
-    steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
+  steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
 }
 
-playBtn.addEventListener('click', () => {
-    resetAndHide(true);
-    playBtn.textContent = "Playing...";
-    bubbleSortAnimation();
+playBtn.addEventListener("click", () => {
+  resetAndHide(true);
+  playBtn.textContent = "Playing...";
+  bubbleSortAnimation();
 });
