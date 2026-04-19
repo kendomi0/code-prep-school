@@ -48,9 +48,6 @@ let appHeader = `
 `;
 document.getElementById("app-header").innerHTML = appHeader;
 
-
-
-
 /* Mobile */
 
 let mobileHeader = `
@@ -121,29 +118,35 @@ document.getElementById("mobile-header").innerHTML = mobileHeader;
 
 // Open the dropdown by clicking menu icon
 
-const dropdown = document.getElementById('full-mobile-dropdown');
+const dropdown = document.getElementById("full-mobile-dropdown");
 
-document.getElementById('hamburger-menu').addEventListener('click', function(e) {
+document
+  .getElementById("hamburger-menu")
+  .addEventListener("click", function (e) {
     e.stopPropagation();
-  dropdown.style.visibility = dropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
-});
+    dropdown.style.visibility =
+      dropdown.style.visibility === "visible" ? "hidden" : "visible";
+  });
 
 // Open the subdropdowns
 
-const mobileDropdownTitles = document.querySelectorAll('.mobile-dropdown-title');
-const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-links');
+const mobileDropdownTitles = document.querySelectorAll(
+  ".mobile-dropdown-title",
+);
+const mobileDropdowns = document.querySelectorAll(".mobile-dropdown");
+const mobileNavLinks = document.querySelectorAll(".mobile-nav-links");
 
 function resetDropdownLinks(index) {
-    mobileNavLinks.forEach((mnl) => {
-        if (mnl == mobileNavLinks[index]) return;
-        mnl.style.display = 'none';
-    });
+  mobileNavLinks.forEach((mnl) => {
+    if (mnl == mobileNavLinks[index]) return;
+    mnl.style.display = "none";
+  });
 }
 
 mobileDropdownTitles.forEach((title, index) => {
-  title.addEventListener('click', () => {
+  title.addEventListener("click", () => {
     resetDropdownLinks(index);
-    mobileNavLinks[index].style.display = mobileNavLinks[index].style.display === 'block' ? 'none' : 'block';
+    mobileNavLinks[index].style.display =
+      mobileNavLinks[index].style.display === "block" ? "none" : "block";
   });
 });

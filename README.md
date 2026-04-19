@@ -5,6 +5,6 @@
 A website that explains coding basics, such as time complexity and algorithms.
 
 ## Technologies Used
+
 - HTML
 - CSS
-
