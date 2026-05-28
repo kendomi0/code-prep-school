@@ -1,12 +1,11 @@
-name: Prettier Check
+name: Prettier check
 
 on:
   pull_request:
-  push:
 
 jobs:
   prettier:
-    name: Prettier Check
+    name: Prettier check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
