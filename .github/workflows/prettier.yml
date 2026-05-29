@@ -15,7 +15,7 @@ jobs:
         id: prettier-run
         uses: rutajdash/prettier-cli-action@v1.0.2
         with:
-          config_path: ./.prettierrc.yml
+          config_path: ./.prettierrc
 
       - name: Prettier Output
         if: ${{ failure() }}
