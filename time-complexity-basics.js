@@ -1,5 +1,3 @@
-hljs.highlightAll();
-
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");
 const btn = document.getElementById("demo-btn");
@@ -131,7 +129,7 @@ const complexityGraphChart = new Chart(complexityGraph, {
 
 // Toggle buttons for graph
 
-complexityBtns = [
+let complexityBtns = [
   constantBtn,
   logarithmicBtn,
   linearBtn,
