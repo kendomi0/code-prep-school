@@ -118,7 +118,7 @@
   <body>
     <header id="app-header"></header>
     <header id="mobile-header"></header>
-    <script src="header.js"></script>
+    <script type="module" script src="header.js"></script>
     <main>
       <div class="content-container">
         <div class="page-title">Bubble Sort</div>
@@ -163,7 +163,7 @@
                     </pre>
           </div>
 
-          <div id="zero-based-index-code">
+          <div id="zero-based-index-code" style="display: none">
             <pre>
                         <code class="language-python">
     # Assume A is an array of numbers
@@ -426,6 +426,9 @@
       </div>
     </main>
     <footer>Github site by kendomi0</footer>
-    <script src="bubble-sort.js"></script>
+    <script type="module" script src="bubble-sort.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>

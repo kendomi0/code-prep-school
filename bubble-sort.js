@@ -1,34 +1,32 @@
-hljs.highlightAll();
-
 const oneBasedIndexCode = document.getElementById("one-based-index-code");
 const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
 const indexBase = document.getElementById("index-base");
 const zeroBasedBtn = document.querySelector(".zero-based-btn");
 const oneBasedBtn = document.querySelector(".one-based-btn");
 
-zeroBasedIndexCode.style.display = "none";
-
 const indexingToggle = document.getElementById("indexing-toggle");
 
-indexingToggle.addEventListener("click", function () {
-  if (zeroBasedIndexCode.style.display === "none") {
-    zeroBasedIndexCode.style.display = "block";
-    oneBasedIndexCode.style.display = "none";
+if (indexingToggle) {
+  indexingToggle.addEventListener("click", function () {
+    if (zeroBasedIndexCode.style.display === "none") {
+      zeroBasedIndexCode.style.display = "block";
+      oneBasedIndexCode.style.display = "none";
 
-    indexingToggle.classList.remove("one-based-btn");
-    indexingToggle.classList.add("zero-based-btn");
+      indexingToggle.classList.remove("one-based-btn");
+      indexingToggle.classList.add("zero-based-btn");
 
-    indexBase.textContent = "1";
-  } else {
-    zeroBasedIndexCode.style.display = "none";
-    oneBasedIndexCode.style.display = "block";
+      indexBase.textContent = "1";
+    } else {
+      zeroBasedIndexCode.style.display = "none";
+      oneBasedIndexCode.style.display = "block";
 
-    indexingToggle.classList.remove("zero-based-btn");
-    indexingToggle.classList.add("one-based-btn");
+      indexingToggle.classList.remove("zero-based-btn");
+      indexingToggle.classList.add("one-based-btn");
 
-    indexBase.textContent = "0";
-  }
-});
+      indexBase.textContent = "0";
+    }
+  });
+}
 
 // Bubble sort animation
 
@@ -197,8 +195,10 @@ function bubbleSortAnimation() {
   steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
 }
 
-playBtn.addEventListener("click", () => {
-  resetAndHide(true);
-  playBtn.textContent = "Playing...";
-  bubbleSortAnimation();
-});
+if (playBtn) {
+  playBtn.addEventListener("click", () => {
+    resetAndHide(true);
+    playBtn.textContent = "Playing...";
+    bubbleSortAnimation();
+  });
+}
