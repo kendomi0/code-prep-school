@@ -1,8 +1,6 @@
 import { parseNumberListInput } from '../bubble-sort-logic.js';
 import { errorMessages } from '../bubble-sort-logic.js'
-
-beforeEach(() => {
-});
+import { bubbleSort } from '../bubble-sort-logic.js'
 
 describe('parseNumberListInput', () => {
 
@@ -54,3 +52,30 @@ describe('parseNumberListInput', () => {
     });
   });
 });
+
+describe("bubbleSort()", () => {
+    it("sorts a list of 2 numbers", () => {
+        let result = bubbleSort([3, 2]);
+        expect(result).toStrictEqual([2, 3]);
+    });
+
+    it("sorts a list of 3 numbers", () => {
+        let result = bubbleSort([4,8,3]);
+        expect(result).toStrictEqual([3,4,8]);
+    });
+
+    it("sorts a list of 10 numbers", () => {
+        let result = bubbleSort([1, 4, 3, 2, 9, 8, 5, 6, 10, 7]);
+        expect(result).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
+
+    it("sorts lists with duplicates", () =>  {
+        let result = bubbleSort([4, 4, 5, 2, 2, 3]);
+        expect(result).toStrictEqual([2, 2, 3, 4, 4, 5]);
+    })
+
+    it("returns input when list is already sorted", () =>  {
+        let result = bubbleSort([1, 2, 3, 4]);
+        expect(result).toStrictEqual([1, 2, 3, 4]);
+    })
+})
