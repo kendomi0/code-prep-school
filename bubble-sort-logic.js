@@ -28,6 +28,31 @@ if (indexingToggle) {
   });
 }
 
+// Bubble sort input
+
+export const errorMessages = {
+  tooFewNumbers: "Enter at least 2 numbers.",
+  tooManyNumbers: "Enter 10 or less numbers.",
+  invalidChar: "The only accepted characters are numbers and commas."
+}
+
+export function parseNumberListInput(numberList) {
+  if (numberList.length > 0 && (!(/^[0-9,]+$/.test(numberList)))) {
+    return errorMessages["invalidChar"] ?? '';
+    }
+
+  const numberArray = numberList.split(",");
+  if (numberArray.length < 2) {
+    return errorMessages["tooFewNumbers"] ?? '';
+  }
+
+  if (numberArray.length > 10) {
+    return errorMessages["tooManyNumbers"] ?? '';
+  }
+
+  return numberArray.map(num => Number(num))
+  }
+
 // Bubble sort animation
 
 const outerLoopTime = document.getElementById("outer-loop-time");

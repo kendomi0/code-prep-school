@@ -9,7 +9,7 @@ const logarithmicOps = document.getElementById("log-ops");
 const linearithmicOps = document.getElementById("linearithmic-ops");
 const factorialOps = document.getElementById("factorial-ops");
 
-const invalidMsg = document.getElementById("invalid-msg");
+const invalidNumberInput = document.getElementById("invalid-number-input");
 
 const linearBtn = document.getElementById("linear-btn");
 const quadraticBtn = document.getElementById("quadratic-btn");
@@ -40,10 +40,10 @@ btn.addEventListener("click", function () {
   const inputNumber = Number(input.value);
 
   if (inputNumber > 50) {
-    invalidMsg.style.display = "block";
+    invalidNumberInput.style.display = "block";
     return;
   } else {
-    invalidMsg.style.display = "none";
+    invalidNumberInput.style.display = "none";
     chosenNums.forEach(function (chosenNum) {
       chosenNum.textContent = inputNumber;
     });

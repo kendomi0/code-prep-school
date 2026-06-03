@@ -290,8 +290,19 @@
           </p>
 
           <p>
-            Here's an animation of the code, step-by-step, so you can see the
-            changes in the variables and array in real time.
+            Enter a list of 2-10 numbers, separated by commas with no spaces, to see how the bubble sort animation works on the list, step-by-step.
+          </p>
+
+          <input
+            id="input-number-list"
+            class="input-btn"
+            type="text"
+            placeholder="Enter list of 2-10 numbers"
+          />
+
+          <button id="get-number-list-btn" class="results-btn">Get results</button>
+
+          <p id="invalid-list-msg" class="invalid-input-msg">
           </p>
 
           <p class="italic center-text">Press play to start.</p>
@@ -426,7 +437,8 @@
       </div>
     </main>
     <footer>Github site by kendomi0</footer>
-    <script type="module" script src="bubble-sort.js"></script>
+    <script type="module" script src="bubble-sort-logic.js"></script>
+    <script type="module" script src="bubble-sort-dom.js"></script>
     <script>
       hljs.highlightAll();
     </script>
