@@ -1,3 +1,5 @@
+import { displayArray, displayOuterLoopIteration, displayInnerLoopIteration, updateTextContent, showArrow, resetAndHideExcept, setGivenArray, hideAllArrows } from "./bubble-sort-dom.js"
+
 const oneBasedIndexCode = document.getElementById("one-based-index-code");
 const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
 const indexBase = document.getElementById("index-base");
@@ -53,89 +55,80 @@ export function parseNumberListInput(numberList) {
   return numberArray.map(num => Number(num))
   }
 
-// Bubble sort animation
-
-const outerLoopTime = document.getElementById("outer-loop-time");
-const innerLoopTime = document.getElementById("inner-loop-time");
-const nValue = document.getElementById("n-value");
-const iValue = document.getElementById("i-value");
-const playBtn = document.getElementById("play-btn");
-const jValue1 = document.getElementById("j-value-1");
-const jValue2 = document.getElementById("j-value-2");
-const jPlusOne = document.getElementById("j-plus-one");
-const arrValue = document.getElementById("arr-value");
-const ajValue = document.getElementById("a-j-value");
-const ajPlusOne = document.getElementById("a-j-plus-one");
-const isGreaterThan = document.getElementById("is-greater-than");
-const doSwap = document.getElementById("do-swap");
-const lines = document.querySelectorAll(".lines");
-const loopTimes = document.querySelectorAll(".loop-time");
-let nMinusI = document.getElementById("n-minus-i");
-let indices = document.querySelectorAll(".index");
-
-const arrow1 = document.getElementById("arrow-1");
-const arrow2 = document.getElementById("arrow-2");
-const arrow3 = document.getElementById("arrow-3");
-const arrow4 = document.getElementById("arrow-4");
-const arrow5 = document.getElementById("arrow-5");
-const arrow6 = document.getElementById("arrow-6");
-const arrows = document.querySelectorAll(".arrows");
-
-function reset(element) {
-  element.textContent = "";
-}
-
-function resetLines() {
-  lines.forEach(reset);
-
-  loopTimes.forEach((loopTime) => {
-    loopTime.innerHTML = "&nbsp;";
-  });
-
-  indices.forEach((index) => {
-    index.innerHTML = "&nbsp;";
-  });
-}
-
-function hide(element) {
-  element.style.visibility = "hidden";
-}
-
-function resetAndHide(clearEverything = null) {
-  resetLines();
-  hideAllArrows();
-  if (clearEverything) {
-    reset(nValue);
-    reset(arrValue);
+export function convertBooleanToYesNo(boolean) {
+  if (boolean) {
+    return "Yes"
   }
+  return "No"
 }
 
-function hideAllArrows() {
-  arrows.forEach(hide);
+const step = (fn, ...args) => pseudocodeSteps.push({ fn, args });
+
+function stepGroup(fnArr) {
+  pseudocodeSteps.push(fnArr);
 }
 
-function showArrow(numberArrow) {
-  numberArrow.style.visibility = "visible";
-}
-
-function hideAndShow(numberArrow) {
-  hideAllArrows();
-  showArrow(numberArrow);
-}
+export let pseudocodeSteps = [];
 
 export function bubbleSort(arr) {
+  step(setGivenArray, [...arr]);
+  step(showArrow, "arrow1");
+  step(displayArray, [...arr]);
+  step(showArrow, "arrow2");
+  step(updateTextContent, "nValue", arr.length);
+
+  let outerLoopIteration = 0;
+  let innerLoopIteration = 0;
+
   for (let i = 0; i < arr.length - 1; i++) {
+    let iOneBased = i + 1;
+    stepGroup(
+      [
+        { fn: resetAndHideExcept, args: ["nValue", "arrValue"]},
+        { fn: showArrow, args: ["arrow3"]}
+      ]
+    )
+    innerLoopIteration = 0;
+    outerLoopIteration += 1;
+    step(displayOuterLoopIteration, outerLoopIteration);
+    step(updateTextContent, "iValue", iOneBased);
+
     for (let j = 0; j < arr.length - i - 1; j++) {
+      let jOneBased = j + 1;
+      stepGroup([
+        { fn: resetAndHideExcept, args: ["iValue", "nValue", "arrValue", "outerLoopTime"] },
+        { fn: showArrow, args: ["arrow4"] }
+      ]);
+
+      innerLoopIteration += 1;
+      step(displayInnerLoopIteration, innerLoopIteration);
+
+      step(updateTextContent, "jValue1", jOneBased);
+      step(updateTextContent, "nMinusI", arr.length-iOneBased);
+      step(showArrow, "arrow5");
+      step(updateTextContent, "jValue2", jOneBased);
+      step(updateTextContent, "ajValue", arr[j]);
+      step(updateTextContent, "jPlusOne", jOneBased+1);
+      step(updateTextContent, "ajPlusOne", arr[j+1]);
+      step(updateTextContent, "isGreaterThan", convertBooleanToYesNo(arr[j] > arr[j + 1]));
+
       if (arr[j] > arr[j + 1]) {
         [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+        step(showArrow, "arrow6");
+        step(updateTextContent, "doSwap", convertBooleanToYesNo(true));
+        step(displayArray, [...arr], j);
+        step(displayArray, [...arr]);
+      }
+      else {
+        step(updateTextContent, "doSwap", convertBooleanToYesNo(false));
       }
     }
   }
+  step(hideAllArrows);
   return arr
 }
 
 function bubbleSortAnimation() {
-  playBtn.disabled = true;
   const steps = [
     // First step
     () => showArrow(arrow1),
@@ -229,13 +222,5 @@ function bubbleSortAnimation() {
   ];
 
   steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
-}
-
-if (playBtn) {
-  playBtn.addEventListener("click", () => {
-    resetAndHide(true);
-    playBtn.textContent = "Playing...";
-    bubbleSortAnimation();
-  });
 }
 
