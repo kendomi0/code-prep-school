@@ -62,7 +62,7 @@ export function convertBooleanToYesNo(boolean) {
   return "No"
 }
 
-const step = (fn, ...args) => pseudocodeSteps.push({ fn, args });
+export const step = (fn, ...args) => pseudocodeSteps.push({ fn, args });
 
 function stepGroup(fnArr) {
   pseudocodeSteps.push(fnArr);
@@ -126,101 +126,5 @@ export function bubbleSort(arr) {
   }
   step(hideAllArrows);
   return arr
-}
-
-function bubbleSortAnimation() {
-  const steps = [
-    // First step
-    () => showArrow(arrow1),
-
-    () => (arrValue.textContent = "[4, 8, 3]"),
-    () => (innerLoopTime.textContent = "First"),
-    () => (outerLoopTime.textContent = "first"),
-
-    () => hideAndShow(arrow2),
-    () => (nValue.textContent = "3"),
-
-    () => hideAndShow(arrow3),
-    () => (iValue.textContent = "1"),
-
-    () => hideAndShow(arrow4),
-    () => (jValue1.textContent = "1"),
-    () => (nMinusI.textContent = "2"),
-
-    () => hideAndShow(arrow5),
-    () => (jValue2.textContent = "1"),
-    () => (ajValue.textContent = "4"),
-    () => (jPlusOne.textContent = "2"),
-    () => (ajPlusOne.textContent = "8"),
-    () => (isGreaterThan.textContent = "No"),
-
-    () => hideAndShow(arrow6),
-    () => (doSwap.textContent = "No"),
-
-    // Second step
-
-    () => {
-      (resetAndHide(), (iValue.textContent = "1"));
-      nMinusI.textContent = "2";
-      outerLoopTime.textContent = "first";
-    },
-
-    () => (innerLoopTime.textContent = "Second"),
-
-    () => hideAndShow(arrow4),
-    () => (jValue1.textContent = "2"),
-
-    () => hideAndShow(arrow5),
-    () => (jValue2.textContent = "2"),
-    () => (ajValue.textContent = "8"),
-    () => (jPlusOne.textContent = "3"),
-    () => (ajPlusOne.textContent = "3"),
-    () => (isGreaterThan.textContent = "Yes"),
-
-    () => hideAndShow(arrow6),
-    () => (doSwap.textContent = "Yes"),
-    () => (arrValue.innerHTML = "[4, <span class='swapped'>3, 8</span>]"),
-
-    // Third step
-
-    () => {
-      resetAndHide();
-      arrValue.innerHTML = "[4, 3, 8]";
-    },
-
-    () => (innerLoopTime.textContent = "First"),
-    () => (outerLoopTime.textContent = "second"),
-
-    () => showArrow(arrow3),
-    () => (iValue.textContent = "2"),
-
-    () => hideAndShow(arrow4),
-    () => (jValue1.textContent = "1"),
-    () => (nMinusI.textContent = "1"),
-
-    () => hideAndShow(arrow5),
-    () => (jValue2.textContent = "1"),
-    () => (ajValue.textContent = "4"),
-    () => (jPlusOne.textContent = "2"),
-    () => (ajPlusOne.textContent = "3"),
-    () => (isGreaterThan.textContent = "Yes"),
-
-    () => hideAndShow(arrow6),
-    () => (doSwap.textContent = "Yes"),
-    () => (arrValue.innerHTML = "[<span class='swapped'>3, 4,</span> 8]"),
-
-    () => {
-      arrValue.innerHTML = "[3, 4, 8]";
-      hideAllArrows();
-      playBtn.textContent = "Complete!";
-    },
-
-    () => {
-      playBtn.innerHTML = '<i class="fa-solid fa-play"></i> Play again';
-      playBtn.disabled = false;
-    },
-  ];
-
-  steps.forEach((fn, i) => setTimeout(fn, (i + 1) * 2000));
 }
 

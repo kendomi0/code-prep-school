@@ -1,7 +1,6 @@
-import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps } from "./bubble-sort-logic.js"
+import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps, step } from "./bubble-sort-logic.js"
 
 let invalidListMsg
-let getNumberListBtn
 let inputNumberList
 let arrValue
 let playBtn
@@ -33,7 +32,6 @@ let givenArray
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
-  getNumberListBtn = document.getElementById("get-number-list-btn");
   inputNumberList = document.getElementById("input-number-list");
   arrValue = document.getElementById("arr-value");
   nValue = document.getElementById("n-value");
@@ -224,7 +222,7 @@ export function updateTextContent(element, newContent) {
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
-async function runInSteps(steps, delay = 2000) {
+async function runInSteps(steps, delay = 500) {
   for (const step of steps) {
     if (Array.isArray(step)) {
       step.forEach(({ fn, args }) => fn(...args));
@@ -235,28 +233,16 @@ async function runInSteps(steps, delay = 2000) {
   }
 }
 
-if (getNumberListBtn) {
-  getNumberListBtn.addEventListener("click", function () {
+if (playBtn) {
+  playBtn.addEventListener("click", function () {
     resetAndHide("clear");
     const results = getBubbleSortResults();
     const isInputValid = invalidListMsg.style.display == "none"
     if (isInputValid) {
+      playBtn.textContent = "Playing..."
       bubbleSort(results);
-      console.log(pseudocodeSteps);
+      step(() => playBtn.textContent = "Complete!");
       runInSteps(pseudocodeSteps);
-    }
-  });
-}
-
-if (playBtn) {
-  playBtn.addEventListener("click", () => {
-    resetAndHide(true);
-    playBtn.textContent = "Playing...";
-    givenArr = parseNumberListInput(inputNumberList.value);
-    getBubbleSortResults();
-    const isInputValid = invalidListMsg.style.display == "none"
-    if (isInputValid) {
-      bubbleSort();
     }
   });
 }
