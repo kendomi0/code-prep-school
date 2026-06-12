@@ -29,7 +29,6 @@ describe("Functions for updating DOM elements", () => {
         it("displays error message", () => {
             setErrorMessage("test");
             const invalidListMsg = document.getElementById("invalid-list-msg");
-            expect(invalidListMsg).toHaveStyle("display: block");
             expect(invalidListMsg.textContent).toBe("test");
         }
         )

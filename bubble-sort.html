@@ -44,7 +44,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-top: 50px;
         margin-bottom: 30px;
       }
 
@@ -80,6 +79,11 @@
 
       .num {
         color: #79c0ff;
+      }
+
+      #invalid-list-msg {
+        display:block;
+        padding-bottom:10px;
       }
 
       #pseudocode-animate,
@@ -308,7 +312,7 @@
           
           <button id="play-btn"><i class="fa-solid fa-play"></i> Play</button>
 
-          <p id="invalid-list-msg" class="invalid-input-msg"></p>
+          <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
 
           <div id="code-animation">
             <div id="pseudocode-animate" class="manual-code-block">

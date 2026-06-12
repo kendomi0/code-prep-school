@@ -68,8 +68,7 @@ export function init() {
 }
 
 export function setErrorMessage(result) {
-    invalidListMsg.textContent = result;
-    invalidListMsg.style.display = "block";
+  invalidListMsg.textContent = result;
 }
 
 export const ordinalNumbers = {
@@ -92,7 +91,7 @@ export function processInput(result) {
 }
 
 export function getBubbleSortResults() {
-  invalidListMsg.style.display = "none";
+  invalidListMsg.innerHTML = "&nbsp;"
   const result = parseNumberListInput(inputNumberList.value);
   processInput(result);
   return result;
@@ -237,7 +236,7 @@ if (playBtn) {
   playBtn.addEventListener("click", function () {
     resetAndHide("clear");
     const results = getBubbleSortResults();
-    const isInputValid = invalidListMsg.style.display == "none"
+    const isInputValid = invalidListMsg.innerHTML == "&nbsp;"
     if (isInputValid) {
       playBtn.textContent = "Playing..."
       bubbleSort(results);
