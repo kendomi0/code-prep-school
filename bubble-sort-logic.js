@@ -1,4 +1,4 @@
-import { displayArray, displayOuterLoopIteration, displayInnerLoopIteration, updateTextContent, showArrow, resetAndHideExcept, setGivenArray, hideAllArrows } from "./bubble-sort-dom.js"
+import { displayArray, displayOuterLoopIteration, displayInnerLoopIteration, updateTextContent, showArrow, resetAndHideExcept, setGivenArray, hideAllArrows, runInSteps } from "./bubble-sort-dom.js"
 
 const oneBasedIndexCode = document.getElementById("one-based-index-code");
 const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
@@ -84,7 +84,7 @@ export function bubbleSort(arr) {
     let iOneBased = i + 1;
     stepGroup(
       [
-        { fn: resetAndHideExcept, args: ["nValue", "arrValue"]},
+        { fn: resetAndHideExcept, args: ["nValue", "arrValue", "givenArray"]},
         { fn: showArrow, args: ["arrow3"]}
       ]
     )
@@ -96,7 +96,7 @@ export function bubbleSort(arr) {
     for (let j = 0; j < arr.length - i - 1; j++) {
       let jOneBased = j + 1;
       stepGroup([
-        { fn: resetAndHideExcept, args: ["iValue", "nValue", "arrValue", "outerLoopTime"] },
+        { fn: resetAndHideExcept, args: ["iValue", "nValue", "arrValue", "outerLoopTime", "givenArray"] },
         { fn: showArrow, args: ["arrow4"] }
       ]);
 
@@ -125,6 +125,7 @@ export function bubbleSort(arr) {
     }
   }
   step(hideAllArrows);
+  step(updateTextContent, "playBtn", "Complete!")
   return arr
 }
 

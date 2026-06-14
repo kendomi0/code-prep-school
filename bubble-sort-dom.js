@@ -29,6 +29,9 @@ let lines
 let loopTimes
 let indices
 let givenArray
+let stopBtn
+let playNewBtn
+let buttons
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
@@ -36,6 +39,8 @@ export function init() {
   arrValue = document.getElementById("arr-value");
   nValue = document.getElementById("n-value");
   playBtn = document.getElementById("play-btn");
+  stopBtn = document.getElementById("stop-btn");
+  playNewBtn = document.getElementById("play-new-btn");
   iValue = document.getElementById("i-value");
   jValue1 = document.getElementById("j-value-1");
   jValue2 = document.getElementById("j-value-2");
@@ -61,8 +66,10 @@ export function init() {
   arrows = document.querySelectorAll(".arrows");
 
   variableElements = {
-    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime
+    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, stopBtn, playNewBtn
   }
+
+  buttons = { playBtn, stopBtn, playNewBtn }
 
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
 }
@@ -186,13 +193,15 @@ function resetAndHide(clearEverything = null) {
   if (clearEverything) {
     reset(nValue);
     reset(arrValue);
+    reset(givenArray);
   }
 }
 
 export function resetAndHideExcept(...elements) {
   hideAllArrows();
   const linesToKeep = elements.map(element => variableElements[element]);
-  const linesToReset = Object.values(variableElements).filter(line => !linesToKeep.includes(line));
+  let linesToReset = Object.values(variableElements).filter(line => !linesToKeep.includes(line) && !Object.values(buttons).includes(line));
+  console.log(linesToReset.length);
   linesToReset.forEach(reset);
 }
 
@@ -221,8 +230,13 @@ export function updateTextContent(element, newContent) {
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
-async function runInSteps(steps, delay = 500) {
+let iterationNumber = 0
+
+export async function runInSteps(steps, iterationNumber) {
+  let givenIterationNumber = iterationNumber;
+  let delay = 500;
   for (const step of steps) {
+    console.log(`Given iteration number: ${givenIterationNumber}, Iteration number: ${iterationNumber}`);
     if (Array.isArray(step)) {
       step.forEach(({ fn, args }) => fn(...args));
     } else {
@@ -232,16 +246,56 @@ async function runInSteps(steps, delay = 500) {
   }
 }
 
-if (playBtn) {
-  playBtn.addEventListener("click", function () {
-    resetAndHide("clear");
-    const results = getBubbleSortResults();
-    const isInputValid = invalidListMsg.innerHTML == "&nbsp;"
-    if (isInputValid) {
-      playBtn.textContent = "Playing..."
-      bubbleSort(results);
-      step(() => playBtn.textContent = "Complete!");
-      runInSteps(pseudocodeSteps);
+export function stopBubbleSort() {
+  pseudocodeSteps.length = 0;
+  resetAndHide("clear");
+}
+
+export function checkInputValidity() {
+  return invalidListMsg.innerHTML == "&nbsp;"
+}
+
+export function enableStopButton() {
+  inputNumberList.disabled = true;
+  playBtn.style.display = "none";
+  stopBtn.style.display = "inline";
+}
+
+export function continueOrPlayNew() {
+  inputNumberList.disabled = false;
+  stopBubbleSort();
+  stopBtn.style.display = "none";
+  playNewBtn.style.display = "inline";
+}
+
+export function playBubbleSort() {
+  resetAndHide("clear");
+  const results = getBubbleSortResults();
+  const isInputValid = checkInputValidity();
+  const isCurrentlyPlaying = pseudocodeSteps.length > 0
+  if (isInputValid) {
+    playNewBtn.style.display = "none";
+    stopBtn.style.display = "none";
+    if (isCurrentlyPlaying) {
+      stopBubbleSort();
     }
-  });
+    else {
+      enableStopButton();
+      bubbleSort(results);
+      iterationNumber += 1;
+      runInSteps(pseudocodeSteps, iterationNumber);
+    }
+  }
+}
+
+if (playBtn) {
+  playBtn.addEventListener("click", playBubbleSort);
+}
+
+if (stopBtn) {
+  stopBtn.addEventListener("click", continueOrPlayNew);
+}
+
+if (playNewBtn) {
+  playNewBtn.addEventListener("click", playBubbleSort);
 }

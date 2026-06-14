@@ -21,6 +21,10 @@ describe("Functions for updating DOM elements", () => {
             <p id="outer-loop-time"></p>
             <p id="inner-loop-time"></p>
             <p id="arrow-1"></p>
+            <p id="given-array"></p>
+            <button id="play-btn"></button>
+            <button id="stop-btn"></button
+            <button id="play-new-btn"></button>
         </div>`
         init();
     });

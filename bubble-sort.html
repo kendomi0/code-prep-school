@@ -47,13 +47,17 @@
         margin-bottom: 30px;
       }
 
-      #play-btn {
+      .animation-btns {
         width: inherit;
         padding: 10px 30px 10px 30px;
         margin-left:10px;
         font-size: 21px;
         border-radius: 25px;
         background-color: #0860b3;
+      }
+
+      #stop-btn, #play-new-btn {
+        display:none;
       }
 
       .manual-code-block {
@@ -300,7 +304,7 @@
           </p>
 
           <p>
-            Enter a list of 2-10 numbers, separated by commas with no spaces, then press play, to see how the bubble sort animation works on the list, step-by-step.
+            Enter a list of 2-10 numbers, separated by commas with no spaces. Then press play to see how the bubble sort animation works on the list, step-by-step.
           </p>
 
           <input
@@ -310,7 +314,9 @@
             placeholder="Enter list of 2-10 numbers"
           />
           
-          <button id="play-btn"><i class="fa-solid fa-play"></i> Play</button>
+          <button id="play-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play</button>
+          <button id="stop-btn" class="animation-btns"><i class="fa-solid fa-stop"></i> Stop</button>
+          <button id="play-new-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
 
           <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
 
