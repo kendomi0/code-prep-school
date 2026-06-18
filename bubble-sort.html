@@ -46,6 +46,10 @@
         justify-content: space-between;
         margin-bottom: 30px;
       }
+    
+      .fa-eject {
+        rotate: 90deg;
+      }
 
       .animation-btns {
         width: inherit;
@@ -56,8 +60,12 @@
         background-color: #0860b3;
       }
 
-      #stop-btn, #play-new-btn {
+      .non-play-btns {
         display:none;
+      }
+
+      #complete-btn {
+        cursor: default;
       }
 
       .manual-code-block {
@@ -315,8 +323,11 @@
           />
           
           <button id="play-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play</button>
-          <button id="stop-btn" class="animation-btns"><i class="fa-solid fa-stop"></i> Stop</button>
-          <button id="play-new-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
+          <button id="complete-btn" class="animation-btns non-play-btns">Complete!</button>
+          <button id="pause-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-pause"></i> Pause</button>
+          <button id="resume-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-eject"></i> Resume</button>
+          <button id="cancel-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-stop"></i> Cancel</button>
+          <button id="play-new-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
 
           <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
 

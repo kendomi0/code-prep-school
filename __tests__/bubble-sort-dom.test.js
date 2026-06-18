@@ -1,4 +1,4 @@
-import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept } from "../bubble-sort-dom.js"
+import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resume } from "../bubble-sort-dom.js"
 import { errorMessages } from "../bubble-sort-logic.js"
 import * as bubbleSortDom from "../bubble-sort-dom.js"
 
@@ -23,7 +23,7 @@ describe("Functions for updating DOM elements", () => {
             <p id="arrow-1"></p>
             <p id="given-array"></p>
             <button id="play-btn"></button>
-            <button id="stop-btn"></button
+            <button id="pause-btn"></button
             <button id="play-new-btn"></button>
         </div>`
         init();
@@ -87,6 +87,16 @@ describe("Functions for updating DOM elements", () => {
             expect(nValue.textContent).toBe("4");
             expect(iValue.innerHTML).toBe("&nbsp;");
             expect(jValue1.innerHTML).toBe("&nbsp;");
+        })
+    })
+
+    describe("runInSteps()", () => {
+        it("runs without error", () => {
+            let steps = [ 
+                { fn: showArrow, args: ["arrow1"] },
+                { fn: updateTextContent, args: ["nValue", 5]} 
+            ]
+            runInSteps(steps);
         })
     })
 })

@@ -1,4 +1,4 @@
-import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps, step } from "./bubble-sort-logic.js"
+import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps, setPseudocodeSteps } from "./bubble-sort-logic.js"
 
 let invalidListMsg
 let inputNumberList
@@ -29,18 +29,26 @@ let lines
 let loopTimes
 let indices
 let givenArray
-let stopBtn
+let pauseBtn
 let playNewBtn
 let buttons
+let resumeBtn
+let cancelBtn
+let completeBtn
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
   inputNumberList = document.getElementById("input-number-list");
   arrValue = document.getElementById("arr-value");
   nValue = document.getElementById("n-value");
+
   playBtn = document.getElementById("play-btn");
-  stopBtn = document.getElementById("stop-btn");
+  pauseBtn = document.getElementById("pause-btn");
   playNewBtn = document.getElementById("play-new-btn");
+  resumeBtn = document.getElementById("resume-btn");
+  cancelBtn = document.getElementById("cancel-btn");
+  completeBtn = document.getElementById("complete-btn");
+
   iValue = document.getElementById("i-value");
   jValue1 = document.getElementById("j-value-1");
   jValue2 = document.getElementById("j-value-2");
@@ -66,10 +74,10 @@ export function init() {
   arrows = document.querySelectorAll(".arrows");
 
   variableElements = {
-    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, stopBtn, playNewBtn
+    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, pauseBtn, playNewBtn, resumeBtn, cancelBtn, completeBtn
   }
 
-  buttons = { playBtn, stopBtn, playNewBtn }
+  buttons = { playBtn, pauseBtn, playNewBtn, resumeBtn, cancelBtn, completeBtn }
 
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
 }
@@ -201,7 +209,6 @@ export function resetAndHideExcept(...elements) {
   hideAllArrows();
   const linesToKeep = elements.map(element => variableElements[element]);
   let linesToReset = Object.values(variableElements).filter(line => !linesToKeep.includes(line) && !Object.values(buttons).includes(line));
-  console.log(linesToReset.length);
   linesToReset.forEach(reset);
 }
 
@@ -228,22 +235,52 @@ export function updateTextContent(element, newContent) {
   variableElements[element].textContent = `${newContent}`;
 }
 
+export let isPaused = false;
+
+export function setToComplete() {
+  hideBtn(pauseBtn);
+  hideBtn(cancelBtn);
+  showBtn(playNewBtn);
+  inputNumberList.disabled = false;
+  showBtn(completeBtn);
+  pseudocodeSteps.length = 0;
+}
+
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
-let iterationNumber = 0
-
-export async function runInSteps(steps, iterationNumber) {
-  let givenIterationNumber = iterationNumber;
+export async function runInSteps(steps) {
+  steps = await steps;
   let delay = 500;
-  for (const step of steps) {
-    console.log(`Given iteration number: ${givenIterationNumber}, Iteration number: ${iterationNumber}`);
+  for (const [index, step] of steps.entries()) {
+    if (step == undefined) {
+      continue;
+    }
+    if (isPaused) {
+      break;
+    }
     if (Array.isArray(step)) {
       step.forEach(({ fn, args }) => fn(...args));
     } else {
       step.fn(...step.args);
     }
     await wait(delay);
+    steps[index] = undefined;
   }
+}
+
+export function hideBtn(btn) {
+  btn.style.display = "none";
+}
+
+export function showBtn(btn) {
+  btn.style.display = "inline";
+}
+
+export function enableStopButton() {
+  inputNumberList.disabled = true;
+  hideBtn(playBtn);
+  showBtn(pauseBtn);
+  showBtn(cancelBtn);
 }
 
 export function stopBubbleSort() {
@@ -251,40 +288,59 @@ export function stopBubbleSort() {
   resetAndHide("clear");
 }
 
+export function clearBubbleSort(steps) {
+  steps.length = 0;
+}
+
+export function getStepsLeft(steps) {
+  setPseudocodeSteps(pseudocodeSteps.filter(pStep => pStep !== undefined));
+}
+
+export function pauseBubbleSort() {
+  isPaused = true;
+  let remainingSteps = [...pseudocodeSteps];
+  clearBubbleSort(pseudocodeSteps);
+  setPseudocodeSteps(remainingSteps);
+  hideBtn(pauseBtn);
+  showBtn(resumeBtn);
+}
+
+export function cancel() {
+  stopBubbleSort();
+  hideBtn(pauseBtn);
+  hideBtn(resumeBtn);
+  hideBtn(cancelBtn);
+  showBtn(playNewBtn);
+  isPaused = false;
+  inputNumberList.disabled = false;
+}
+
+let stepsLeft = null;
+
+export function resume() {
+  isPaused = false;
+  runInSteps(pseudocodeSteps);
+  hideBtn(resumeBtn);
+  hideBtn(playNewBtn);
+  showBtn(pauseBtn);
+}
+
 export function checkInputValidity() {
   return invalidListMsg.innerHTML == "&nbsp;"
-}
-
-export function enableStopButton() {
-  inputNumberList.disabled = true;
-  playBtn.style.display = "none";
-  stopBtn.style.display = "inline";
-}
-
-export function continueOrPlayNew() {
-  inputNumberList.disabled = false;
-  stopBubbleSort();
-  stopBtn.style.display = "none";
-  playNewBtn.style.display = "inline";
 }
 
 export function playBubbleSort() {
   resetAndHide("clear");
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
-  const isCurrentlyPlaying = pseudocodeSteps.length > 0
   if (isInputValid) {
-    playNewBtn.style.display = "none";
-    stopBtn.style.display = "none";
-    if (isCurrentlyPlaying) {
-      stopBubbleSort();
-    }
-    else {
-      enableStopButton();
-      bubbleSort(results);
-      iterationNumber += 1;
-      runInSteps(pseudocodeSteps, iterationNumber);
-    }
+    hideBtn(playNewBtn);
+    hideBtn(pauseBtn);
+    hideBtn(resumeBtn);
+    hideBtn(completeBtn);
+    enableStopButton();
+    bubbleSort(results);
+    stepsLeft = runInSteps(pseudocodeSteps);
   }
 }
 
@@ -292,10 +348,18 @@ if (playBtn) {
   playBtn.addEventListener("click", playBubbleSort);
 }
 
-if (stopBtn) {
-  stopBtn.addEventListener("click", continueOrPlayNew);
+if (pauseBtn) {
+  pauseBtn.addEventListener("click", pauseBubbleSort);
 }
 
 if (playNewBtn) {
   playNewBtn.addEventListener("click", playBubbleSort);
+}
+
+if (resumeBtn) {
+  resumeBtn.addEventListener("click", resume);
+}
+
+if (cancelBtn) {
+  cancelBtn.addEventListener("click", cancel);
 }

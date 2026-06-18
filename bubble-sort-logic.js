@@ -1,4 +1,4 @@
-import { displayArray, displayOuterLoopIteration, displayInnerLoopIteration, updateTextContent, showArrow, resetAndHideExcept, setGivenArray, hideAllArrows, runInSteps } from "./bubble-sort-dom.js"
+import { displayArray, displayOuterLoopIteration, displayInnerLoopIteration, updateTextContent, showArrow, resetAndHideExcept, setGivenArray, hideAllArrows, runInSteps, setToComplete } from "./bubble-sort-dom.js"
 
 const oneBasedIndexCode = document.getElementById("one-based-index-code");
 const zeroBasedIndexCode = document.getElementById("zero-based-index-code");
@@ -70,6 +70,10 @@ function stepGroup(fnArr) {
 
 export let pseudocodeSteps = [];
 
+export function setPseudocodeSteps(steps) {
+  pseudocodeSteps = [...steps];
+}
+
 export function bubbleSort(arr) {
   step(setGivenArray, [...arr]);
   step(showArrow, "arrow1");
@@ -125,7 +129,7 @@ export function bubbleSort(arr) {
     }
   }
   step(hideAllArrows);
-  step(updateTextContent, "playBtn", "Complete!")
+  step(setToComplete);
   return arr
 }
 
