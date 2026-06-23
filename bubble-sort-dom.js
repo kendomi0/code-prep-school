@@ -1,7 +1,7 @@
 import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps, setPseudocodeSteps } from "./bubble-sort-logic.js"
 
 let invalidListMsg
-let inputNumberList
+let numberListInput
 let arrValue
 let playBtn
 let nValue
@@ -38,7 +38,7 @@ let completeBtn
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
-  inputNumberList = document.getElementById("input-number-list");
+  numberListInput = document.getElementById("number-list-input");
   arrValue = document.getElementById("arr-value");
   nValue = document.getElementById("n-value");
 
@@ -82,9 +82,9 @@ export function init() {
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
 }
 
-export function setErrorMessage(result) {
-  invalidListMsg.textContent = result;
-}
+init();
+
+// Defining variables to be used in functions
 
 export const ordinalNumbers = {
   1: "first",
@@ -99,20 +99,11 @@ export const ordinalNumbers = {
   10: "tenth"
 }
 
-export function processInput(result) {
-    if (Object.values(errorMessages).includes(result)) {
-      setErrorMessage(result);
-    }
-}
+// Functions for Setting DOM elements
 
-export function getBubbleSortResults() {
-  invalidListMsg.innerHTML = "&nbsp;"
-  const result = parseNumberListInput(inputNumberList.value);
-  processInput(result);
-  return result;
+export function setErrorMessage(result) {
+  invalidListMsg.textContent = result;
 }
-
-init();
 
 export function setGivenArray(arr) {
   if (!givenArray) {
@@ -120,6 +111,97 @@ export function setGivenArray(arr) {
     return;
   }
   givenArray.textContent = `[${arr}]`;
+}
+
+export function processInput(result) {
+    if (Object.values(errorMessages).includes(result)) {
+      setErrorMessage(result);
+    }
+}
+
+export function displayOuterLoopIteration(num) {
+  if (!outerLoopTime) {
+    console.warn("outerLoopTime element not found");
+    return;
+  }
+  outerLoopTime.textContent = `${ordinalNumbers[num]}`;
+}
+
+export function displayInnerLoopIteration(num) {
+  if (!innerLoopTime) {
+    console.warn("innerLoopTime element not found");
+    return;
+  }
+  innerLoopTime.textContent = `${ordinalNumbers[num]}`
+  innerLoopTime.style.textTransform = "capitalize";
+}
+
+function reset(element) {
+  element.innerHTML = "&nbsp;";
+}
+
+function resetLines() {
+  lines.forEach(reset);
+
+  loopTimes.forEach((loopTime) => {
+    loopTime.innerHTML = "&nbsp;";
+  });
+
+  indices.forEach((index) => {
+    index.innerHTML = "&nbsp;";
+  });
+}
+
+export function hideAllArrows() {
+  arrows.forEach(
+    (arrow) => arrow.style.visibility = "hidden"
+  );
+}
+
+export function showArrow(numberArrow) {
+  if (!arrowsObject[numberArrow]) {
+    console.warn(`${numberArrow} element not found`);
+    return;
+  }
+  hideAllArrows();
+  arrowsObject[numberArrow].style.visibility = "visible";
+}
+
+export function updateTextContent(element, newContent) {
+  if (!variableElements[element]) {
+    console.warn(`No element found for "${element}"`);
+    return;
+  }
+  variableElements[element].textContent = `${newContent}`;
+}
+
+export function disableInput(element) {
+  element.disabled = true;
+}
+
+export function enableInput(element) {
+  element.disabled = false;
+}
+
+export function hideBtn(btn) {
+  btn.style.display = "none";
+}
+
+export function showBtn(btn) {
+  btn.style.display = "inline";
+}
+
+export function checkInputValidity() {
+  return invalidListMsg.innerHTML == "&nbsp;"
+}
+
+// Bubble sort functions
+
+export function getBubbleSortResults() {
+  invalidListMsg.innerHTML = "&nbsp;"
+  const result = parseNumberListInput(numberListInput.value);
+  processInput(result);
+  return result;
 }
 
 export function displayArray(arr, j) {
@@ -161,48 +243,12 @@ export function displayArray(arr, j) {
   }
 }
 
-export function displayOuterLoopIteration(num) {
-  if (!outerLoopTime) {
-    console.warn("outerLoopTime element not found");
-    return;
-  }
-  outerLoopTime.textContent = `${ordinalNumbers[num]}`;
-}
-
-export function displayInnerLoopIteration(num) {
-  if (!innerLoopTime) {
-    console.warn("innerLoopTime element not found");
-    return;
-  }
-  innerLoopTime.textContent = `${ordinalNumbers[num]}`
-  innerLoopTime.style.textTransform = "capitalize";
-}
-
-function reset(element) {
-  element.innerHTML = "&nbsp;";
-}
-
-function resetLines() {
-  lines.forEach(reset);
-
-  loopTimes.forEach((loopTime) => {
-    loopTime.innerHTML = "&nbsp;";
-  });
-
-  indices.forEach((index) => {
-    index.innerHTML = "&nbsp;";
-  });
-}
-
-
-function resetAndHide(clearEverything = null) {
+function clearAll() {
   resetLines();
   hideAllArrows();
-  if (clearEverything) {
-    reset(nValue);
-    reset(arrValue);
-    reset(givenArray);
-  }
+  reset(nValue);
+  reset(arrValue);
+  reset(givenArray);
 }
 
 export function resetAndHideExcept(...elements) {
@@ -212,37 +258,12 @@ export function resetAndHideExcept(...elements) {
   linesToReset.forEach(reset);
 }
 
-export function hideAllArrows() {
-  arrows.forEach(
-    (arrow) => arrow.style.visibility = "hidden"
-  );
-}
-
-export function showArrow(numberArrow) {
-  if (!arrowsObject[numberArrow]) {
-    console.warn(`${numberArrow} element not found`);
-    return;
-  }
-  hideAllArrows();
-  arrowsObject[numberArrow].style.visibility = "visible";
-}
-
-export function updateTextContent(element, newContent) {
-  if (!variableElements[element]) {
-    console.warn(`No element found for "${element}"`);
-    return;
-  }
-  variableElements[element].textContent = `${newContent}`;
-}
-
 export let isPaused = false;
 
 export function setToComplete() {
-  hideBtn(pauseBtn);
-  hideBtn(cancelBtn);
-  showBtn(playNewBtn);
-  inputNumberList.disabled = false;
-  showBtn(completeBtn);
+  [pauseBtn, cancelBtn].forEach(hideBtn);
+  [playNewBtn, completeBtn].forEach(showBtn);
+  enableInput(numberListInput);
   pseudocodeSteps.length = 0;
 }
 
@@ -268,24 +289,15 @@ export async function runInSteps(steps) {
   }
 }
 
-export function hideBtn(btn) {
-  btn.style.display = "none";
-}
-
-export function showBtn(btn) {
-  btn.style.display = "inline";
-}
-
 export function enableStopButton() {
-  inputNumberList.disabled = true;
+  disableInput(numberListInput);
   hideBtn(playBtn);
-  showBtn(pauseBtn);
-  showBtn(cancelBtn);
+  [pauseBtn, cancelBtn].forEach(showBtn);
 }
 
 export function stopBubbleSort() {
   pseudocodeSteps.length = 0;
-  resetAndHide("clear");
+  clearAll();
 }
 
 export function clearBubbleSort(steps) {
@@ -296,6 +308,8 @@ export function getStepsLeft(steps) {
   setPseudocodeSteps(pseudocodeSteps.filter(pStep => pStep !== undefined));
 }
 
+// Animation states
+
 export function pauseBubbleSort() {
   isPaused = true;
   let remainingSteps = [...pseudocodeSteps];
@@ -305,61 +319,43 @@ export function pauseBubbleSort() {
   showBtn(resumeBtn);
 }
 
-export function cancel() {
+export function cancelBubbleSort() {
   stopBubbleSort();
-  hideBtn(pauseBtn);
-  hideBtn(resumeBtn);
-  hideBtn(cancelBtn);
+  [pauseBtn, resumeBtn, cancelBtn].forEach(hideBtn);
   showBtn(playNewBtn);
   isPaused = false;
-  inputNumberList.disabled = false;
+  enableInput(numberListInput);
 }
 
-let stepsLeft = null;
-
-export function resume() {
+export function resumeBubbleSort() {
   isPaused = false;
   runInSteps(pseudocodeSteps);
-  hideBtn(resumeBtn);
-  hideBtn(playNewBtn);
+  [resumeBtn, playNewBtn].forEach(hideBtn);
   showBtn(pauseBtn);
 }
 
-export function checkInputValidity() {
-  return invalidListMsg.innerHTML == "&nbsp;"
-}
-
 export function playBubbleSort() {
-  resetAndHide("clear");
+  clearAll();
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
   if (isInputValid) {
-    hideBtn(playNewBtn);
-    hideBtn(pauseBtn);
-    hideBtn(resumeBtn);
-    hideBtn(completeBtn);
+    [playNewBtn, pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
     enableStopButton();
     bubbleSort(results);
-    stepsLeft = runInSteps(pseudocodeSteps);
+    let stepsLeft = runInSteps(pseudocodeSteps);
   }
 }
 
-if (playBtn) {
-  playBtn.addEventListener("click", playBubbleSort);
-}
+// Event listeners
 
-if (pauseBtn) {
-  pauseBtn.addEventListener("click", pauseBubbleSort);
-}
+const buttonFns = [
+  [playBtn, playBubbleSort],
+  [pauseBtn, pauseBubbleSort],
+  [playNewBtn, playBubbleSort],
+  [resumeBtn, resumeBubbleSort],
+  [cancelBtn, cancelBubbleSort]
+]
 
-if (playNewBtn) {
-  playNewBtn.addEventListener("click", playBubbleSort);
-}
-
-if (resumeBtn) {
-  resumeBtn.addEventListener("click", resume);
-}
-
-if (cancelBtn) {
-  cancelBtn.addEventListener("click", cancel);
-}
+buttonFns.forEach(
+  ([btn, fn]) => btn.addEventListener('click', fn)
+);
