@@ -1,4 +1,4 @@
-import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resume } from "../bubble-sort-dom.js"
+import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resumeBubbleSort } from "../bubble-sort-dom.js"
 import { errorMessages } from "../bubble-sort-logic.js"
 import * as bubbleSortDom from "../bubble-sort-dom.js"
 

@@ -357,5 +357,10 @@ const buttonFns = [
 ]
 
 buttonFns.forEach(
-  ([btn, fn]) => btn.addEventListener('click', fn)
+  ([btn, fn]) => 
+   {
+    if (btn) {
+      btn.addEventListener('click', fn)
+    }
+  } 
 );
