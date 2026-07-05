@@ -39,6 +39,7 @@ let completeBtn
 let slowBtn
 let mediumBtn
 let fastBtn
+let fastestBtn
 let speedBtns
 let speedBtnSection
 
@@ -58,6 +59,7 @@ export function init() {
   slowBtn = document.getElementById("slow-btn");
   mediumBtn = document.getElementById("medium-btn");
   fastBtn = document.getElementById("fast-btn");
+  fastestBtn = document.getElementById("fastest-btn");
   speedBtns = document.querySelectorAll(".speed-btns");
   speedBtnSection = document.getElementById("speed-btn-section");
 
@@ -327,7 +329,7 @@ export function getStepsLeft(steps) {
 // Button states
 
 export function getSpeed(btn) {
-  const speeds = { "slow-btn": 2000, "medium-btn": 1000, "fast-btn": 500 }
+  const speeds = { "slow-btn": 2000, "medium-btn": 1000, "fast-btn": 500, "fastest-btn": 200 };
   return speeds[btn.id]
 }
 
