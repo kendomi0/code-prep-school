@@ -51,13 +51,40 @@
         rotate: 90deg;
       }
 
-      .animation-btns {
+      #speed-btn-section {
+        display: flex;
+        visibility: hidden;
+        height:50px;
+        margin-bottom: 30px;
+      }
+
+      #speed-btn-container {
+        display: flex;
+        height:50px;
+      }
+
+      .animation-btns, .speed-btns {
         width: inherit;
-        padding: 10px 30px 10px 30px;
         margin-left:10px;
         font-size: 21px;
+        padding: 10px 30px 10px 30px;
         border-radius: 25px;
         background-color: #0860b3;
+      }
+
+      #slow-btn {
+        background-color: #348543;
+        border: 2px solid #4d9e5c;
+      }
+
+      #medium-btn {
+        background-color: #66620d;
+        border: 2px solid #757120;
+      }
+
+      #fast-btn {
+        background-color: #530000;
+        border: 2px solid #610a0a;
       }
 
       .non-play-btns {
@@ -330,6 +357,15 @@
           <button id="play-new-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
 
           <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
+
+          <div id="speed-btn-section">
+            <p>Change speed:</p>
+            <div id="speed-btn-container">
+              <button id="slow-btn" class="speed-btns inactive">Slow</button>
+              <button id="medium-btn" class="speed-btns">Medium</button>
+              <button id="fast-btn" class="speed-btns inactive">Fast</button>
+            </div>
+          </div>
 
           <div id="code-animation">
             <div id="pseudocode-animate" class="manual-code-block">

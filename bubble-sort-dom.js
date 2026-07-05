@@ -36,6 +36,12 @@ let resumeBtn
 let cancelBtn
 let completeBtn
 
+let slowBtn
+let mediumBtn
+let fastBtn
+let speedBtns
+let speedBtnSection
+
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
   numberListInput = document.getElementById("number-list-input");
@@ -48,6 +54,12 @@ export function init() {
   resumeBtn = document.getElementById("resume-btn");
   cancelBtn = document.getElementById("cancel-btn");
   completeBtn = document.getElementById("complete-btn");
+
+  slowBtn = document.getElementById("slow-btn");
+  mediumBtn = document.getElementById("medium-btn");
+  fastBtn = document.getElementById("fast-btn");
+  speedBtns = document.querySelectorAll(".speed-btns");
+  speedBtnSection = document.getElementById("speed-btn-section");
 
   iValue = document.getElementById("i-value");
   jValue1 = document.getElementById("j-value-1");
@@ -265,13 +277,17 @@ export function setToComplete() {
   [playNewBtn, completeBtn].forEach(showBtn);
   enableInput(numberListInput);
   pseudocodeSteps.length = 0;
+  speedBtnSection.style.visibility = "hidden";
 }
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
+let delay = 1000;
+
+let isCurrentlyPlaying = false;
+
 export async function runInSteps(steps) {
   steps = await steps;
-  let delay = 500;
   for (const [index, step] of steps.entries()) {
     if (step == undefined) {
       continue;
@@ -308,6 +324,33 @@ export function getStepsLeft(steps) {
   setPseudocodeSteps(pseudocodeSteps.filter(pStep => pStep !== undefined));
 }
 
+// Button states
+
+export function getSpeed(btn) {
+  const speeds = { "slow-btn": 2000, "medium-btn": 1000, "fast-btn": 500 }
+  return speeds[btn.id]
+}
+
+export function setSpeedButtonState(btn) {
+  btn.disabled = true;
+  for (const currentElement of speedBtns) {
+    currentElement.disabled = currentElement === btn;
+    if (currentElement === btn) {
+      currentElement.classList.toggle('inactive', false);
+    }
+    else {
+      currentElement.classList.add('inactive');
+    }
+  }
+}
+
+export function changeSpeed(btn) {
+  pauseBubbleSort();
+  setSpeedButtonState(btn);
+  delay = getSpeed(btn);
+  resumeBubbleSort();
+}
+
 // Animation states
 
 export function pauseBubbleSort() {
@@ -325,9 +368,11 @@ export function cancelBubbleSort() {
   showBtn(playNewBtn);
   isPaused = false;
   enableInput(numberListInput);
+  speedBtnSection.style.visibility = "hidden";
 }
 
 export function resumeBubbleSort() {
+  isCurrentlyPlaying = true;
   isPaused = false;
   runInSteps(pseudocodeSteps);
   [resumeBtn, playNewBtn].forEach(hideBtn);
@@ -335,10 +380,12 @@ export function resumeBubbleSort() {
 }
 
 export function playBubbleSort() {
+  isCurrentlyPlaying = true;
   clearAll();
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
   if (isInputValid) {
+    speedBtnSection.style.visibility = "visible";
     [playNewBtn, pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
     enableStopButton();
     bubbleSort(results);
@@ -363,4 +410,12 @@ buttonFns.forEach(
       btn.addEventListener('click', fn)
     }
   } 
+);
+
+speedBtns.forEach(
+  (speedBtn) => {
+    if (speedBtn) {
+      speedBtn.addEventListener('click', () => changeSpeed(speedBtn));
+    }
+  }
 );

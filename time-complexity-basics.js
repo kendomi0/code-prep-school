@@ -141,7 +141,7 @@ let complexityBtns = [
 
 complexityBtns.forEach((cBtn, index) => {
   cBtn.addEventListener("click", () => {
-    cBtn.classList.toggle("active");
+    cBtn.classList.toggle("inactive");
     complexityGraphChart.data.datasets[index].hidden =
       !complexityGraphChart.data.datasets[index].hidden;
     complexityGraphChart.update();

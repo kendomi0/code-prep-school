@@ -1,4 +1,4 @@
-import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resumeBubbleSort } from "../bubble-sort-dom.js"
+import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resumeBubbleSort, selectSpeed, setSpeedButtonState, getSpeed } from "../bubble-sort-dom.js"
 import { errorMessages } from "../bubble-sort-logic.js"
 import * as bubbleSortDom from "../bubble-sort-dom.js"
 
@@ -25,6 +25,8 @@ describe("Functions for updating DOM elements", () => {
             <button id="play-btn"></button>
             <button id="pause-btn"></button
             <button id="play-new-btn"></button>
+            <button id="slow-btn" class="speed-btns"><span></span></button>
+            <button id="medium-btn" class="speed-btns"><span></span></button>
         </div>`
         init();
     });
@@ -97,6 +99,24 @@ describe("Functions for updating DOM elements", () => {
                 { fn: updateTextContent, args: ["nValue", 5]} 
             ]
             runInSteps(steps);
+        })
+    })
+
+    describe("setSpeedButtonState()", () => {
+        it("selects correct speed button", () => {
+            const slowBtn = document.getElementById("slow-btn");
+            const mediumBtn = document.getElementById("medium-btn");
+            setSpeedButtonState(slowBtn);
+            expect(slowBtn.disabled).toBe(true);
+            expect(mediumBtn.disabled).toBe(false);
+        })
+    })
+
+    describe("getSpeed()", () => {
+        it("gets speed", () => {
+            const slowBtn = document.getElementById("slow-btn");
+            let delay = getSpeed(slowBtn);
+            expect(delay).toBe(2000);
         })
     })
 })

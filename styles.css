@@ -102,6 +102,12 @@ th {
   padding: 8px;
 }
 
+.inactive {
+  background-color: gray !important;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
 /* Header */
 
 header {
