@@ -42,6 +42,7 @@ let fastBtn
 let fastestBtn
 let speedBtns
 let speedBtnSection
+let selectOrChange
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
@@ -62,6 +63,7 @@ export function init() {
   fastestBtn = document.getElementById("fastest-btn");
   speedBtns = document.querySelectorAll(".speed-btns");
   speedBtnSection = document.getElementById("speed-btn-section");
+  selectOrChange = document.getElementById("select-or-change");
 
   iValue = document.getElementById("i-value");
   jValue1 = document.getElementById("j-value-1");
@@ -277,6 +279,7 @@ export let isPaused = false;
 export function setToComplete() {
   [pauseBtn, cancelBtn].forEach(hideBtn);
   [playNewBtn, completeBtn].forEach(showBtn);
+  
   enableInput(numberListInput);
   pseudocodeSteps.length = 0;
   speedBtnSection.style.visibility = "hidden";
@@ -346,11 +349,41 @@ export function setSpeedButtonState(btn) {
   }
 }
 
+let isSpeedSelected = false;
+let isNewRun = false;
+
 export function changeSpeed(btn) {
+  console.log("Speed changed function called");
   pauseBubbleSort();
   setSpeedButtonState(btn);
   delay = getSpeed(btn);
   resumeBubbleSort();
+}
+
+export function selectSpeed(btn) {
+  console.log("Speed selected function called");
+  setSpeedButtonState(btn);
+  delay = getSpeed(btn);
+  isSpeedSelected = true;
+  selectOrChange.textContent = "Change";
+}
+
+export function initiateRun(btn) {
+  selectSpeed(btn);
+  [playNewBtn, pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
+  enableStopButton();
+  let stepsLeft = runInSteps(pseudocodeSteps);
+  isNewRun = false;
+}
+
+export function editSpeed(btn) {
+  console.log('clicked', event.currentTarget);
+  if (isNewRun) {
+    initiateRun(btn);
+  }
+  else {
+    changeSpeed(btn);
+  }
 }
 
 // Animation states
@@ -382,16 +415,22 @@ export function resumeBubbleSort() {
 }
 
 export function playBubbleSort() {
+  speedBtns.forEach(
+    (speedBtn) => {
+      speedBtn.disabled = false;
+      speedBtn.classList.add("inactive");
+    }
+  );
+  selectOrChange.textContent = "Select";
+  completeBtn.style.display = "none";
   isCurrentlyPlaying = true;
   clearAll();
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
   if (isInputValid) {
+    isNewRun = true;
     speedBtnSection.style.visibility = "visible";
-    [playNewBtn, pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
-    enableStopButton();
     bubbleSort(results);
-    let stepsLeft = runInSteps(pseudocodeSteps);
   }
 }
 
@@ -417,7 +456,7 @@ buttonFns.forEach(
 speedBtns.forEach(
   (speedBtn) => {
     if (speedBtn) {
-      speedBtn.addEventListener('click', () => changeSpeed(speedBtn));
+      speedBtn.addEventListener('click', () => editSpeed(speedBtn));
     }
   }
 );
