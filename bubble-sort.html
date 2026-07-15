@@ -51,20 +51,29 @@
         rotate: 90deg;
       }
 
+      #animation-btn-section {
+        display: inline-block;
+      }
+
       #speed-btn-section {
         display: flex;
-        visibility: hidden;
-        height:50px;
         margin-bottom: 30px;
       }
 
       #speed-btn-container {
         display: flex;
-        height:50px;
       }
 
       #speed-text {
         width: 130px;
+      }
+
+      .speed-btns {
+        height: 50px;
+      }
+
+      #number-list-input {
+        max-width:100%;
       }
 
       .animation-btns, .speed-btns {
@@ -158,17 +167,65 @@
         min-width: 55px;
       }
 
-      @media (max-width: 600px) {
+      .hidden-responsive {
+        visibility: hidden;
+      }
+
+      @media (max-width:400px) {
+
+        .animation-btns {
+          font-size:1em;
+          max-width:100%;
+        }
+
+        #pseudocode-animate {
+          font-size:1rem;
+          line-height:1.5;
+        }
+
+        .speed-btns {
+          max-width:100%;
+        }
+      }
+
+      @media (max-width: 750px) {
         #code-animation {
           flex-direction: column;
           align-items: center;
+          width:100%;
         }
+
         .manual-code-block {
-          max-width: 100%;
+          width: 100%;
         }
 
         #pseudocode-animate {
           margin-bottom: 1rem;
+        }
+
+        #speed-btn-section {
+          display:flex;
+          flex-direction: column;
+        }
+
+        #speed-btn-container {
+          display: flex;
+          max-width:100%;
+          flex-wrap: wrap;
+          align-items: center;
+          margin-bottom: 1rem;
+          gap: 1rem;
+        }
+
+        .hidden-responsive {
+          display: none !important;
+          visibility: visible;
+        }
+
+        #animation-btn-section {
+          display: flex;
+          flex-wrap: wrap;
+          row-gap:1em;
         }
       }
     </style>
@@ -358,16 +415,18 @@
             placeholder="Enter list of 2-10 numbers"
           />
           
-          <button id="play-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play</button>
-          <button id="complete-btn" class="animation-btns non-play-btns">Complete!</button>
-          <button id="pause-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-pause"></i> Pause</button>
-          <button id="resume-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-eject"></i> Resume</button>
-          <button id="cancel-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-stop"></i> Cancel</button>
-          <button id="play-new-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
+          <div id="animation-btn-section">
+            <button id="play-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play</button>
+            <button id="complete-btn" class="animation-btns non-play-btns">Complete!</button>
+            <button id="pause-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-pause"></i> Pause</button>
+            <button id="resume-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-eject"></i> Resume</button>
+            <button id="cancel-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-stop"></i> Cancel</button>
+            <button id="play-new-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-play"></i> Play with new input</button>
+          </div>
 
           <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
 
-          <div id="speed-btn-section">
+          <div id="speed-btn-section" class="hidden-responsive">
             <p id="speed-text"><span id="select-or-change">Select</span> speed:</p>
             <div id="speed-btn-container">
               <button id="slow-btn" class="speed-btns inactive">Slow</button>
@@ -426,20 +485,20 @@
             </div>
             <!-- prettier-ignore -->
             <div id="variable-changes" class="manual-code-block">
-                    <p># <span id="inner-loop-time" class="loop-time lines">&nbsp;</span> iteration of inner loop</p>
-                    <p># inside <span id="outer-loop-time" class="loop-time lines">&nbsp;</span> iteration</p>
-                    <p># of outer loop</p>
-                    <p>n = <span id="n-value" class="num"> </span></p>
-                    <p>i = <span id="i-value" class="num lines"></span></p>
-                    <p>j = <span id="j-value-1" class="num lines"></span></p>
-                    <p>n - i = <span id="n-minus-i" class="num lines"></span></p>
-                    <p>A[j] = A[<span id="j-value-2" class="num lines index">&nbsp;</span>] = <span id="a-j-value" class="num lines"></span></p>
-                    <p>A[j + 1] = A[<span id="j-plus-one" class="num lines index">&nbsp;</span>] = <span id="a-j-plus-one" class="num lines"></span></p>
-                    <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
-                    <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
-                    <p>A = <span id="arr-value"></span></p>
-                </div>
-          </div>
+              <p># <span id="inner-loop-time" class="loop-time lines">&nbsp;</span> iteration of inner loop</p>
+              <p># inside <span id="outer-loop-time" class="loop-time lines">&nbsp;</span> iteration</p>
+              <p># of outer loop</p>
+              <p>n = <span id="n-value" class="num"> </span></p>
+              <p>i = <span id="i-value" class="num lines"></span></p>
+              <p>j = <span id="j-value-1" class="num lines"></span></p>
+              <p>n - i = <span id="n-minus-i" class="num lines"></span></p>
+              <p>A[j] = A[<span id="j-value-2" class="num lines index">&nbsp;</span>] = <span id="a-j-value" class="num lines"></span></p>
+              <p>A[j + 1] = A[<span id="j-plus-one" class="num lines index">&nbsp;</span>] = <span id="a-j-plus-one" class="num lines"></span></p>
+              <p>Is A[j] > A[j+1]: <span id="is-greater-than" class="lines boolean"></span></p>
+              <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
+              <p>A = <span id="arr-value"></span></p>
+              </div>
+            </div>
 
           <p>
             Now, let's discuss bubble sort's

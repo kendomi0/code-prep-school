@@ -282,7 +282,7 @@ export function setToComplete() {
   
   enableInput(numberListInput);
   pseudocodeSteps.length = 0;
-  speedBtnSection.style.visibility = "hidden";
+  speedBtnSection.classList.add("hidden-responsive");
 }
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
@@ -387,7 +387,6 @@ export function editSpeed(btn) {
 }
 
 // Animation states
-
 export function pauseBubbleSort() {
   isPaused = true;
   let remainingSteps = [...pseudocodeSteps];
@@ -403,7 +402,7 @@ export function cancelBubbleSort() {
   showBtn(playNewBtn);
   isPaused = false;
   enableInput(numberListInput);
-  speedBtnSection.style.visibility = "hidden";
+  speedBtnSection.classList.add("hidden-responsive");
 }
 
 export function resumeBubbleSort() {
@@ -415,12 +414,6 @@ export function resumeBubbleSort() {
 }
 
 export function playBubbleSort() {
-  speedBtns.forEach(
-    (speedBtn) => {
-      speedBtn.disabled = false;
-      speedBtn.classList.add("inactive");
-    }
-  );
   selectOrChange.textContent = "Select";
   completeBtn.style.display = "none";
   isCurrentlyPlaying = true;
@@ -429,7 +422,13 @@ export function playBubbleSort() {
   const isInputValid = checkInputValidity();
   if (isInputValid) {
     isNewRun = true;
-    speedBtnSection.style.visibility = "visible";
+    speedBtnSection.classList.remove("hidden-responsive");
+    speedBtns.forEach(
+      (speedBtn) => {
+        speedBtn.disabled = false;
+        speedBtn.classList.add("inactive");
+      }
+    );
     bubbleSort(results);
   }
 }
