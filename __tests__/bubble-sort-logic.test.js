@@ -24,6 +24,11 @@ describe('parseNumberListInput', () => {
         let result = parseNumberListInput('');
         expect(result).toBe(errorMessages["tooFewNumbers"]);
     });
+
+    it('rejects only commas', () => {
+        let result = parseNumberListInput(',,,');
+        expect(result).toBe(errorMessages["tooFewNumbers"]);
+    });
   });
 
   describe('too many numbers', () => {

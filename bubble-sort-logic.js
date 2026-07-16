@@ -43,7 +43,9 @@ export function parseNumberListInput(numberList) {
     return errorMessages["invalidChar"] ?? '';
     }
 
-  const numberArray = numberList.split(",");
+  const splitNumberList = numberList.split(",");
+  const numberArray = splitNumberList.filter(element => element.length > 0);
+
   if (numberArray.length < 2) {
     return errorMessages["tooFewNumbers"] ?? '';
   }
