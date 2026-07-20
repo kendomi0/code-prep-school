@@ -96,20 +96,20 @@ export function bubbleSort(arr) {
     )
     innerLoopIteration = 0;
     outerLoopIteration += 1;
-    step(displayOuterLoopIteration, outerLoopIteration);
     step(updateTextContent, "iValue", iOneBased);
+    step(displayOuterLoopIteration, outerLoopIteration);
 
     for (let j = 0; j < arr.length - i - 1; j++) {
       let jOneBased = j + 1;
       stepGroup([
-        { fn: resetAndHideExcept, args: ["iValue", "nValue", "arrValue", "outerLoopTime", "givenArray"] },
+        { fn: resetAndHideExcept, args: ["iValue", "nValue", "nMinusI", "arrValue", "outerLoopTime", "givenArray"] },
         { fn: showArrow, args: ["arrow4"] }
       ]);
 
       innerLoopIteration += 1;
-      step(displayInnerLoopIteration, innerLoopIteration);
 
       step(updateTextContent, "jValue1", jOneBased);
+      step(displayInnerLoopIteration, innerLoopIteration);
       step(updateTextContent, "nMinusI", arr.length-iOneBased);
       step(showArrow, "arrow5");
       step(updateTextContent, "jValue2", jOneBased);

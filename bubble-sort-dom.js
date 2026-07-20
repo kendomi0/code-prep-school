@@ -141,6 +141,7 @@ export function displayOuterLoopIteration(num) {
     return;
   }
   outerLoopTime.textContent = `${ordinalNumbers[num]}`;
+  outerLoopTime.style.textTransform = "capitalize";
 }
 
 export function displayInnerLoopIteration(num) {
