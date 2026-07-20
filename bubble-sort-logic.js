@@ -110,7 +110,9 @@ export function bubbleSort(arr) {
 
       step(updateTextContent, "jValue1", jOneBased);
       step(displayInnerLoopIteration, innerLoopIteration);
-      step(updateTextContent, "nMinusI", arr.length-iOneBased);
+      if (jOneBased === 1) {
+        step(updateTextContent, "nMinusI", arr.length-iOneBased);
+      }
       step(showArrow, "arrow5");
       step(updateTextContent, "jValue2", jOneBased);
       step(updateTextContent, "ajValue", arr[j]);
