@@ -30,7 +30,6 @@ let loopTimes
 let indices
 let givenArray
 let pauseBtn
-let playNewBtn
 let buttons
 let resumeBtn
 let cancelBtn
@@ -52,7 +51,6 @@ export function init() {
 
   playBtn = document.getElementById("play-btn");
   pauseBtn = document.getElementById("pause-btn");
-  playNewBtn = document.getElementById("play-new-btn");
   resumeBtn = document.getElementById("resume-btn");
   cancelBtn = document.getElementById("cancel-btn");
   completeBtn = document.getElementById("complete-btn");
@@ -90,10 +88,10 @@ export function init() {
   arrows = document.querySelectorAll(".arrows");
 
   variableElements = {
-    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, pauseBtn, playNewBtn, resumeBtn, cancelBtn, completeBtn
+    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, pauseBtn, resumeBtn, cancelBtn, completeBtn
   }
 
-  buttons = { playBtn, pauseBtn, playNewBtn, resumeBtn, cancelBtn, completeBtn }
+  buttons = { playBtn, pauseBtn, resumeBtn, cancelBtn, completeBtn }
 
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
 }
@@ -277,15 +275,6 @@ export function resetAndHideExcept(...elements) {
 
 export let isPaused = false;
 
-export function setToComplete() {
-  [pauseBtn, cancelBtn].forEach(hideBtn);
-  [playNewBtn, completeBtn].forEach(showBtn);
-  
-  enableInput(numberListInput);
-  pseudocodeSteps.length = 0;
-  speedBtnSection.classList.add("hidden-responsive");
-}
-
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let delay = 1000;
@@ -371,7 +360,7 @@ export function selectSpeed(btn) {
 
 export function initiateRun(btn) {
   selectSpeed(btn);
-  [playNewBtn, pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
+  [pauseBtn, resumeBtn, completeBtn].forEach(hideBtn);
   enableStopButton();
   let stepsLeft = runInSteps(pseudocodeSteps);
   isNewRun = false;
@@ -399,10 +388,19 @@ export function pauseBubbleSort() {
 
 export function cancelBubbleSort() {
   stopBubbleSort();
-  [pauseBtn, resumeBtn, cancelBtn].forEach(hideBtn);
-  showBtn(playNewBtn);
+  [pauseBtn, resumeBtn, cancelBtn, completeBtn].forEach(hideBtn);
+  showBtn(playBtn);
   isPaused = false;
   enableInput(numberListInput);
+  speedBtnSection.classList.add("hidden-responsive");
+}
+
+export function setToComplete() {
+  [pauseBtn].forEach(hideBtn);
+  [completeBtn].forEach(showBtn);
+  
+  enableInput(numberListInput);
+  pseudocodeSteps.length = 0;
   speedBtnSection.classList.add("hidden-responsive");
 }
 
@@ -410,7 +408,7 @@ export function resumeBubbleSort() {
   isCurrentlyPlaying = true;
   isPaused = false;
   runInSteps(pseudocodeSteps);
-  [resumeBtn, playNewBtn].forEach(hideBtn);
+  [resumeBtn].forEach(hideBtn);
   showBtn(pauseBtn);
 }
 
@@ -438,8 +436,7 @@ export function playBubbleSort() {
 
 const buttonFns = [
   [playBtn, playBubbleSort],
-  [pauseBtn, pauseBubbleSort],
-  [playNewBtn, playBubbleSort],
+  [pauseBtn, pauseBubbleSort],,
   [resumeBtn, resumeBubbleSort],
   [cancelBtn, cancelBubbleSort]
 ]

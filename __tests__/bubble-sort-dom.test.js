@@ -23,8 +23,7 @@ describe("Functions for updating DOM elements", () => {
             <p id="arrow-1"></p>
             <p id="given-array"></p>
             <button id="play-btn"></button>
-            <button id="pause-btn"></button
-            <button id="play-new-btn"></button>
+            <button id="pause-btn"></button>
             <button id="slow-btn" class="speed-btns"><span></span></button>
             <button id="medium-btn" class="speed-btns"><span></span></button>
         </div>`
