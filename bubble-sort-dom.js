@@ -116,6 +116,7 @@ export const ordinalNumbers = {
 // Functions for Setting DOM elements
 
 export function setErrorMessage(result) {
+  invalidListMsg.style.display = "block";
   invalidListMsg.textContent = result;
 }
 
@@ -420,6 +421,7 @@ export function playBubbleSort() {
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
   if (isInputValid) {
+    hideBtn(invalidListMsg);
     isNewRun = true;
     speedBtnSection.classList.remove("hidden-responsive");
     speedBtns.forEach(

@@ -367,6 +367,7 @@ math {
 
 .invalid-input-msg {
   color: #ff7b72;
+  margin-top:13px;
   margin-bottom: 13px;
   display: none;
 }
