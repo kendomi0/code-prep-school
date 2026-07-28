@@ -280,8 +280,6 @@ const wait = ms => new Promise(res => setTimeout(res, ms));
 
 let delay = 1000;
 
-let isCurrentlyPlaying = false;
-
 export async function runInSteps(steps) {
   steps = await steps;
   for (const [index, step] of steps.entries()) {
@@ -406,7 +404,6 @@ export function setToComplete() {
 }
 
 export function resumeBubbleSort() {
-  isCurrentlyPlaying = true;
   isPaused = false;
   runInSteps(pseudocodeSteps);
   [resumeBtn].forEach(hideBtn);
@@ -416,7 +413,6 @@ export function resumeBubbleSort() {
 export function playBubbleSort() {
   selectOrChange.textContent = "Select";
   completeBtn.style.display = "none";
-  isCurrentlyPlaying = true;
   clearAll();
   const results = getBubbleSortResults();
   const isInputValid = checkInputValidity();
@@ -438,7 +434,7 @@ export function playBubbleSort() {
 
 const buttonFns = [
   [playBtn, playBubbleSort],
-  [pauseBtn, pauseBubbleSort],,
+  [pauseBtn, pauseBubbleSort],
   [resumeBtn, resumeBubbleSort],
   [cancelBtn, cancelBubbleSort]
 ]
