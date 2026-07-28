@@ -44,10 +44,10 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-top:20px;
+        margin-top: 20px;
         margin-bottom: 30px;
       }
-    
+
       .fa-eject {
         rotate: 90deg;
       }
@@ -58,7 +58,7 @@
 
       #speed-btn-section {
         display: flex;
-        margin-top:20px;
+        margin-top: 20px;
       }
 
       #speed-btn-container {
@@ -74,12 +74,13 @@
       }
 
       #number-list-input {
-        max-width:100%;
+        max-width: 100%;
       }
 
-      .animation-btns, .speed-btns {
+      .animation-btns,
+      .speed-btns {
         width: inherit;
-        margin-left:10px;
+        margin-left: 10px;
         font-size: 21px;
         padding: 10px 30px 10px 30px;
         border-radius: 25px;
@@ -107,7 +108,7 @@
       }
 
       .non-play-btns {
-        display:none;
+        display: none;
       }
 
       #complete-btn {
@@ -140,7 +141,7 @@
       }
 
       #invalid-list-msg {
-        padding-bottom:10px;
+        padding-bottom: 10px;
       }
 
       #pseudocode-animate,
@@ -171,19 +172,19 @@
         display: none !important;
       }
 
-      @media (max-width:400px) {
+      @media (max-width: 400px) {
         .animation-btns {
-          font-size:1em;
-          max-width:100%;
+          font-size: 1em;
+          max-width: 100%;
         }
 
         #pseudocode-animate {
-          font-size:1rem;
-          line-height:1.5;
+          font-size: 1rem;
+          line-height: 1.5;
         }
 
         .speed-btns {
-          max-width:100%;
+          max-width: 100%;
         }
       }
 
@@ -191,7 +192,7 @@
         #code-animation {
           flex-direction: column;
           align-items: center;
-          width:100%;
+          width: 100%;
         }
 
         .manual-code-block {
@@ -203,13 +204,13 @@
         }
 
         #speed-btn-section {
-          display:flex;
+          display: flex;
           flex-direction: column;
         }
 
         #speed-btn-container {
           display: flex;
-          max-width:100%;
+          max-width: 100%;
           flex-wrap: wrap;
           align-items: center;
           margin-bottom: 1rem;
@@ -224,7 +225,7 @@
         #animation-btn-section {
           display: flex;
           flex-wrap: wrap;
-          row-gap:1em;
+          row-gap: 1em;
         }
       }
     </style>
@@ -404,7 +405,9 @@
           </p>
 
           <p>
-            Enter a list of 2-10 numbers, separated by commas with no spaces. Then press play to see how the bubble sort animation works on the list, step-by-step.
+            Enter a list of 2-10 numbers, separated by commas with no spaces.
+            Then press play to see how the bubble sort animation works on the
+            list, step-by-step.
           </p>
 
           <input
@@ -413,24 +416,40 @@
             type="text"
             placeholder="Enter list of 2-10 numbers"
           />
-          
+
           <div id="animation-btn-section">
-            <button id="play-btn" class="animation-btns"><i class="fa-solid fa-play"></i> Play</button>
-            <button id="complete-btn" class="animation-btns non-play-btns">Complete!</button>
-            <button id="pause-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-pause"></i> Pause</button>
-            <button id="resume-btn" class="animation-btns non-play-btns"><i class="fa-solid fa-eject"></i> Resume</button>
-            <button id="cancel-btn" class="animation-btns  non-play-btns"><i class="fa-solid fa-stop"></i> Reset</button>
+            <button id="play-btn" class="animation-btns">
+              <i class="fa-solid fa-play"></i> Play
+            </button>
+            <button id="complete-btn" class="animation-btns non-play-btns">
+              Complete!
+            </button>
+            <button id="pause-btn" class="animation-btns non-play-btns">
+              <i class="fa-solid fa-pause"></i> Pause
+            </button>
+            <button id="resume-btn" class="animation-btns non-play-btns">
+              <i class="fa-solid fa-eject"></i> Resume
+            </button>
+            <button id="cancel-btn" class="animation-btns non-play-btns">
+              <i class="fa-solid fa-stop"></i> Reset
+            </button>
           </div>
 
           <p id="invalid-list-msg" class="invalid-input-msg">&nbsp;</p>
 
           <div id="speed-btn-section" class="hidden-responsive">
-            <p id="speed-text"><span id="select-or-change">Select</span> speed:</p>
+            <p id="speed-text">
+              <span id="select-or-change">Select</span> speed:
+            </p>
             <div id="speed-btn-container">
               <button id="slow-btn" class="speed-btns inactive">Slow</button>
-              <button id="medium-btn" class="speed-btns inactive">Medium</button>
+              <button id="medium-btn" class="speed-btns inactive">
+                Medium
+              </button>
               <button id="fast-btn" class="speed-btns inactive">Fast</button>
-              <button id="fastest-btn" class="speed-btns inactive">Fastest</button>
+              <button id="fastest-btn" class="speed-btns inactive">
+                Fastest
+              </button>
             </div>
           </div>
 
@@ -493,7 +512,7 @@
               <p>Swap: <span id="do-swap" class="lines boolean"></span></p>
               <p>A = <span id="arr-value"></span></p>
               </div>
-            </div>
+          </div>
 
           <p>
             Now, let's discuss bubble sort's

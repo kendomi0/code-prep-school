@@ -1,47 +1,53 @@
-import { parseNumberListInput, errorMessages, bubbleSort, pseudocodeSteps, setPseudocodeSteps } from "./bubble-sort-logic.js"
+import {
+  parseNumberListInput,
+  errorMessages,
+  bubbleSort,
+  pseudocodeSteps,
+  setPseudocodeSteps,
+} from "./bubble-sort-logic.js";
 
-let invalidListMsg
-let numberListInput
-let arrValue
-let playBtn
-let nValue
-let iValue
-let jValue1
-let jValue2
-let jPlusOne
-let ajValue
-let ajPlusOne
-let isGreaterThan
-let doSwap
-let nMinusI
-let variableElements
-let arrow1
-let arrow2
-let arrow3
-let arrow4
-let arrow5
-let arrow6
-let arrowsObject
-let outerLoopTime
-let innerLoopTime
-let arrows
-let lines
-let loopTimes
-let indices
-let givenArray
-let pauseBtn
-let buttons
-let resumeBtn
-let cancelBtn
-let completeBtn
+let invalidListMsg;
+let numberListInput;
+let arrValue;
+let playBtn;
+let nValue;
+let iValue;
+let jValue1;
+let jValue2;
+let jPlusOne;
+let ajValue;
+let ajPlusOne;
+let isGreaterThan;
+let doSwap;
+let nMinusI;
+let variableElements;
+let arrow1;
+let arrow2;
+let arrow3;
+let arrow4;
+let arrow5;
+let arrow6;
+let arrowsObject;
+let outerLoopTime;
+let innerLoopTime;
+let arrows;
+let lines;
+let loopTimes;
+let indices;
+let givenArray;
+let pauseBtn;
+let buttons;
+let resumeBtn;
+let cancelBtn;
+let completeBtn;
 
-let slowBtn
-let mediumBtn
-let fastBtn
-let fastestBtn
-let speedBtns
-let speedBtnSection
-let selectOrChange
+let slowBtn;
+let mediumBtn;
+let fastBtn;
+let fastestBtn;
+let speedBtns;
+let speedBtnSection;
+let selectOrChange;
 
 export function init() {
   invalidListMsg = document.getElementById("invalid-list-msg");
@@ -88,10 +94,28 @@ export function init() {
   arrows = document.querySelectorAll(".arrows");
 
   variableElements = {
-    arrValue, nValue, iValue, jValue1, nMinusI, jValue2, ajValue, jPlusOne, ajPlusOne, isGreaterThan, doSwap, outerLoopTime, innerLoopTime, playBtn, givenArray, pauseBtn, resumeBtn, cancelBtn, completeBtn
-  }
+    arrValue,
+    nValue,
+    iValue,
+    jValue1,
+    nMinusI,
+    jValue2,
+    ajValue,
+    jPlusOne,
+    ajPlusOne,
+    isGreaterThan,
+    doSwap,
+    outerLoopTime,
+    innerLoopTime,
+    playBtn,
+    givenArray,
+    pauseBtn,
+    resumeBtn,
+    cancelBtn,
+    completeBtn,
+  };
 
-  buttons = { playBtn, pauseBtn, resumeBtn, cancelBtn, completeBtn }
+  buttons = { playBtn, pauseBtn, resumeBtn, cancelBtn, completeBtn };
 
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
 }
@@ -110,8 +134,8 @@ export const ordinalNumbers = {
   7: "seventh",
   8: "eighth",
   9: "ninth",
-  10: "tenth"
-}
+  10: "tenth",
+};
 
 // Functions for Setting DOM elements
 
@@ -129,9 +153,9 @@ export function setGivenArray(arr) {
 }
 
 export function processInput(result) {
-    if (Object.values(errorMessages).includes(result)) {
-      setErrorMessage(result);
-    }
+  if (Object.values(errorMessages).includes(result)) {
+    setErrorMessage(result);
+  }
 }
 
 export function displayOuterLoopIteration(num) {
@@ -148,7 +172,7 @@ export function displayInnerLoopIteration(num) {
     console.warn("innerLoopTime element not found");
     return;
   }
-  innerLoopTime.textContent = `${ordinalNumbers[num]}`
+  innerLoopTime.textContent = `${ordinalNumbers[num]}`;
   innerLoopTime.style.textTransform = "capitalize";
 }
 
@@ -169,9 +193,7 @@ function resetLines() {
 }
 
 export function hideAllArrows() {
-  arrows.forEach(
-    (arrow) => arrow.style.visibility = "hidden"
-  );
+  arrows.forEach((arrow) => (arrow.style.visibility = "hidden"));
 }
 
 export function showArrow(numberArrow) {
@@ -208,13 +230,13 @@ export function showBtn(btn) {
 }
 
 export function checkInputValidity() {
-  return invalidListMsg.innerHTML == "&nbsp;"
+  return invalidListMsg.innerHTML == "&nbsp;";
 }
 
 // Bubble sort functions
 
 export function getBubbleSortResults() {
-  invalidListMsg.innerHTML = "&nbsp;"
+  invalidListMsg.innerHTML = "&nbsp;";
   const result = parseNumberListInput(numberListInput.value);
   processInput(result);
   return result;
@@ -232,29 +254,26 @@ export function displayArray(arr, j) {
 
     for (let i = 0; i < arr.length; i++) {
       if (i < j) {
-        unchangedNumbersPreceding.push(arr[i])
-      }
-      else if (i===j || i==j+1) {
-        swappedNumbers.push(arr[i])
-      }
-      else {
-        unchangedNumbersSucceeding.push(arr[i])
+        unchangedNumbersPreceding.push(arr[i]);
+      } else if (i === j || i == j + 1) {
+        swappedNumbers.push(arr[i]);
+      } else {
+        unchangedNumbersSucceeding.push(arr[i]);
       }
     }
 
     let precedingComma = "";
     let succeedingComma = "";
 
-    if (j>0) {
+    if (j > 0) {
       precedingComma = ",";
     }
-    if (j+1<arr.length-1) {
+    if (j + 1 < arr.length - 1) {
       succeedingComma = ",";
     }
 
     arrValue.innerHTML = `[${unchangedNumbersPreceding}${precedingComma}<span style="color:yellow;">${swappedNumbers}</span>${succeedingComma}${unchangedNumbersSucceeding}]`;
-  }
-  else {
+  } else {
     arrValue.textContent = `[${arr}]`;
   }
 }
@@ -269,14 +288,17 @@ function clearAll() {
 
 export function resetAndHideExcept(...elements) {
   hideAllArrows();
-  const linesToKeep = elements.map(element => variableElements[element]);
-  let linesToReset = Object.values(variableElements).filter(line => !linesToKeep.includes(line) && !Object.values(buttons).includes(line));
+  const linesToKeep = elements.map((element) => variableElements[element]);
+  let linesToReset = Object.values(variableElements).filter(
+    (line) =>
+      !linesToKeep.includes(line) && !Object.values(buttons).includes(line),
+  );
   linesToReset.forEach(reset);
 }
 
 export let isPaused = false;
 
-const wait = ms => new Promise(res => setTimeout(res, ms));
+const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
 let delay = 1000;
 
@@ -315,14 +337,19 @@ export function clearBubbleSort(steps) {
 }
 
 export function getStepsLeft(steps) {
-  setPseudocodeSteps(pseudocodeSteps.filter(pStep => pStep !== undefined));
+  setPseudocodeSteps(pseudocodeSteps.filter((pStep) => pStep !== undefined));
 }
 
 // Button states
 
 export function getSpeed(btn) {
-  const speeds = { "slow-btn": 2000, "medium-btn": 1000, "fast-btn": 500, "fastest-btn": 200 };
-  return speeds[btn.id]
+  const speeds = {
+    "slow-btn": 2000,
+    "medium-btn": 1000,
+    "fast-btn": 500,
+    "fastest-btn": 200,
+  };
+  return speeds[btn.id];
 }
 
 export function setSpeedButtonState(btn) {
@@ -330,10 +357,9 @@ export function setSpeedButtonState(btn) {
   for (const currentElement of speedBtns) {
     currentElement.disabled = currentElement === btn;
     if (currentElement === btn) {
-      currentElement.classList.toggle('inactive', false);
-    }
-    else {
-      currentElement.classList.add('inactive');
+      currentElement.classList.toggle("inactive", false);
+    } else {
+      currentElement.classList.add("inactive");
     }
   }
 }
@@ -342,7 +368,6 @@ let isSpeedSelected = false;
 let isNewRun = false;
 
 export function changeSpeed(btn) {
-  console.log("Speed changed function called");
   pauseBubbleSort();
   setSpeedButtonState(btn);
   delay = getSpeed(btn);
@@ -350,7 +375,6 @@ export function changeSpeed(btn) {
 }
 
 export function selectSpeed(btn) {
-  console.log("Speed selected function called");
   setSpeedButtonState(btn);
   delay = getSpeed(btn);
   isSpeedSelected = true;
@@ -366,11 +390,9 @@ export function initiateRun(btn) {
 }
 
 export function editSpeed(btn) {
-  console.log('clicked', event.currentTarget);
   if (isNewRun) {
     initiateRun(btn);
-  }
-  else {
+  } else {
     changeSpeed(btn);
   }
 }
@@ -397,7 +419,7 @@ export function cancelBubbleSort() {
 export function setToComplete() {
   [pauseBtn].forEach(hideBtn);
   [completeBtn].forEach(showBtn);
-  
+
   enableInput(numberListInput);
   pseudocodeSteps.length = 0;
   speedBtnSection.classList.add("hidden-responsive");
@@ -420,12 +442,10 @@ export function playBubbleSort() {
     hideBtn(invalidListMsg);
     isNewRun = true;
     speedBtnSection.classList.remove("hidden-responsive");
-    speedBtns.forEach(
-      (speedBtn) => {
-        speedBtn.disabled = false;
-        speedBtn.classList.add("inactive");
-      }
-    );
+    speedBtns.forEach((speedBtn) => {
+      speedBtn.disabled = false;
+      speedBtn.classList.add("inactive");
+    });
     bubbleSort(results);
   }
 }
@@ -436,22 +456,17 @@ const buttonFns = [
   [playBtn, playBubbleSort],
   [pauseBtn, pauseBubbleSort],
   [resumeBtn, resumeBubbleSort],
-  [cancelBtn, cancelBubbleSort]
-]
+  [cancelBtn, cancelBubbleSort],
+];
 
-buttonFns.forEach(
-  ([btn, fn]) => 
-   {
-    if (btn) {
-      btn.addEventListener('click', fn)
-    }
-  } 
-);
-
-speedBtns.forEach(
-  (speedBtn) => {
-    if (speedBtn) {
-      speedBtn.addEventListener('click', () => editSpeed(speedBtn));
-    }
+buttonFns.forEach(([btn, fn]) => {
+  if (btn) {
+    btn.addEventListener("click", fn);
   }
-);
+});
+
+speedBtns.forEach((speedBtn) => {
+  if (speedBtn) {
+    speedBtn.addEventListener("click", () => editSpeed(speedBtn));
+  }
+});

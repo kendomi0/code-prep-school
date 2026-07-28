@@ -59,7 +59,8 @@ footer {
 
 /* Specifics */
 
-input[type="number"], input[type="text"] {
+input[type="number"],
+input[type="text"] {
   background-color: #e3e3fa;
   color: #1d1d2b;
   font-size: inherit;
@@ -367,7 +368,7 @@ math {
 
 .invalid-input-msg {
   color: #ff7b72;
-  margin-top:13px;
+  margin-top: 13px;
   margin-bottom: 13px;
   display: none;
 }

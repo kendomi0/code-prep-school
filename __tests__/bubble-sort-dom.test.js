@@ -1,11 +1,24 @@
-import { setErrorMessage, init, processInput, displayArray, updateTextContent, showArrow, resetAndHideExcept, runInSteps, pauseBubbleSort, resumeBubbleSort, selectSpeed, setSpeedButtonState, getSpeed } from "../bubble-sort-dom.js"
-import { errorMessages } from "../bubble-sort-logic.js"
-import * as bubbleSortDom from "../bubble-sort-dom.js"
+import {
+  setErrorMessage,
+  init,
+  processInput,
+  displayArray,
+  updateTextContent,
+  showArrow,
+  resetAndHideExcept,
+  runInSteps,
+  pauseBubbleSort,
+  resumeBubbleSort,
+  selectSpeed,
+  setSpeedButtonState,
+  getSpeed,
+} from "../bubble-sort-dom.js";
+import { errorMessages } from "../bubble-sort-logic.js";
+import * as bubbleSortDom from "../bubble-sort-dom.js";
 
 describe("Functions for updating DOM elements", () => {
-    beforeEach(() => {
-        document.body.innerHTML = 
-        `<div>
+  beforeEach(() => {
+    document.body.innerHTML = `<div>
             <p id="invalid-list-msg"></p>
             <p id="arr-value"></p>
             <p id="n-value"></p>
@@ -26,96 +39,95 @@ describe("Functions for updating DOM elements", () => {
             <button id="pause-btn"></button>
             <button id="slow-btn" class="speed-btns"><span></span></button>
             <button id="medium-btn" class="speed-btns"><span></span></button>
-        </div>`
-        init();
+        </div>`;
+    init();
+  });
+
+  describe("setErrorMessage()", () => {
+    it("displays error message", () => {
+      setErrorMessage("test");
+      const invalidListMsg = document.getElementById("invalid-list-msg");
+      expect(invalidListMsg.textContent).toBe("test");
+    });
+  });
+
+  describe("processInput()", () => {
+    it("sets error message if argument is in errorMessages", () => {
+      const spySetErrorMessage = vi.spyOn(bubbleSortDom, "setErrorMessage");
+      processInput(errorMessages["invalidChar"]);
+      expect(spySetErrorMessage).toHaveBeenCalled;
+    });
+  });
+
+  describe("displayArray()", () => {
+    it("sets text content to inputted array", () => {
+      displayArray([1, 5, 3]);
+      const arrValue = document.getElementById("arr-value");
+      expect(arrValue.textContent).toBe("[1,5,3]");
     });
 
-    describe('setErrorMessage()', () => {
-        it("displays error message", () => {
-            setErrorMessage("test");
-            const invalidListMsg = document.getElementById("invalid-list-msg");
-            expect(invalidListMsg.textContent).toBe("test");
-        }
-        )
+    it("correctly separates swapped numbers from preceding and succeeding ones", () => {
+      displayArray([2, 4, 1, 5, 7], 2);
+      const arrValue = document.getElementById("arr-value");
     });
+  });
 
-    describe("processInput()", () => {
-        it("sets error message if argument is in errorMessages", () => {
-            const spySetErrorMessage = vi.spyOn(bubbleSortDom, "setErrorMessage");
-            processInput(errorMessages["invalidChar"]);
-            expect(spySetErrorMessage).toHaveBeenCalled;
-        })
-    })
+  describe("updateTextContent()", () => {
+    it("correctly accesses variable name and updates content", () => {
+      updateTextContent("nValue", 4);
+      const nValue = document.getElementById("n-value");
+      expect(nValue.textContent).toBe("4");
+    });
+  });
 
-    describe("displayArray()", () => {
-        it("sets text content to inputted array", () => {
-            displayArray([1,5,3]);
-            const arrValue = document.getElementById("arr-value");
-            expect(arrValue.textContent).toBe("[1,5,3]")
-        })
+  describe("showArrow()", () => {
+    it("makes given arrow visible", () => {
+      showArrow("arrow1");
+      const arrow1 = document.getElementById("arrow-1");
+      expect(arrow1).toHaveStyle("visibility: visible");
+    });
+  });
 
-        it("correctly separates swapped numbers from preceding and succeeding ones", () => {
-            displayArray([2,4,1,5,7], 2);
-            const arrValue = document.getElementById("arr-value");
-        })
-    })
+  describe("resetAndHideExcept()", () => {
+    it("only resets given lines", () => {
+      const nValue = document.getElementById("n-value");
+      const iValue = document.getElementById("i-value");
+      const jValue1 = document.getElementById("j-value-1");
+      nValue.textContent = "4";
+      iValue.textContent = "6";
+      jValue1.textContent = "1";
+      resetAndHideExcept("nValue");
+      expect(nValue.textContent).toBe("4");
+      expect(iValue.innerHTML).toBe("&nbsp;");
+      expect(jValue1.innerHTML).toBe("&nbsp;");
+    });
+  });
 
-    describe("updateTextContent()", () => {
-        it("correctly accesses variable name and updates content", () =>  {
-            updateTextContent("nValue", 4);
-            const nValue = document.getElementById("n-value");
-            expect(nValue.textContent).toBe("4")
-        })
-    })
+  describe("runInSteps()", () => {
+    it("runs without error", () => {
+      let steps = [
+        { fn: showArrow, args: ["arrow1"] },
+        { fn: updateTextContent, args: ["nValue", 5] },
+      ];
+      runInSteps(steps);
+    });
+  });
 
-    describe("showArrow()", () => {
-        it("makes given arrow visible", () =>  {
-            showArrow("arrow1");
-            const arrow1 = document.getElementById("arrow-1");
-            expect(arrow1).toHaveStyle("visibility: visible");
-        })
-    })
+  describe("setSpeedButtonState()", () => {
+    it("selects correct speed button", () => {
+      const slowBtn = document.getElementById("slow-btn");
+      const mediumBtn = document.getElementById("medium-btn");
+      setSpeedButtonState(slowBtn);
+      expect(slowBtn.disabled).toBe(true);
+      expect(mediumBtn.disabled).toBe(false);
+    });
+  });
 
-    describe("resetAndHideExcept()", () => {
-        it("only resets given lines", () =>  {
-            const nValue = document.getElementById("n-value");
-            const iValue = document.getElementById("i-value");
-            const jValue1 = document.getElementById("j-value-1");
-            nValue.textContent = "4";
-            iValue.textContent = "6";
-            jValue1.textContent = "1";
-            resetAndHideExcept("nValue");
-            expect(nValue.textContent).toBe("4");
-            expect(iValue.innerHTML).toBe("&nbsp;");
-            expect(jValue1.innerHTML).toBe("&nbsp;");
-        })
-    })
-
-    describe("runInSteps()", () => {
-        it("runs without error", () => {
-            let steps = [ 
-                { fn: showArrow, args: ["arrow1"] },
-                { fn: updateTextContent, args: ["nValue", 5]} 
-            ]
-            runInSteps(steps);
-        })
-    })
-
-    describe("setSpeedButtonState()", () => {
-        it("selects correct speed button", () => {
-            const slowBtn = document.getElementById("slow-btn");
-            const mediumBtn = document.getElementById("medium-btn");
-            setSpeedButtonState(slowBtn);
-            expect(slowBtn.disabled).toBe(true);
-            expect(mediumBtn.disabled).toBe(false);
-        })
-    })
-
-    describe("getSpeed()", () => {
-        it("gets speed", () => {
-            const slowBtn = document.getElementById("slow-btn");
-            let delay = getSpeed(slowBtn);
-            expect(delay).toBe(2000);
-        })
-    })
-})
+  describe("getSpeed()", () => {
+    it("gets speed", () => {
+      const slowBtn = document.getElementById("slow-btn");
+      let delay = getSpeed(slowBtn);
+      expect(delay).toBe(2000);
+    });
+  });
+});
