@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/kendomi0/code-prep-school#readme",
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
     "jest": "^30.4.2",
     "jsdom": "^28.1.0",
     "prettier": "3.8.3",

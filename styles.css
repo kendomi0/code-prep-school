@@ -59,7 +59,8 @@ footer {
 
 /* Specifics */
 
-input[type="number"] {
+input[type="number"],
+input[type="text"] {
   background-color: #e3e3fa;
   color: #1d1d2b;
   font-size: inherit;
@@ -100,6 +101,12 @@ th {
   border: 1px solid #414154;
   text-align: left;
   padding: 8px;
+}
+
+.inactive {
+  background-color: gray !important;
+  color: white !important;
+  border: 2px solid white !important;
 }
 
 /* Header */
@@ -357,6 +364,13 @@ math {
 
 .center-text {
   text-align: center;
+}
+
+.invalid-input-msg {
+  color: #ff7b72;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  display: none;
 }
 
 @media (max-width: 1024px) {
