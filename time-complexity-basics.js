@@ -39,7 +39,7 @@ function factorial(x) {
 btn.addEventListener("click", function () {
   const inputNumber = Number(input.value);
 
-  if (inputNumber > 50) {
+  if (inputNumber > 50 || inputNumber < 1) {
     invalidNumberInput.style.display = "block";
     return;
   } else {
