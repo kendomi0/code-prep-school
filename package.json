@@ -4,7 +4,10 @@
   "description": "**[View Live Demo](https://kendomi0.github.io/code-prep-school/)**",
   "main": "bubble-sort.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,10 @@
     "jest": "^30.4.2",
     "jsdom": "^28.1.0",
     "prettier": "3.8.3",
+    "vite": "^8.2.0",
     "vitest": "^4.1.8"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }
