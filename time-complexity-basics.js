@@ -1,4 +1,4 @@
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");
