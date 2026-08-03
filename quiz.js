@@ -1,3 +1,6 @@
+import hljs from "./highlightjs-setup.js";
+hljs.highlightAll();
+
 const feedback = {
   q1: {
     correct: "b",
