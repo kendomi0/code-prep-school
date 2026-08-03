@@ -1,5 +1,8 @@
 import Chart from "chart.js/auto";
 
+import hljs from "./highlightjs-setup.js";
+hljs.highlightAll();
+
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");
 const btn = document.getElementById("demo-btn");
