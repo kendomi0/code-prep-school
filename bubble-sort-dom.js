@@ -8,6 +8,8 @@ import {
 
 import hljs from "./highlightjs-setup.js";
 
+import * as header from "./header.js";
+
 let invalidListMsg;
 let numberListInput;
 let arrValue;
