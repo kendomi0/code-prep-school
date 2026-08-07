@@ -1,52 +1,56 @@
+// TODO: initialize elements
 let appHeader = `
-    <a href="index.html" class="title">CodePrepSchool</a>
-    <nav class="nav-dropdown">
-        <div class="dropdown" id="dropdown-time-complexity">
-            <div class="dropdown-title">
-                Time Complexity
-                <i class="fa-solid fa-caret-down"></i>
+        <a href="index.html" class="title">CodePrepSchool</a>
+        <nav class="nav-dropdown">
+            <div class="dropdown" id="dropdown-time-complexity">
+                <div class="dropdown-title">
+                    Time Complexity
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                <div class="nav-links">
+                    <a href="time-complexity-basics.html" class="nav-item">
+                        Time Complexity Basics
+                    </a>
+                    <a href="built-in-methods.html" class="nav-item">
+                        Built-In Methods
+                    </a>
+                    <a href="constant-time-complexity.html" class="nav-item">
+                        Constant Time Complexity
+                    </a>
+                    <a href="linear-time-complexity.html" class="nav-item">
+                        Linear Time Complexity
+                    </a>
+                    <a href="quadratic-time-complexity.html" class="nav-item">
+                        Quadratic Time Complexity
+                    </a>
+                    <a href="time-complexity-quiz.html" class="nav-item">
+                        Time Complexity Quiz
+                    </a>
+                </div>
             </div>
-            <div class="nav-links">
-                <a href="time-complexity-basics.html" class="nav-item">
-                    Time Complexity Basics
-                </a>
-                <a href="built-in-methods.html" class="nav-item">
-                    Built-In Methods
-                </a>
-                <a href="constant-time-complexity.html" class="nav-item">
-                    Constant Time Complexity
-                </a>
-                <a href="linear-time-complexity.html" class="nav-item">
-                    Linear Time Complexity
-                </a>
-                <a href="quadratic-time-complexity.html" class="nav-item">
-                    Quadratic Time Complexity
-                </a>
-                <a href="time-complexity-quiz.html" class="nav-item">
-                    Time Complexity Quiz
-                </a>
+            <div class="dropdown" id="dropdown-algorithms">
+                <div class="dropdown-title">
+                    Algorithms
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                <div class="nav-links">
+                    <a href="intro-to-algorithms.html" class="nav-item">
+                        Intro to Algorithms
+                    </a>
+                    <a href="insertion-sort.html" class="nav-item">
+                        Insertion Sort
+                    </a>
+                    <a href="bubble-sort.html" class="nav-item">
+                        Bubble Sort
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown" id="dropdown-algorithms">
-            <div class="dropdown-title">
-                Algorithms
-                <i class="fa-solid fa-caret-down"></i>
-            </div>
-            <div class="nav-links">
-                <a href="intro-to-algorithms.html" class="nav-item">
-                    Intro to Algorithms
-                </a>
-                <a href="insertion-sort.html" class="nav-item">
-                    Insertion Sort
-                </a>
-                <a href="bubble-sort.html" class="nav-item">
-                    Bubble Sort
-                </a>
-            </div>
-        </div>
-    </nav>
-`;
-document.getElementById("app-header").innerHTML = appHeader;
+        </nav>
+    `;
+
+if (document.getElementById("app-header")) {
+  document.getElementById("app-header").innerHTML = appHeader;
+}
 
 /* Mobile */
 
@@ -113,20 +117,23 @@ let mobileHeader = `
 
     </nav>
 `;
-
-document.getElementById("mobile-header").innerHTML = mobileHeader;
+if (document.getElementById("mobile-header")) {
+  document.getElementById("mobile-header").innerHTML = mobileHeader;
+}
 
 // Open the dropdown by clicking menu icon
 
 const dropdown = document.getElementById("full-mobile-dropdown");
 
-document
-  .getElementById("hamburger-menu")
-  .addEventListener("click", function (e) {
-    e.stopPropagation();
-    dropdown.style.visibility =
-      dropdown.style.visibility === "visible" ? "hidden" : "visible";
-  });
+if (document.getElementById("hamburger-menu")) {
+  document
+    .getElementById("hamburger-menu")
+    .addEventListener("click", function (e) {
+      e.stopPropagation();
+      dropdown.style.visibility =
+        dropdown.style.visibility === "visible" ? "hidden" : "visible";
+    });
+}
 
 // Open the subdropdowns
 
