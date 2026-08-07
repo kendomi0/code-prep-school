@@ -49,7 +49,7 @@ let appHeader = `
     `;
 
 if (document.getElementById("app-header")) {
-    document.getElementById("app-header").innerHTML = appHeader;
+  document.getElementById("app-header").innerHTML = appHeader;
 }
 
 /* Mobile */
@@ -118,7 +118,7 @@ let mobileHeader = `
     </nav>
 `;
 if (document.getElementById("mobile-header")) {
-    document.getElementById("mobile-header").innerHTML = mobileHeader;
+  document.getElementById("mobile-header").innerHTML = mobileHeader;
 }
 
 // Open the dropdown by clicking menu icon
@@ -126,11 +126,11 @@ if (document.getElementById("mobile-header")) {
 const dropdown = document.getElementById("full-mobile-dropdown");
 
 if (document.getElementById("hamburger-menu")) {
-    document
+  document
     .getElementById("hamburger-menu")
     .addEventListener("click", function (e) {
-        e.stopPropagation();
-        dropdown.style.visibility =
+      e.stopPropagation();
+      dropdown.style.visibility =
         dropdown.style.visibility === "visible" ? "hidden" : "visible";
     });
 }
