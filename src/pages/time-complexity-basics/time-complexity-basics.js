@@ -1,9 +1,10 @@
 import Chart from "chart.js/auto";
-
-import hljs from "./highlightjs-setup.js";
+import hljs from "../../lib/highlightjs-setup.js";
 hljs.highlightAll();
 
-import * as header from "./header.js";
+import * as header from "../../components/header.js";
+
+import "../../styles.css";
 
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");

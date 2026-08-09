@@ -4,7 +4,7 @@ import {
   bubbleSort,
   arrowsObject,
   pseudocodeSteps,
-} from "../bubble-sort-logic.js";
+} from "../src/pages/bubble-sort/bubble-sort-logic.js";
 
 describe("parseNumberListInput", () => {
   describe("invalid characters", () => {

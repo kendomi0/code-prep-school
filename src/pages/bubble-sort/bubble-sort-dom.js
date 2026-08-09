@@ -6,9 +6,9 @@ import {
   setPseudocodeSteps,
 } from "./bubble-sort-logic.js";
 
-import hljs from "./highlightjs-setup.js";
+import hljs from "../../lib/highlightjs-setup.js";
 
-import * as header from "./header.js";
+import * as header from "../../components/header.js";
 
 let invalidListMsg;
 let numberListInput;

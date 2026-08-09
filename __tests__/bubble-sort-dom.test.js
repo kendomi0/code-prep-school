@@ -12,9 +12,9 @@ import {
   selectSpeed,
   setSpeedButtonState,
   getSpeed,
-} from "../bubble-sort-dom.js";
-import { errorMessages } from "../bubble-sort-logic.js";
-import * as bubbleSortDom from "../bubble-sort-dom.js";
+} from "../src/pages/bubble-sort/bubble-sort-dom.js";
+import * as bubbleSortDom from "../src/pages/bubble-sort/bubble-sort-dom.js";
+import { errorMessages } from "../src/pages/bubble-sort/bubble-sort-logic.js";
 
 describe("Functions for updating DOM elements", () => {
   beforeEach(() => {
