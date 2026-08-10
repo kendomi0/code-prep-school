@@ -3,4 +3,4 @@ hljs.highlightAll();
 
 import * as header from "../../components/header.js";
 
-import "../../styles.css";
+import "../../globals.css";
