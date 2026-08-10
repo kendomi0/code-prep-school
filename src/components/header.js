@@ -1,5 +1,7 @@
+const homeLink = `${import.meta.env.BASE_URL}index.html`;
+
 let appHeader = `
-        <a href="/index.html" class="title">CodePrepSchool</a>
+        <a href="${homeLink}" class="title">CodePrepSchool</a>
         <nav class="nav-dropdown">
             <div class="dropdown" id="dropdown-time-complexity">
                 <div class="dropdown-title">
