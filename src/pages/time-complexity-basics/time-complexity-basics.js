@@ -6,6 +6,8 @@ import * as header from "../../components/header.js";
 
 import "../../styles.css";
 
+import "./time-complexity-basics.css";
+
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");
 const btn = document.getElementById("demo-btn");

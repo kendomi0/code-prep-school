@@ -1,0 +1,104 @@
+.chosen-num {
+    display: inline-block;
+    min-width: 22px;
+    color: #fff6a1;
+    text-align: center;
+}
+
+.ops {
+    color: #b5ffc0;
+    min-width: 22px;
+}
+
+#num-input {
+    margin-right: 10px;
+}
+
+#btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#constant-btn {
+    background-color: #530000;
+    border: 2px solid #610a0a;
+}
+
+#logarithmic-btn {
+    background-color: #c74440;
+    border: 2px solid #d35f5b;
+}
+
+#linear-btn {
+    background-color: #66620d;
+    border: 2px solid #757120;
+}
+
+#linearithmic-btn {
+    background-color: #348543;
+    border: 2px solid #4d9e5c;
+}
+
+#quadratic-btn {
+    background-color: #2d70b3;
+    border: 2px solid #3e80c2;
+}
+
+#exponential-btn {
+    background-color: #6042a6;
+    border: 2px solid #7255b4;
+}
+
+#factorial-btn {
+    background-color: #a13f94;
+    border: 2px solid #b153a4;
+}
+
+.complexity-btn {
+    border: none;
+    border-radius: 25px;
+    width: 140px;
+}
+
+.complexity-btn:hover {
+    background-color: black !important;
+    border: 2px solid white !important;
+}
+
+#charts {
+    display: flex;
+    justify-content: center;
+}
+
+#graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#constant-graph-disclaimer {
+    text-align: center;
+    font-size: 13px;
+    color: #aeaeca;
+}
+
+@media (max-width: 600px) {
+    #graph {
+        flex-direction: column !important;
+    }
+
+    #btn-container {
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
+
+    #num-input {
+        max-width: 90%;
+    }
+
+    #demo-btn {
+        margin-bottom: 1rem;
+    }
+}
