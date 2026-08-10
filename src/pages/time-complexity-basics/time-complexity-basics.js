@@ -1,9 +1,7 @@
 import Chart from "chart.js/auto";
+import "../../shared/basic-page-setup.js";
 
-import hljs from "./highlightjs-setup.js";
-hljs.highlightAll();
-
-import * as header from "./header.js";
+import "./time-complexity-basics.css";
 
 const input = document.getElementById("num-input");
 const chosenNums = document.querySelectorAll(".chosen-num");

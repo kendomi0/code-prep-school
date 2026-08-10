@@ -1,7 +1,4 @@
-import hljs from "./highlightjs-setup.js";
-hljs.highlightAll();
-
-import * as header from "./header.js";
+import "../../shared/basic-page-setup.js";
 
 const feedback = {
   q1: {

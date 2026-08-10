@@ -1,0 +1,1 @@
+import "../../shared/basic-page-setup.js";

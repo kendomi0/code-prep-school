@@ -109,6 +109,10 @@ th {
   border: 2px solid white !important;
 }
 
+label {
+  margin-left: 5px;
+}
+
 /* Header */
 
 header {
