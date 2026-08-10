@@ -6,10 +6,6 @@ import {
   setPseudocodeSteps,
 } from "./bubble-sort-logic.js";
 
-import hljs from "../../lib/highlightjs-setup.js";
-
-import * as header from "../../components/header.js";
-
 let invalidListMsg;
 let numberListInput;
 let arrValue;
@@ -122,8 +118,6 @@ export function init() {
   buttons = { playBtn, pauseBtn, resumeBtn, cancelBtn, completeBtn };
 
   arrowsObject = { arrow1, arrow2, arrow3, arrow4, arrow5, arrow6 };
-
-  hljs.highlightAll();
 }
 
 init();
