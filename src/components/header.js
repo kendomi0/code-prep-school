@@ -56,7 +56,7 @@ if (document.getElementById("app-header")) {
 /* Mobile */
 
 let mobileHeader = `
-    <a href="index.html" class="mobile-title">CodePrepSchool</a>
+    <a href="${homeLink}" class="mobile-title">CodePrepSchool</a>
     
     <nav class="mobile-nav">
 
@@ -72,22 +72,22 @@ let mobileHeader = `
                 </div>
 
                 <div id="time-complexity-links" class="mobile-nav-links">
-                    <a href="time-complexity-basics.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/time-complexity-basics/time-complexity-basics.html" class="mobile-nav-item">
                         Time Complexity Basics
                     </a>
-                    <a href="built-in-methods.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/built-in-methods.html" class="mobile-nav-item">
                         Built-In Methods
                     </a>
-                    <a href="constant-time-complexity.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/constant-time-complexity.html" class="mobile-nav-item">
                         Constant Time Complexity
                     </a>
-                    <a href="linear-time-complexity.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/linear-time-complexity.html" class="mobile-nav-item">
                         Linear Time Complexity
                     </a>
-                    <a href="quadratic-time-complexity.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/quadratic-time-complexity.html" class="mobile-nav-item">
                         Quadratic Time Complexity
                     </a>
-                    <a href="time-complexity-quiz.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/time-complexity-quiz/time-complexity-quiz.html" class="mobile-nav-item">
                         Time Complexity Quiz
                     </a>
                 </div>
@@ -102,13 +102,13 @@ let mobileHeader = `
                 </div>
 
                 <div id="algorithm-links" class="mobile-nav-links">
-                    <a href="intro-to-algorithms.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/intro-to-algorithms/intro-to-algorithms.html" class="mobile-nav-item">
                         Intro to Algorithms
                     </a>
-                    <a href="insertion-sort.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/insertion-sort/insertion-sort.html" class="mobile-nav-item">
                         Insertion Sort
                     </a>
-                    <a href="bubble-sort.html" class="mobile-nav-item">
+                    <a href="/code-prep-school/src/pages/bubble-sort/bubble-sort.html" class="mobile-nav-item">
                         Bubble Sort
                     </a>
                 </div>
