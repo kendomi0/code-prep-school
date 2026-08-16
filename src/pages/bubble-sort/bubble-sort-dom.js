@@ -452,6 +452,8 @@ export function playBubbleSort() {
 
 // Event listeners
 
+/*
+
 const buttonFns = [
   [playBtn, playBubbleSort],
   [pauseBtn, pauseBubbleSort],
@@ -470,3 +472,4 @@ speedBtns.forEach((speedBtn) => {
     speedBtn.addEventListener("click", () => editSpeed(speedBtn));
   }
 });
+*/
