@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "chart.js": "^4.5.1",
+    "eslint-plugin-vitest-globals": "^1.6.1",
     "highlight.js": "^11.11.1"
   }
 }
