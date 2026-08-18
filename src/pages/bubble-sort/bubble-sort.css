@@ -4,7 +4,7 @@
   border-radius: 25px;
 }
 
-#arr-value {
+.current-arr {
   color: #79c0ff;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .complete-btn {
-  cursor: default;
+  cursor: default !important;
 }
 
 .manual-code-block {

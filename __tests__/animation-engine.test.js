@@ -1,3 +1,4 @@
+import { test } from "vitest";
 import { AnimationEngine } from "../src/components/animation-engine.js";
 
 let testEngine;
@@ -15,6 +16,12 @@ describe("Animation engine functions and variables", () => {
     <button class="medium-btn"></button>
     <button class="fast-btn"></button>
     <button class="fastest-btn"></button>
+    <p>
+      <span class="given-arr"></span>
+      <span class="current-arr"></span>
+      <span class="i-value"></span>
+      <span class="j-value"></span>
+    </p>
     <input class="animation-input">
   </div>`;
   testEngine = new AnimationEngine(document.getElementById("test-container"));
@@ -62,5 +69,21 @@ describe("Animation engine functions and variables", () => {
     expect(testEngine.fastBtn.classList).not.toContain("inactive");
     expect([testEngine.slowBtn.disabled, testEngine.mediumBtn.disabled, testEngine.fastestBtn.disabled]).toEqual([false, false, false]);
     expect([testEngine.slowBtn, testEngine.mediumBtn, testEngine.fastestBtn].map(btn => btn.classList.contains("inactive"))).toEqual([true, true, true]);
+  })
+
+  it("adds element group to animatedElements", () => {
+    testEngine.addElementGroupToLookupTable(
+      [
+        ["slowBtn", testEngine.slowBtn],
+        ["mediumBtn", testEngine.mediumBtn]
+      ]
+    )
+    let newAnimatedElements = {
+      givenArr: testEngine.givenArr,
+      currentArr: testEngine.currentArr,
+      slowBtn: testEngine.slowBtn,
+      mediumBtn: testEngine.mediumBtn
+    }
+    expect(testEngine.animatedElements).toEqual(newAnimatedElements);
   })
 });

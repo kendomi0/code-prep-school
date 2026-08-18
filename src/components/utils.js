@@ -2,6 +2,14 @@ export function removeElement(el) {
     el.style.display = "none";
 }
 
+export function makeVisible(el) {
+    el.style.visibility = "visible";
+}
+
+export function makeInvisible(el) {
+    el.style.visibility = "hidden";
+}
+
 export function showInlineElement(el) {
     el.style.display = "inline";
 }
@@ -13,8 +21,8 @@ export function showBlockElement(el) {
     }
 }
 
-export function resetElement() {
-    element.innerHTML = "&nbsp;";
+export function resetElement(el) {
+    el.innerHTML = "&nbsp;";
 }
 
 export function reverseMap(originalMap) {

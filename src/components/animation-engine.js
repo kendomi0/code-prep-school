@@ -1,4 +1,4 @@
-import { removeElement, showInlineElement, showBlockElement, resetElement } from "./utils.js";
+import { removeElement, showInlineElement, showBlockElement, resetElement, makeVisible, makeInvisible } from "./utils.js";
 
 export class AnimationEngine {
     constructor(container) {
@@ -31,7 +31,15 @@ export class AnimationEngine {
 
         this.selectOrChange = container.querySelector(".select-or-change");
 
-        this.animationLines = container.querySelector(".animation-lines");
+        this.givenArr = container.querySelector(".given-arr");
+        this.currentArr = container.querySelector(".current-arr");
+
+        this.arrows = container.querySelectorAll(".arrows");
+
+        this.animatedElements = {
+            givenArr: this.givenArr,
+            currentArr: this.currentArr,
+        }
 
         this.speeds = new Map([
             [this.slowBtn, "slow"],
@@ -69,7 +77,7 @@ export class AnimationEngine {
             "playing": [this.pauseBtn, this.resetBtn],
             "paused": [this.resumeBtn, this.resetBtn],
             "resumed": [this.pauseBtn, this.resetBtn],
-            "completed": [this.completeBtn, this.playBtn]
+            "completed": [this.completeBtn, this.resetBtn]
         }
 
         this.speeds.keys().forEach((speedBtn) => {
@@ -173,9 +181,15 @@ export class AnimationEngine {
 
     resetStepsAndLines() {
         this.resetSteps();
-        this.animationSteps.forEach((step) => 
-            resetElement(step)
-        );
+        Object.values(this.animatedElements).forEach((el) => 
+        {
+            if (el.classList.contains("arrows")) {
+                makeInvisible(el);
+            }
+            else {
+                resetElement(el);
+            }
+        });
     }
 
     populateSteps(steps) {
@@ -189,32 +203,35 @@ export class AnimationEngine {
         this.isInputValid = null;
     }
 
+    wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
     async runInSteps(steps) {
       steps = await steps;
       for (const [index, step] of steps.entries()) {
         if (step == undefined) {
-          continue;
+            continue;
         }
-        if (this.currentState = "paused") {
-          break;
+        if (this.currentState == "paused") {
+            break;
         }
         if (Array.isArray(step)) {
-          step.forEach(({ fn, args }) => fn(...args));
+            step.forEach(({ fn, args }) => fn(...args));
         } else {
-          step.fn(...step.args);
+            step.fn(...step.args);
         }
-        await wait(delay);
+        await this.wait(this.delay);
         steps[index] = undefined;
       }
     }
 
-    generateSteps() {
-
+    generateSteps(_arr) {
+        throw new Error("generateSteps() must be implemented by subclass");
     }
 
     // Input/output
 
-    parseInput() {
+    parseInput(_input) {
+        throw new Error("parseInput() must be implemented by subclass");
     };
 
     setErrorMessage(parsedOutput) {
@@ -240,28 +257,58 @@ export class AnimationEngine {
 
     // Updating DOM elements
 
-    displayArray() {
-
+    addElementToLookupTable(name, el) {
+        this.animatedElements[name] = el;
     }
 
-    setGivenArray() {
+    addElementGroupToLookupTable(group) {
+        group.forEach((subgroup) => {
+            this.animatedElements[subgroup[0]] = subgroup[1];
+        })
+    }
 
+    displayArray() {
+        throw new Error("displayArray() must be implemented by subclass");
+    }
+
+    setGivenArray(arr) {
+        this.givenArr.textContent = `[${arr}]`;
     }
 
     resetAndHideExcept(...elements) {
-
+        const elementsToKeep = elements.map((element) => this.animatedElements[element]);
+        let elementsToReset = Object.values(this.animatedElements).filter((el) => !elementsToKeep.includes(el));
+        elementsToReset.forEach((el) => 
+        {
+            if (el.classList.contains('arrows')) {
+                makeInvisible(el);
+            }
+            else {
+                resetElement(el);
+            }
+        }
+        );
     }
 
-    showArrow() {
-
+    showArrow(arrow) {
+        if (!arrow) {
+            console.warn(`${arrow} not found`);
+            return;
+        }
+        this.hideAllArrows();
+        makeVisible(this.animatedElements[arrow]);
     }
 
     hideAllArrows() {
-
+        this.arrows.forEach((arrow) => (arrow.style.visibility = "hidden"));
     }
 
-    updateTextContent() {
-
+    updateTextContent(element, newContent) {
+        if (!(element in this.animatedElements)) {
+            console.warn("Element not found in animatedElements");
+            return;
+        }
+        this.animatedElements[element].textContent = `${newContent}`
     }
 
     // Animation states
@@ -269,7 +316,7 @@ export class AnimationEngine {
     pauseAnimation() {
         this.currentState = "paused";
         let remainingSteps = [...this.animationSteps];
-        this.resetSteps(this.animationSteps);
+        this.resetSteps();
         this.populateSteps(remainingSteps);
         this.setStateButtons();
     }
@@ -292,7 +339,7 @@ export class AnimationEngine {
     resumeAnimation() {
         this.currentState = "resumed";
         this.setStateButtons();
-        //this.runInSteps(pseudocodeSteps);
+        this.runInSteps(this.animationSteps);
     }
 
     requestRun() {
@@ -305,7 +352,7 @@ export class AnimationEngine {
             }
             this.speedBtnSection.classList.remove("hidden-responsive");
             this.selectOrChange.textContent = "Select";
-            //this.generateSteps(parsedOutput);
+            this.generateSteps(parsedOutput);
         }
     }
 
@@ -313,7 +360,7 @@ export class AnimationEngine {
         this.currentState = "playing";
         this.selectSpeed(btn);
         this.setStateButtons();
-        //this.runInSteps();
+        this.runInSteps(this.animationSteps);
     }
 
 }
