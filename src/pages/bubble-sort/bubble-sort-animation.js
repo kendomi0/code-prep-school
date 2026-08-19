@@ -120,11 +120,6 @@ export class BubbleSortAnimation extends AnimationEngine {
         this.outerLoopIteration.style.textTransform = "capitalize";
     }
 
-    displayLoopIteration(element, iteration) {
-        element.textContent = `${ordinalNumbersList[iteration]}`;
-        element.style.textTransform = "capitalize";
-    }
-
     generateSteps(arr) {
         this.addStep(this.setGivenArray.bind(this), [...arr]);
         this.addStep(this.showArrow.bind(this), "arrow1");

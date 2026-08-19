@@ -1,4 +1,4 @@
-import { removeElement, showInlineElement, showBlockElement, resetElement, makeVisible, makeInvisible } from "./utils.js";
+import { removeElement, showInlineElement, showBlockElement, resetElement, makeVisible, makeInvisible, ordinalNumbersList } from "./utils.js";
 
 export class AnimationEngine {
     constructor(container) {
@@ -309,6 +309,11 @@ export class AnimationEngine {
             return;
         }
         this.animatedElements[element].textContent = `${newContent}`
+    }
+
+    displayLoopIteration(element, iteration) {
+        element.textContent = `${ordinalNumbersList[iteration]}`;
+        element.style.textTransform = "capitalize";
     }
 
     // Animation states
