@@ -1,5 +1,5 @@
 import { AnimationEngine } from "../../components/animation-engine.js";
-import { convertBoolean, ordinalNumbersList } from "../../components/utils.js"
+import { convertBoolean } from "../../components/utils.js"
 
 export class BubbleSortAnimation extends AnimationEngine {
     constructor(container) {
@@ -108,16 +108,6 @@ export class BubbleSortAnimation extends AnimationEngine {
         else {
             this.currentArr.textContent = `[${arr}]`;
         }
-    }
-
-    displayInnerLoopIteration(iteration) {
-        this.innerLoopIteration.textContent = `${ordinalNumbersList[iteration]}`;
-        this.innerLoopIteration.style.textTransform = "capitalize";
-    }
-
-    displayOuterLoopIteration(iteration) {
-        this.outerLoopIteration.textContent = `${ordinalNumbersList[iteration]}`;
-        this.outerLoopIteration.style.textTransform = "capitalize";
     }
 
     generateSteps(arr) {
