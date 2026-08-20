@@ -34,13 +34,17 @@ describe("Animation engine functions and variables", () => {
   })
 
   describe("setStateButtons()", () => {
-    // TODO: See if this test can be refactored to reduce performance time, 
-    // as it takes significantly longer than the other tests
       it("shows and hides correct state buttons", () => {
         testEngine.currentState = "playing";
         testEngine.setStateButtons();
-        [testEngine.pauseBtn, testEngine.resetBtn].forEach(btn => expect(btn).toHaveStyle("display: inline"));
-        [testEngine.playBtn, testEngine.resumeBtn, testEngine.completeBtn].forEach(btn => expect(btn).toHaveStyle("display: none"));
+        
+        expect(testEngine.pauseBtn.style.display).toBe("inline");
+        expect(testEngine.resetBtn.style.display).toBe("inline");
+        
+        expect(testEngine.playBtn.style.display).toBe("none");
+        expect(testEngine.resumeBtn.style.display).toBe("none");
+        expect(testEngine.completeBtn.style.display).toBe("none");
+
         expect(testEngine.animationInput.disabled).toBe(true);
       })
 
