@@ -52,6 +52,8 @@ My intention with this website is to describe programming concepts in accessible
 
 ## Run Locally
 ```
+git clone https://github.com/kendomi0/code-prep-school
+cd code-prep-school
 npm install
 npm run dev
 ```
