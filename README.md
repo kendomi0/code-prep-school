@@ -2,7 +2,7 @@
 
 **[View Live Demo](https://kendomi0.github.io/code-prep-school/)**
 
-This website teaches coding fundamentals, such as time complexity and algorithms, with code snippets and interactive elements, like time complexity visualization, step-by-step animations of algorithms, and quizzes with feedback.
+This website teaches coding fundamentals, such as time complexity and algorithms, with code snippets and interactive elements, including time complexity visualization, step-by-step animations of algorithms, and quizzes with feedback.
 
 My intention with this website is to describe programming concepts in accessible terms. I noticed that some coding resources are written in ways that may be difficult to understand for aspiring learners with limited programming experience, and thus was inspired to build a website with a simplified pedagogical approach.
 
