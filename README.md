@@ -35,11 +35,11 @@ My intention with this website is to describe programming concepts in accessible
 
 - Big-O time complexity calculations
 
-![Big O calculations](./assets/screenshots/big-o-calculations-cropped.gif)
+![Big O calculations](./assets/screenshots/big-o-calculations.gif)
 
 - Big-O growth graph
 
-![Big O growth graph](./assets/screenshots/bigo-graph.gif)
+![Big O growth graph](./assets/screenshots/big-o-graph.gif)
 
 - Time complexity quiz with feedback
 
