@@ -160,7 +160,7 @@ describe("Animation engine functions and variables", () => {
   describe("setErrorMessage()", () => {
     it("sets correct error message", () => {
       testEngine.setErrorMessage("test");
-      expect(testEngine.invalidListMsg.textContent).toBe("test");
+      expect(testEngine.invalidInputMsg.textContent).toBe("test");
     })
   })
 
@@ -254,7 +254,7 @@ describe("Animation engine functions and variables", () => {
       "test": "testing"
       };
       testEngine.validateInput("testing");
-      expect(testEngine.invalidListMsg.textContent).toBe("testing");
+      expect(testEngine.invalidInputMsg.textContent).toBe("testing");
       expect(testEngine.isInputValid).toBe(false);
     });
   })

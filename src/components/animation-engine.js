@@ -25,7 +25,7 @@ export class AnimationEngine {
         this.fastestBtn = container.querySelector(".fastest-btn");
         this.speedBtnSection = container.querySelector(".speed-btn-section");
 
-        this.invalidListMsg = container.querySelector(".invalid-input-msg");
+        this.invalidInputMsg = container.querySelector(".invalid-input-msg");
 
         this.animationInput = container.querySelector(".animation-input");
 
@@ -235,8 +235,8 @@ export class AnimationEngine {
     };
 
     setErrorMessage(parsedOutput) {
-        showBlockElement(this.invalidListMsg);
-        this.invalidListMsg.textContent = parsedOutput;
+        showBlockElement(this.invalidInputMsg);
+        this.invalidInputMsg.textContent = parsedOutput;
     };
 
 
@@ -278,6 +278,7 @@ export class AnimationEngine {
     resetAndHideExcept(...elements) {
         const elementsToKeep = elements.map((element) => this.animatedElements[element]);
         let elementsToReset = Object.values(this.animatedElements).filter((el) => !elementsToKeep.includes(el));
+        // TODO: Refactor this part, as this part is the same as the part in resetStepsAndLines
         elementsToReset.forEach((el) => 
         {
             if (el.classList.contains('arrows')) {
@@ -319,6 +320,8 @@ export class AnimationEngine {
     // Animation states
 
     pauseAnimation() {
+        // TODO: Refactor this line in the state functions, 
+        // map back to their respective buttons, then map those to their state
         this.currentState = "paused";
         let remainingSteps = [...this.animationSteps];
         this.resetSteps();
@@ -352,8 +355,8 @@ export class AnimationEngine {
         let parsedOutput = this.parseInput(input);
         this.validateInput(parsedOutput);
         if (this.isInputValid) {
-            if (this.invalidListMsg.style.display == "block") {
-                removeElement(this.invalidListMsg);
+            if (this.invalidInputMsg.style.display == "block") {
+                removeElement(this.invalidInputMsg);
             }
             this.speedBtnSection.classList.remove("hidden-responsive");
             this.selectOrChange.textContent = "Select";
