@@ -181,15 +181,7 @@ export class AnimationEngine {
 
     resetStepsAndLines() {
         this.resetSteps();
-        Object.values(this.animatedElements).forEach((el) => 
-        {
-            if (el.classList.contains("arrows")) {
-                makeInvisible(el);
-            }
-            else {
-                resetElement(el);
-            }
-        });
+        Object.values(this.animatedElements).forEach(this.clearOrHideElement);
     }
 
     populateSteps(steps) {
@@ -275,20 +267,19 @@ export class AnimationEngine {
         this.givenArr.textContent = `[${arr}]`;
     }
 
-    resetAndHideExcept(...elements) {
-        const elementsToKeep = elements.map((element) => this.animatedElements[element]);
-        let elementsToReset = Object.values(this.animatedElements).filter((el) => !elementsToKeep.includes(el));
-        // TODO: Refactor this part, as this part is the same as the part in resetStepsAndLines
-        elementsToReset.forEach((el) => 
-        {
-            if (el.classList.contains('arrows')) {
+    clearOrHideElement(el) {
+        if (el.classList.contains('arrows')) {
                 makeInvisible(el);
             }
-            else {
+        else {
                 resetElement(el);
             }
         }
-        );
+
+    resetAndHideExcept(...elements) {
+        const elementsToKeep = elements.map((element) => this.animatedElements[element]);
+        let elementsToReset = Object.values(this.animatedElements).filter((el) => !elementsToKeep.includes(el));
+        elementsToReset.forEach(this.clearOrHideElement);
     }
 
     showArrow(arrow) {

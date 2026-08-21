@@ -292,4 +292,17 @@ describe("Animation engine functions and variables", () => {
     })
   })
 
+  describe("clearOrHideElement", () => {
+    it("makes element invisible if it belongs to arrow class", () => {
+      let arrow1 = testEngine.container.querySelector(".arrow-1");
+      testEngine.clearOrHideElement(arrow1);
+      expect(arrow1.style.visibility).toBe("hidden");
+    })
+
+    it("resets element if it does not belong to arrow class", () => {
+      testEngine.givenArr.textContent = "[4,3,2,1]";
+      testEngine.clearOrHideElement(testEngine.givenArr);
+      expect(testEngine.givenArr.innerHTML).toBe("&nbsp;");
+    })
+  })
 });
