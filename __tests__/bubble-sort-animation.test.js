@@ -57,7 +57,6 @@ describe("Animation engine functions and variables", () => {
         it("correctly colors numbers that have changed", () => {
             let arr = [7,9,8,1];
             testAnimation.displayArray(arr, 0);
-            console.log(testAnimation.currentArr.innerHTML);
             expect(testAnimation.currentArr.innerHTML).toBe('[<span style="color:yellow;">7,9</span>,8,1]');
         })
     })
