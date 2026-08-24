@@ -305,4 +305,23 @@ describe("Animation engine functions and variables", () => {
       expect(testEngine.givenArr.innerHTML).toBe("&nbsp;");
     })
   })
+
+  describe("setState()", () => {
+    it("sets given state", () => {
+      testEngine.setState("playing");
+      expect(testEngine.currentState).toBe("playing");
+    })
+  })
+
+  describe("applyState()", () => {
+    it("sets given state", () => {
+      testEngine.applyState("playing");
+      expect(testEngine.currentState).toBe("playing");
+    })
+    it("sets state buttons", () => {
+      testEngine.applyState("paused");
+      expect(testEngine.pauseBtn.style.display).toBe("none");
+      expect(testEngine.resumeBtn.style.display).toBe("inline");
+    })
+  })
 });

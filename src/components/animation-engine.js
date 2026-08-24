@@ -95,6 +95,10 @@ export class AnimationEngine {
 
     // Setting/changing animation state
 
+    setState(state) {
+        this.currentState = state;
+    }
+
     setStateButtons() {
         this.states.keys().forEach((btn) => {
             if (this.visibleStateButtons[this.currentState].includes(btn)) {
@@ -110,6 +114,11 @@ export class AnimationEngine {
         else {
             this.animationInput.disabled = true;
         }
+    }
+
+    applyState(state) {
+        this.setState(state);
+        this.setStateButtons();
     }
 
     // Setting/changing speed
@@ -189,10 +198,10 @@ export class AnimationEngine {
     }
     
     resetProperties() {
-        this.currentState = "inactive";
         this.currentSpeed = null;
         this.currentDelay = 0;
         this.isInputValid = null;
+        this.applyState("inactive");
     }
 
     wait = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -311,33 +320,27 @@ export class AnimationEngine {
     // Animation states
 
     pauseAnimation() {
-        // TODO: Refactor this line in the state functions, 
-        // map back to their respective buttons, then map those to their state
-        this.currentState = "paused";
+        this.applyState("paused");
         let remainingSteps = [...this.animationSteps];
         this.resetSteps();
         this.populateSteps(remainingSteps);
-        this.setStateButtons();
     }
 
     resetAnimation() {
         this.resetStepsAndLines();
         this.resetProperties();
-        this.setStateButtons();
         this.setSpeedButtons();
         this.hideSpeedButtons();
     }
 
     setAnimationToComplete() {
-        this.currentState = "completed";
-        this.setStateButtons();
+        this.applyState("completed");
         this.hideSpeedButtons();
         this.resetSteps();
     }
 
     resumeAnimation() {
-        this.currentState = "resumed";
-        this.setStateButtons();
+        this.applyState("resumed");
         this.runInSteps(this.animationSteps);
     }
 
@@ -356,9 +359,8 @@ export class AnimationEngine {
     }
 
     playAnimation(btn) {
-        this.currentState = "playing";
+        this.applyState("playing");
         this.selectSpeed(btn);
-        this.setStateButtons();
         this.runInSteps(this.animationSteps);
     }
 
