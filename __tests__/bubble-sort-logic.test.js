@@ -1,4 +1,3 @@
 describe("placeholder test", () => {
-    it("logs test", () => {
-    })
-})
+  it("logs test", () => {});
+});

@@ -1,32 +1,32 @@
 export function removeElement(el) {
-    el.style.display = "none";
+  el.style.display = "none";
 }
 
 export function makeVisible(el) {
-    el.style.visibility = "visible";
+  el.style.visibility = "visible";
 }
 
 export function makeInvisible(el) {
-    el.style.visibility = "hidden";
+  el.style.visibility = "hidden";
 }
 
 export function showInlineElement(el) {
-    el.style.display = "inline";
+  el.style.display = "inline";
 }
 
 export function showBlockElement(el) {
-    el.style.display = "block";
-    if (el.classList.contains("hidden-responsive")) {
-        el.classList.remove("hidden-responsive");
-    }
+  el.style.display = "block";
+  if (el.classList.contains("hidden-responsive")) {
+    el.classList.remove("hidden-responsive");
+  }
 }
 
 export function resetElement(el) {
-    el.innerHTML = "&nbsp;";
+  el.innerHTML = "&nbsp;";
 }
 
 export function reverseMap(originalMap) {
-    return new Map([...originalMap].map(([key, value]) => [value, key]));
+  return new Map([...originalMap].map(([key, value]) => [value, key]));
 }
 
 export function convertBoolean(boolean) {

@@ -196,98 +196,94 @@
           </p>
 
           <div class="animation-container">
-              <input
+            <input
               id="number-list-input"
               class="animation-input"
               type="text"
               placeholder="Enter list of 2-10 numbers"
-              />
+            />
 
-              <div id="animation-btn-section">
-                  <button class="play-btn animation-btns">
-                      <i class="fa-solid fa-play"></i> Play
-                  </button>
-                  <button class="complete-btn animation-btns non-play-btns">
-                      Complete!
-                  </button>
-                  <button class="pause-btn animation-btns non-play-btns">
-                      <i class="fa-solid fa-pause"></i> Pause
-                  </button>
-                  <button class="resume-btn animation-btns non-play-btns">
-                      <i class="fa-solid fa-eject"></i> Resume
-                  </button>
-                  <button class="reset-btn animation-btns non-play-btns">
-                      <i class="fa-solid fa-stop"></i> Reset
-                  </button>
+            <div id="animation-btn-section">
+              <button class="play-btn animation-btns">
+                <i class="fa-solid fa-play"></i> Play
+              </button>
+              <button class="complete-btn animation-btns non-play-btns">
+                Complete!
+              </button>
+              <button class="pause-btn animation-btns non-play-btns">
+                <i class="fa-solid fa-pause"></i> Pause
+              </button>
+              <button class="resume-btn animation-btns non-play-btns">
+                <i class="fa-solid fa-eject"></i> Resume
+              </button>
+              <button class="reset-btn animation-btns non-play-btns">
+                <i class="fa-solid fa-stop"></i> Reset
+              </button>
+            </div>
+
+            <p class="invalid-list-msg invalid-input-msg">&nbsp;</p>
+
+            <div class="speed-btn-section hidden-responsive">
+              <p id="speed-text">
+                <span class="select-or-change">Select</span> speed:
+              </p>
+              <div class="speed-btn-container">
+                <button class="slow-btn speed-btns inactive">Slow</button>
+                <button class="medium-btn speed-btns inactive">Medium</button>
+                <button class="fast-btn speed-btns inactive">Fast</button>
+                <button class="fastest-btn speed-btns inactive">Fastest</button>
               </div>
+            </div>
 
-              <p class="invalid-list-msg invalid-input-msg">&nbsp;</p>
+            <div id="code-animation">
+              <div id="pseudocode-animate" class="manual-code-block">
+                <p>
+                  A = <span class="given-arr"></span>
+                  <span class="arrow-1 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
+                <p>
+                  n = length(A)
+                  <span class="arrow-2 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
+                <p>
+                  <span class="code-keyword">for</span> i =
+                  <span class="num">1</span> to n:
+                  <span class="arrow-3 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
 
-              <div class="speed-btn-section hidden-responsive">
-                  <p id="speed-text">
-                      <span class="select-or-change">Select</span> speed:
-                  </p>
-                  <div class="speed-btn-container">
-                      <button class="slow-btn speed-btns inactive">Slow</button>
-                      <button class="medium-btn speed-btns inactive">
-                          Medium
-                      </button>
-                      <button class="fast-btn speed-btns inactive">Fast</button>
-                      <button class="fastest-btn speed-btns inactive">
-                          Fastest
-                      </button>
-                  </div>
+                <p class="indent-one">
+                  <span class="code-keyword">for</span> j =
+                  <span class="num">1</span> to n-i:
+                  <span class="arrow-4 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
+
+                <p class="indent-two">
+                  <span class="code-keyword">if</span> A[j] > A[j+<span
+                    class="num"
+                    >1</span
+                  >]:
+                  <span class="arrow-5 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
+
+                <p class="indent-three">
+                  swap(A[j], A[j+<span class="num">1</span>])
+                  <span class="arrow-6 arrows">
+                    <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                </p>
               </div>
-
-              <div id="code-animation">
-                  <div id="pseudocode-animate" class="manual-code-block">
-                  <p>
-                      A = <span class="given-arr"></span>
-                      <span class="arrow-1 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-                  <p>
-                      n = length(A)
-                      <span class="arrow-2 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-                  <p>
-                      <span class="code-keyword">for</span> i =
-                      <span class="num">1</span> to n:
-                      <span class="arrow-3 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-
-                  <p class="indent-one">
-                      <span class="code-keyword">for</span> j =
-                      <span class="num">1</span> to n-i:
-                      <span class="arrow-4 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-
-                  <p class="indent-two">
-                      <span class="code-keyword">if</span> A[j] > A[j+<span
-                      class="num"
-                      >1</span
-                      >]:
-                      <span class="arrow-5 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-
-                  <p class="indent-three">
-                      swap(A[j], A[j+<span class="num">1</span>])
-                      <span class="arrow-6 arrows">
-                        <i class="fa-solid fa-arrow-left"></i>
-                      </span>
-                  </p>
-                  </div>
-                  <!-- prettier-ignore -->
-                  <div id="variable-changes" class="manual-code-block">
+              <!-- prettier-ignore -->
+              <div id="variable-changes" class="manual-code-block">
                   <p>n = <span class="n-value num"> </span></p>
                   <p>i = <span class="i-value num lines">&nbsp;</span>  # <span class="outer-loop-iteration loop-time lines">&nbsp;</span> iteration of outer loop </p>
                   <p>j = <span class="j-value-1 num lines">&nbsp;</span>  # <span class="inner-loop-iteration loop-time lines">&nbsp;</span> iteration of inner loop </p>
@@ -298,7 +294,7 @@
                   <p>Swap: <span class="do-swap lines boolean"></span></p>
                   <p>A = <span class="current-arr"></span></p>
                   </div>
-              </div>
+            </div>
           </div>
 
           <p>

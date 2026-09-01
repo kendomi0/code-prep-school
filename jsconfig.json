@@ -3,5 +3,5 @@
     "types": ["vitest/globals"],
     "checkJs": true,
     "noImplicitAny": false
-  },
+  }
 }
