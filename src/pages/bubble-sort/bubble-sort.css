@@ -4,7 +4,7 @@
   border-radius: 25px;
 }
 
-#arr-value {
+.current-arr {
   color: #79c0ff;
 }
 
@@ -32,12 +32,12 @@
   display: inline-block;
 }
 
-#speed-btn-section {
+.speed-btn-section {
   display: flex;
   margin-top: 20px;
 }
 
-#speed-btn-container {
+.speed-btn-container {
   display: flex;
 }
 
@@ -63,22 +63,22 @@
   background-color: #0860b3;
 }
 
-#slow-btn {
+.slow-btn {
   background-color: #348543;
   border: 2px solid #4d9e5c;
 }
 
-#medium-btn {
+.medium-btn {
   background-color: #66620d;
   border: 2px solid #757120;
 }
 
-#fast-btn {
+.fast-btn {
   background-color: #530000;
   border: 2px solid #610a0a;
 }
 
-#fastest-btn {
+.fastest-btn {
   background-color: #29045c;
   border: 2px solid #432377;
 }
@@ -87,8 +87,8 @@
   display: none;
 }
 
-#complete-btn {
-  cursor: default;
+.complete-btn {
+  cursor: default !important;
 }
 
 .manual-code-block {
@@ -179,12 +179,12 @@
     margin-bottom: 1rem;
   }
 
-  #speed-btn-section {
+  .speed-btn-section {
     display: flex;
     flex-direction: column;
   }
 
-  #speed-btn-container {
+  .speed-btn-container {
     display: flex;
     max-width: 100%;
     flex-wrap: wrap;
