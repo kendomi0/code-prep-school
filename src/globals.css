@@ -37,6 +37,7 @@ main {
   min-height: 100svh;
 }
 
+/* Landing page */
 #landing-page-main-text {
   font-size:1.5rem;
   text-align: center;
@@ -56,6 +57,42 @@ main {
   font-size: 1.5rem;
 }
 
+#landing-page-button-container {
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  gap:2rem;
+}
+
+#landing-page-button-container a, a:hover, a:visited, a:active {
+  color:#B6B6E0;
+}
+
+.landing-page-button {
+  max-width:40%;
+  padding:2rem;
+  border-radius:1.5rem;
+  background-color: #1F1F36;
+  border: 1px solid #4F4F75;
+  text-align:left;
+  transition: 300ms background-color;
+}
+
+.landing-page-button:hover {
+  border-color: #c2c2df
+}
+
+
+.landing-page-button-title {
+  font-size: 1.8rem;
+  margin-bottom:0.9rem;
+}
+
+.landing-page-button-description {
+  font-size:1.1rem;
+}
+
+/* Footer */
 footer {
   background-color: #1d1d2b;
   padding: 20px;
