@@ -41,8 +41,19 @@ main {
   min-height: 100svh;
 }
 
+#landing-page-main-text {
+  font-size:1.5rem;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 #tagline {
-  font-size: 5rem;
+  max-width: 75%;
+  font-size: 4.5rem;
+  text-wrap: balance;
 }
 
 #site-description {
