@@ -1,8 +1,7 @@
-const baseURL = `${import.meta.env.BASE_URL}`;
-const homeLink = `${import.meta.env.BASE_URL}index.html`;
+import { setLinks } from "../lib/links.js"
 
 let appHeader = `
-        <a href="${homeLink}" class="title">CodePrepSchool</a>
+        <a data-link="home" class="title">CodePrepSchool</a>
         <nav class="nav-dropdown">
             <div class="dropdown" id="dropdown-time-complexity">
                 <div class="dropdown-title">
@@ -10,22 +9,22 @@ let appHeader = `
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
                 <div class="nav-links">
-                    <a href="${baseURL}src/pages/time-complexity-basics/time-complexity-basics.html" class="nav-item">
+                    <a data-link="time-complexity-basics" class="nav-item">
                         Time Complexity Basics
                     </a>
-                    <a href="${baseURL}src/pages/built-in-methods.html" class="nav-item">
+                    <a data-link="built-in-methods" class="nav-item">
                         Built-In Methods
                     </a>
-                    <a href="${baseURL}src/pages/constant-time-complexity.html" class="nav-item">
+                    <a data-link="constant-time-complexity" class="nav-item">
                         Constant Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/linear-time-complexity.html" class="nav-item">
+                    <a data-link="linear-time-complexity" class="nav-item">
                         Linear Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/quadratic-time-complexity.html" class="nav-item">
+                    <a data-link="quadratic-time-complexity" class="nav-item">
                         Quadratic Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/time-complexity-quiz/time-complexity-quiz.html" class="nav-item">
+                    <a data-link="time-complexity-quiz" class="nav-item">
                         Time Complexity Quiz
                     </a>
                 </div>
@@ -36,13 +35,13 @@ let appHeader = `
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
                 <div class="nav-links">
-                    <a href="${baseURL}src/pages/intro-to-algorithms/intro-to-algorithms.html" class="nav-item">
+                    <a data-link="intro-to-algorithms" class="nav-item">
                         Intro to Algorithms
                     </a>
-                    <a href="${baseURL}src/pages/insertion-sort/insertion-sort.html" class="nav-item">
+                    <a data-link="insertion-sort" class="nav-item">
                         Insertion Sort
                     </a>
-                    <a href="${baseURL}src/pages/bubble-sort/bubble-sort.html" class="nav-item">
+                    <a data-link="bubble-sort" class="nav-item">
                         Bubble Sort
                     </a>
                 </div>
@@ -57,7 +56,7 @@ if (document.getElementById("app-header")) {
 /* Mobile */
 
 let mobileHeader = `
-    <a href="${homeLink}" class="mobile-title">CodePrepSchool</a>
+    <a data-link="home" class="mobile-title">CodePrepSchool</a>
     
     <nav class="mobile-nav">
 
@@ -73,22 +72,22 @@ let mobileHeader = `
                 </div>
 
                 <div id="time-complexity-links" class="mobile-nav-links">
-                    <a href="${baseURL}src/pages/time-complexity-basics/time-complexity-basics.html" class="mobile-nav-item">
+                    <a data-link="time-complexity-basics" class="mobile-nav-item">
                         Time Complexity Basics
                     </a>
-                    <a href="${baseURL}src/pages/built-in-methods.html" class="mobile-nav-item">
+                    <a data-link="built-in-methods" class="mobile-nav-item">
                         Built-In Methods
                     </a>
-                    <a href="${baseURL}src/pages/constant-time-complexity.html" class="mobile-nav-item">
+                    <a data-link="constant-time-complexity" class="mobile-nav-item">
                         Constant Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/linear-time-complexity.html" class="mobile-nav-item">
+                    <a data-link="linear-time-complexity" class="mobile-nav-item">
                         Linear Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/quadratic-time-complexity.html" class="mobile-nav-item">
+                    <a data-link="quadratic-time-complexity" class="mobile-nav-item">
                         Quadratic Time Complexity
                     </a>
-                    <a href="${baseURL}src/pages/time-complexity-quiz/time-complexity-quiz.html" class="mobile-nav-item">
+                    <a data-link="time-complexity-quiz" class="mobile-nav-item">
                         Time Complexity Quiz
                     </a>
                 </div>
@@ -103,13 +102,13 @@ let mobileHeader = `
                 </div>
 
                 <div id="algorithm-links" class="mobile-nav-links">
-                    <a href="${baseURL}src/pages/intro-to-algorithms/intro-to-algorithms.html" class="mobile-nav-item">
+                    <a data-link="intro-to-algorithms" class="mobile-nav-item">
                         Intro to Algorithms
                     </a>
-                    <a href="${baseURL}src/pages/insertion-sort/insertion-sort.html" class="mobile-nav-item">
+                    <a data-link="insertion-sort" class="mobile-nav-item">
                         Insertion Sort
                     </a>
-                    <a href="${baseURL}src/pages/bubble-sort/bubble-sort.html" class="mobile-nav-item">
+                    <a data-link="bubble-sort" class="mobile-nav-item">
                         Bubble Sort
                     </a>
                 </div>
@@ -159,3 +158,6 @@ mobileDropdownTitles.forEach((title, index) => {
       mobileNavLinks[index].style.display === "block" ? "none" : "block";
   });
 });
+
+// Set links
+setLinks();
