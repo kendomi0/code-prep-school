@@ -1,4 +1,4 @@
-const baseURL = `${import.meta.env.BASE_URL}/`;
+const baseURL = `${import.meta.env.BASE_URL}`;
 const pagesBaseURL = `${import.meta.env.BASE_URL}src/pages/`
 
 const links = {
