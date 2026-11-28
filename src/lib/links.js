@@ -1,5 +1,5 @@
 const baseURL = `${import.meta.env.BASE_URL}`;
-const pagesBaseURL = `${import.meta.env.BASE_URL}src/pages/`
+const pagesPath = `${baseURL}src/pages/`
 
 const links = {
     'home': `index.html`,
@@ -23,7 +23,7 @@ export function setLinks() {
                 el.href = baseURL + 'index.html'
             }
             else {
-                el.href = pagesBaseURL + links[el.dataset.link]
+                el.href = pagesPath + links[el.dataset.link]
             }
         })
     }   
